@@ -266,4 +266,26 @@ RRULE:FREQ=YEARLY;UNTIL=20900101T000000Z
 TRANSP:TRANSPARENT
 ATTACH:https://gtowntech.org/team/kenneth-kim
 END:VEVENT
+BEGIN:VEVENT
+UID:saanvi-bhagwat@gtowntech.org
+ORGANIZER;CN=Georgetown Disruptive Tech:MAILTO:disruptivetech@georgetown.edu
+DTSTART;VALUE=DATE:20050120
+DTEND;VALUE=DATE:20050120
+SUMMARY:Saanvi Bhagwat's Birthday
+DTSTAMP:20050120T050000
+RRULE:FREQ=YEARLY;UNTIL=20900101T000000Z
+TRANSP:TRANSPARENT
+ATTACH:https://gtowntech.org/team/saanvi-bhagwat
+END:VEVENT
+BEGIN:VEVENT
+UID:arsema-gebreegizabher@gtowntech.org
+ORGANIZER;CN=Georgetown Disruptive Tech:MAILTO:disruptivetech@georgetown.edu
+DTSTART;VALUE=DATE:20050506
+DTEND;VALUE=DATE:20050506
+SUMMARY:Arsema Gebreegizabher's Birthday
+DTSTAMP:20050506T040000
+RRULE:FREQ=YEARLY;UNTIL=20900101T000000Z
+TRANSP:TRANSPARENT
+ATTACH:https://gtowntech.org/team/arsema-gebreegizabher
+END:VEVENT
 END:VCALENDAR
