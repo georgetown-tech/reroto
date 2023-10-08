@@ -6,7 +6,7 @@ const Header = ({  }) => (
   <header aria-label="Site Header" class="shadow-sm print:hidden">
     <div class="mx-auto max-w-screen-lg p-0 flex flew-row gap-4">
       <div class="flex items-center justify-center">
-        <Link class="m-0 p-0 mr-4" to="/">
+        <Link activeClassName="m-0 p-0 mr-4" class="m-0 p-0 mr-4" to="/">
           <img class="h-20" src={Logo} alt="ReRoto Logo" />
         </Link>
       </div>
