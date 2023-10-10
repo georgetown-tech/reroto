@@ -32,6 +32,6 @@ function ContactPage({location}) {
     )
 }
 
-export const Head = () => <Seo title="Join Us" />
+export const Head = () => <Seo title="Solutions" />
 
 export default ContactPage

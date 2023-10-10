@@ -30,14 +30,14 @@ function IndexPage({location}) {
         >
           <div class="mx-auto max-w-xl text-center">
             <h1 class="text-3xl font-extrabold sm:text-5xl">
-              We Build Projects,
+              ReRoto is a CMS
               <strong class="font-extrabold text-active sm:block">
-                &nbsp;To Help Our Community.
+                &nbsp;for Newspapers.
               </strong>
             </h1>
 
             <p class="mt-4 sm:text-xl sm:leading-relaxed">
-              Since 2017, Georgetown Disruptive Tech has changed the way that our school interacts with computer science.
+              Started in 2023, ReRoto was built to have all of the features to grow and run a newspaper company of any size.
             </p>
 
             <div class="mt-8 flex flex-wrap justify-center gap-4">

@@ -9,10 +9,10 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Georgetown Disruptive Tech`,
+    title: `ReRoto`,
     description: ``,
     author: `@tech_georgetown`,
-    siteUrl: `https://gtowntech.org`,
+    siteUrl: `https://reroto.com`,
   },
   plugins: [
     'gatsby-plugin-postcss',
@@ -24,15 +24,15 @@ module.exports = {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: false,
-        sitemap: 'https://gtowntech.org/sitemap/sitemap-index.xml',
+        sitemap: 'https://reroto.com/sitemap/sitemap-index.xml',
         policy: [{ userAgent: '*', allow: '/' }]
       }
     },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Georgetown Disruptive Tech`,
-        short_name: `gdt`,
+        name: `ReRoto`,
+        short_name: `roto`,
         start_url: `/`,
         background_color: `#FC3858`,
         theme_color: `#FC3858`,

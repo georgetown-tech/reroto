@@ -1,5 +1,5 @@
 import * as React from "react"
-import Logo from "../res/gdt.svg";
+import Logo from "../res/logo.svg";
 import { Link } from "gatsby"
 const Footer = ({ siteTitle }) => {
 
@@ -140,39 +140,25 @@ const Footer = ({ siteTitle }) => {
         >
           <div></div>
           <div></div>
-          <div>
-            <p class="font-medium text-gray-900">Programs</p>
-
-            <nav aria-label="Footer Navigation - Services" class="mt-6">
-              <ul class="space-y-4 text-sm">
-                {
-                  programs.filter((n, i) => i < 4).map(program => <li>
-                    <Link to={`/projects/${program.slug}`} class="text-gray-700 transition hover:opacity-75">
-                      {program.title}
-                    </Link>
-                  </li>)
-                }
-              </ul>
-            </nav>
-          </div>
+          <div></div>
 
           <div>
-            <p class="font-medium text-gray-900">Organization</p>
+            <p class="font-medium text-gray-900 text-right">Organization</p>
 
             <nav aria-label="Footer Navigation - Organization" class="mt-6">
               <ul class="space-y-4 text-sm">
-                <li>
-                  <Link to="/about" class="text-gray-700 transition hover:opacity-75">
+                <li className="text-right">
+                  <Link to="https://gtowntech.org/about" class="text-gray-700 transition hover:opacity-75">
                     About
                   </Link>
                 </li>
-                <li>
-                  <Link to="/team" class="text-gray-700 transition hover:opacity-75">
+                <li className="text-right">
+                  <Link to="https://gtowntech.org/team" class="text-gray-700 transition hover:opacity-75">
                     Meet the Team
                   </Link>
                 </li>
-                <li>
-                  <Link to="/contact" class="text-gray-700 transition hover:opacity-75">
+                <li className="text-right">
+                  <Link to="https://gtowntech.org/contact" class="text-gray-700 transition hover:opacity-75">
                     Contact
                   </Link>
                 </li>
