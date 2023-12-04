@@ -120,11 +120,11 @@ export default async function SitePostPage({
         >
           <div className="my-8">
             <div className="relative inline-block h-8 w-8 overflow-hidden rounded-full align-middle md:h-12 md:w-12">
-              {data.site?.user?.image ? (
+              {data?.user?.image ? (
                 <BlurImage
-                  alt={data.site?.user?.name ?? "User Avatar"}
+                  alt={data?.user?.name ?? "User Avatar"}
                   height={80}
-                  src={data.site.user.image}
+                  src={data?.user?.image}
                   width={80}
                 />
               ) : (
@@ -134,12 +134,12 @@ export default async function SitePostPage({
               )}
             </div>
             <div className="text-md ml-3 inline-block align-middle dark:text-white md:text-lg">
-              by <span className="font-semibold">{data.site?.user?.name}</span>
+              by <span className="font-semibold">{data?.user?.name}</span>
             </div>
           </div>
         </a>
       </div>
-      <div className="relative m-auto mb-10 h-80 w-full max-w-screen-lg overflow-hidden md:mb-20 md:h-150 md:w-5/6 md:rounded-2xl lg:w-2/3">
+      {/* <div className="relative m-auto mb-10 h-80 w-full max-w-screen-lg overflow-hidden md:mb-20 md:h-150 md:w-5/6 md:rounded-2xl lg:w-2/3">
         <BlurImage
           alt={data.title ?? "Post image"}
           width={1200}
@@ -149,7 +149,7 @@ export default async function SitePostPage({
           blurDataURL={data.imageBlurhash ?? placeholderBlurhash}
           src={data.image ?? "/placeholder.png"}
         />
-      </div>
+      </div> */}
 
       <MDX source={data.mdxSource} />
 
