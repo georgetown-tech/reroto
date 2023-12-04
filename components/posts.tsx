@@ -17,8 +17,8 @@ export default async function Posts({
   }
   const posts = await prisma.post.findMany({
     where: {
-      userId: session.user.id as string,
-      ...(siteId ? { siteId } : {}),
+      siteId: session.user.siteId as string,
+      // ...(siteId ? { siteId } : {}),
     },
     orderBy: {
       updatedAt: "desc",

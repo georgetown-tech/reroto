@@ -10,7 +10,11 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <Profile />
         </Suspense>
       </Nav>
-      <div className="min-h-screen dark:bg-black sm:pl-60">{children}</div>
+      <div className="min-h-screen dark:bg-black sm:pl-60">
+        <div className="flex max-w-screen-xl flex-col space-y-12 p-8">
+          <div className="flex flex-col space-y-6">{children}</div>
+        </div>
+      </div>
     </div>
   );
 }

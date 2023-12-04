@@ -1,0 +1,112 @@
+{
+  "plans": {
+    "plan:college@4": {
+      "title": "College",
+      "features": {
+        "feature:AudioTranscription": {
+          "base": 2,
+          "mode": "graduated",
+          "title": "Audio Transcription"
+        },
+        "feature:InAppWritingEditing": {
+          "base": 0,
+          "title": "In-App Writing/Editing"
+        },
+        "feature:ArticleScheduling": {
+          "base": 0,
+          "title": "Article Scheduling"
+        }
+      }
+    },
+    "plan:professional@8": {
+      "title": "Professional",
+      "features": {
+        "feature:AudioTranscription": {
+          "base": 2,
+          "mode": "volume",
+          "title": "Audio Transcription"
+        },
+        "feature:EmailManagement": {
+          "base": 0,
+          "title": "Email Management"
+        },
+        "feature:InAppWritingEditing": {
+          "base": 0,
+          "title": "In-App Writing/Editing"
+        },
+        "feature:ArticleScheduling": {
+          "base": 0,
+          "title": "Article Scheduling"
+        },
+        "feature:DeepViewerInsights": {
+          "base": 0,
+          "title": "Deep Viewer Insights"
+        },
+        "feature:SubscriberSystem": {
+          "tiers": [
+            {
+              "upto": 10000,
+              "price": 0.1
+            },
+            {
+              "upto": 50000,
+              "price": 0.05
+            },
+            {
+              "upto": 250000,
+              "price": 0.02
+            }
+          ],
+          "title": "Subscriber System"
+        }
+      }
+    },
+    "plan:enterprise@9": {
+      "title": "Enterprise",
+      "features": {
+        "feature:AudioTranscription": {
+          "base": 1,
+          "mode": "volume",
+          "title": "Audio Transcription"
+        },
+        "feature:EmailManagement": {
+          "base": 0,
+          "title": "Email Management"
+        },
+        "feature:InAppWritingEditing": {
+          "base": 0,
+          "title": "In-App Writing/Editing"
+        },
+        "feature:ArticleScheduling": {
+          "base": 0,
+          "title": "Article Scheduling"
+        },
+        "feature:DeepViewerInsights": {
+          "base": 0,
+          "title": "Deep Viewer Insights"
+        },
+        "feature:SubscriberSystem": {
+          "tiers": [
+            {
+              "upto": 10000,
+              "price": 0.1
+            },
+            {
+              "upto": 50000,
+              "price": 0.05
+            },
+            {
+              "upto": 250000,
+              "price": 0.02
+            }
+          ],
+          "title": "Subscriber System"
+        },
+        "feature:OnCallSupport": {
+          "base": 0,
+          "title": "24/7 On-Call Support"
+        }
+      }
+    }
+  }
+}

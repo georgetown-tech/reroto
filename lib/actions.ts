@@ -21,7 +21,7 @@ const nanoid = customAlphabet(
   7,
 ); // 7-character random string
 
-export const createSite = async (formData: FormData) => {
+export const createTranscript = async (formData: FormData) => {
   const session = await getSession();
   if (!session?.user.id) {
     return {
@@ -30,7 +30,49 @@ export const createSite = async (formData: FormData) => {
   }
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
+  const src = formData.get("audioSrc") as string;
+
+  try {
+    const response = await prisma.transcript.create({
+      data: {
+        name,
+        description,
+        src,
+        // seconds:
+      },
+    });
+
+    console.log(response);
+
+    return response;
+  } catch (error: any) {
+    if (error.code === "P2002") {
+      return {
+        error: `This subdomain is already taken`,
+      };
+    } else {
+      return {
+        error: error.message,
+      };
+    }
+  }
+};
+
+export const createSite = async (formData: FormData) => {
+  const session = await getSession();
+  if (!session?.user.id) {
+    return {
+      error: "Not authenticated",
+    };
+  }
+  const name = formData.get("name") as string;
+  const type = formData.get("type") as string;
+  const description = formData.get("description") as string;
   const subdomain = formData.get("subdomain") as string;
+
+  console.log(
+    `Generating ${type} website with name: "${name}", subdomain: ${subdomain}`,
+  );
 
   try {
     const response = await prisma.site.create({
@@ -38,13 +80,21 @@ export const createSite = async (formData: FormData) => {
         name,
         description,
         subdomain,
-        user: {
-          connect: {
-            id: session.user.id,
-          },
-        },
       },
     });
+    const user = await prisma.user.update({
+      where: {
+        id: session.user.id,
+      },
+      data: {
+        siteId: response.id,
+        role: 0,
+      },
+    });
+
+    console.log(response);
+    console.log(user);
+
     await revalidateTag(
       `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
     );

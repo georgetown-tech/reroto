@@ -1,4 +1,5 @@
 import { getServerSession, type NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
@@ -7,6 +8,19 @@ const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          username: profile.login,
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
+    }),
     GitHubProvider({
       clientId: process.env.AUTH_GITHUB_ID as string,
       clientSecret: process.env.AUTH_GITHUB_SECRET as string,
@@ -51,8 +65,22 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session: async ({ session, token }) => {
+      const userData = await prisma.user.findUnique({
+        where: {
+          id: token.sub,
+        },
+      });
+
+      const siteData = await prisma.site.findUnique({
+        where: {
+          id: userData.siteId,
+        },
+      });
+
       session.user = {
         ...session.user,
+        siteId: userData.siteId,
+        logo: siteData.logo,
         // @ts-expect-error
         id: token.sub,
         // @ts-expect-error
@@ -71,6 +99,7 @@ export function getSession() {
       username: string;
       email: string;
       image: string;
+      siteId: string;
     };
   } | null>;
 }
@@ -92,9 +121,9 @@ export function withSiteAuth(action: any) {
         id: siteId,
       },
     });
-    if (!site || site.userId !== session.user.id) {
+    if (!site) {
       return {
-        error: "Not authorized",
+        error: "Website not found",
       };
     }
 

@@ -1,46 +1,61 @@
-import { ReactNode } from "react";
+import prisma from "@/lib/prisma";
 import Form from "@/components/form";
+import { updateSite } from "@/lib/actions";
+import DeleteSiteForm from "@/components/form/delete-site-form";
 import { getSession } from "@/lib/auth";
-import { redirect } from "next/navigation";
-import { editUser } from "@/lib/actions";
 
-export default async function SettingsPage() {
+export default async function SiteSettingsIndex({
+  params,
+}: {
+  params: { id: string };
+}) {
   const session = await getSession();
   if (!session) {
     redirect("/login");
   }
+
+  const data = await prisma.site.findUnique({
+    where: {
+      id: session.user.siteId,
+    },
+  });
+
+  console.log(data);
+
+  // if (!data) {
+  //   notFound();
+  // }
+
   return (
-    <div className="flex max-w-screen-xl flex-col space-y-12 p-8">
-      <div className="flex flex-col space-y-6">
-        <h1 className="font-cal text-3xl font-bold dark:text-white">
-          Settings
-        </h1>
-        <Form
-          title="Name"
-          description="Your name on this app."
-          helpText="Please use 32 characters maximum."
-          inputAttrs={{
-            name: "name",
-            type: "text",
-            defaultValue: session.user.name!,
-            placeholder: "Brendon Urie",
-            maxLength: 32,
-          }}
-          handleSubmit={editUser}
-        />
-        <Form
-          title="Email"
-          description="Your email on this app."
-          helpText="Please enter a valid email."
-          inputAttrs={{
-            name: "email",
-            type: "email",
-            defaultValue: session.user.email!,
-            placeholder: "panic@thedis.co",
-          }}
-          handleSubmit={editUser}
-        />
-      </div>
+    <div className="flex flex-col space-y-6">
+      <Form
+        title="Name"
+        description="The name of your site. This will be used as the meta title on Google as well."
+        helpText="Please use 32 characters maximum."
+        inputAttrs={{
+          name: "name",
+          type: "text",
+          defaultValue: data?.name!,
+          placeholder: "My Awesome Site",
+          maxLength: 32,
+        }}
+        handleSubmit={updateSite}
+      />
+
+      <Form
+        title="Description"
+        description="The description of your site. This will be used as the meta description on Google as well."
+        helpText="Include SEO-optimized keywords that you want to rank for."
+        inputAttrs={{
+          name: "description",
+          type: "text",
+          defaultValue: data?.description!,
+          placeholder: "A blog about really interesting things.",
+        }}
+        handleSubmit={updateSite}
+      />
+
+      <DeleteSiteForm siteName={data?.name!} />
     </div>
   );
 }

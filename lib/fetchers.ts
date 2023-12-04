@@ -12,7 +12,7 @@ export async function getSiteData(domain: string) {
     async () => {
       return prisma.site.findUnique({
         where: subdomain ? { subdomain } : { customDomain: domain },
-        include: { user: true },
+        // include: { user: true },
       });
     },
     [`${domain}-metadata`],
@@ -72,11 +72,8 @@ export async function getPostData(domain: string, slug: string) {
           published: true,
         },
         include: {
-          site: {
-            include: {
-              user: true,
-            },
-          },
+          user: true,
+          site: true,
         },
       });
 

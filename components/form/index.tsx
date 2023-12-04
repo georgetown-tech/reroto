@@ -31,9 +31,13 @@ export default function Form({
   };
   handleSubmit: any;
 }) {
-  const { id } = useParams() as { id?: string };
+  const { data: session, update } = useSession({ required: true });
+
+  const id = session?.user?.siteId || "";
   const router = useRouter();
-  const { update } = useSession();
+
+  if (id == "") return <></>;
+
   return (
     <form
       action={async (data: FormData) => {

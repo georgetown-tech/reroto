@@ -13,7 +13,15 @@ import {
   Newspaper,
   Settings,
   FileCode,
+  Bird,
   Github,
+  Users,
+  ChevronDown,
+  KanbanSquare,
+  LibraryBig,
+  Wrench,
+  ListMusic,
+  Code,
 } from "lucide-react";
 import {
   useParams,
@@ -23,43 +31,24 @@ import {
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import { getSiteFromPostId } from "@/lib/actions";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const externalLinks = [
-  {
-    name: "Read announcement",
-    href: "https://vercel.com/blog/platforms-starter-kit",
-    icon: <Megaphone width={18} />,
-  },
-  {
-    name: "Star on GitHub",
-    href: "https://github.com/vercel/platforms",
-    icon: <Github width={18} />,
-  },
-  {
-    name: "Read the guide",
-    href: "https://vercel.com/guides/nextjs-multi-tenant-application",
-    icon: <FileCode width={18} />,
-  },
-  {
-    name: "View demo site",
-    href: "https://demo.vercel.pub",
-    icon: <Layout width={18} />,
-  },
-  {
-    name: "Deploy your own",
-    href: "https://vercel.com/templates/next.js/platforms-starter-kit",
-    icon: (
-      <svg
-        width={18}
-        viewBox="0 0 76 76"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="py-1 text-black dark:text-white"
-      >
-        <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor" />
-      </svg>
-    ),
-  },
+  // {
+  //   name: "Deploy your own",
+  //   href: "https://vercel.com/templates/next.js/platforms-starter-kit",
+  //   icon: (
+  //     <svg
+  //       width={18}
+  //       viewBox="0 0 76 76"
+  //       fill="none"
+  //       xmlns="http://www.w3.org/2000/svg"
+  //       className="py-1 text-black dark:text-white"
+  //     >
+  //       <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor" />
+  //     </svg>
+  //   ),
+  // },
 ];
 
 export default function Nav({ children }: { children: ReactNode }) {
@@ -77,37 +66,11 @@ export default function Nav({ children }: { children: ReactNode }) {
   }, [segments, id]);
 
   const tabs = useMemo(() => {
-    if (segments[0] === "site" && id) {
-      return [
-        {
-          name: "Back to All Sites",
-          href: "/sites",
-          icon: <ArrowLeft width={18} />,
-        },
-        {
-          name: "Posts",
-          href: `/site/${id}`,
-          isActive: segments.length === 2,
-          icon: <Newspaper width={18} />,
-        },
-        {
-          name: "Analytics",
-          href: `/site/${id}/analytics`,
-          isActive: segments.includes("analytics"),
-          icon: <BarChart3 width={18} />,
-        },
-        {
-          name: "Settings",
-          href: `/site/${id}/settings`,
-          isActive: segments.includes("settings"),
-          icon: <Settings width={18} />,
-        },
-      ];
-    } else if (segments[0] === "post" && id) {
+    if (segments[0] === "post" && id) {
       return [
         {
           name: "Back to All Posts",
-          href: siteId ? `/site/${siteId}` : "/sites",
+          href: `/posts`,
           icon: <ArrowLeft width={18} />,
         },
         {
@@ -127,20 +90,62 @@ export default function Nav({ children }: { children: ReactNode }) {
     return [
       {
         name: "Overview",
-        href: "/",
+        href: `/`,
         isActive: segments.length === 0,
-        icon: <LayoutDashboard width={18} />,
+        icon: <Bird width={18} />,
       },
       {
-        name: "Sites",
-        href: "/sites",
-        isActive: segments[0] === "sites",
-        icon: <Globe width={18} />,
+        name: "Posts",
+        href: `/posts`,
+        isActive: segments.includes("posts"),
+        icon: <Newspaper width={18} />,
+      },
+      {
+        name: "My Team",
+        href: `/team`,
+        isActive: segments.includes("team"),
+        icon: <Users width={18} />,
+      },
+      {
+        name: "Planning",
+        href: `/plan`,
+        isActive: segments.includes("plan"),
+        icon: <KanbanSquare width={18} />,
+      },
+      {
+        name: "Tools",
+        children: [
+          {
+            name: "Design",
+            href: `/design`,
+            isActive: segments.includes("design"),
+            icon: <Code width={18} />,
+          },
+          {
+            name: "Transcribe",
+            href: `/transcribe`,
+            isActive: segments.includes("transcribe"),
+            icon: <ListMusic width={18} />,
+          },
+          {
+            name: "Media Library",
+            href: `/media`,
+            isActive: segments.includes("media"),
+            icon: <LibraryBig width={18} />,
+          },
+        ],
+        icon: <Wrench width={24} />,
+      },
+      {
+        name: "Analytics",
+        href: `/analytics`,
+        isActive: segments.includes("analytics"),
+        icon: <BarChart3 width={18} />,
       },
       {
         name: "Settings",
-        href: "/settings",
-        isActive: segments[0] === "settings",
+        href: `/settings`,
+        isActive: segments.includes("settings"),
         icon: <Settings width={18} />,
       },
     ];
@@ -148,7 +153,11 @@ export default function Nav({ children }: { children: ReactNode }) {
 
   const [showSidebar, setShowSidebar] = useState(false);
 
+  const { data: session, status } = useSession();
   const pathname = usePathname();
+
+  console.log("AAA");
+  console.log(session);
 
   useEffect(() => {
     // hide sidebar on path change
@@ -175,52 +184,67 @@ export default function Nav({ children }: { children: ReactNode }) {
       >
         <div className="grid gap-2">
           <div className="flex items-center space-x-2 rounded-lg px-2 py-1.5">
-            <a
-              href="https://vercel.com/templates/next.js/platforms-starter-kit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg p-1.5 hover:bg-stone-200 dark:hover:bg-stone-700"
-            >
-              <svg
-                width="26"
-                viewBox="0 0 76 65"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-black dark:text-white"
-              >
-                <path
-                  d="M37.5274 0L75.0548 65H0L37.5274 0Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </a>
-            <div className="h-6 rotate-[30deg] border-l border-stone-400 dark:border-stone-500" />
             <Link
               href="/"
               className="rounded-lg p-2 hover:bg-stone-200 dark:hover:bg-stone-700"
             >
-              <Image
-                src="/logo.png"
-                width={24}
-                height={24}
+              <img
+                src={session?.user?.logo || ""}
                 alt="Logo"
-                className="dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
+                objectFit="cover"
+                className="h-8 w-full dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
               />
             </Link>
           </div>
           <div className="grid gap-1">
-            {tabs.map(({ name, href, isActive, icon }) => (
-              <Link
-                key={name}
-                href={href}
-                className={`flex items-center space-x-3 ${
-                  isActive ? "bg-stone-200 text-black dark:bg-stone-700" : ""
-                } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
-              >
-                {icon}
-                <span className="text-sm font-medium">{name}</span>
-              </Link>
-            ))}
+            {tabs.map(({ name, href, isActive, icon, children }) =>
+              children == undefined ? (
+                <Link
+                  key={name}
+                  href={href}
+                  className={`flex items-center space-x-3 ${
+                    isActive ? "bg-stone-200 text-black dark:bg-stone-700" : ""
+                  } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
+                >
+                  {icon}
+                  <span className="text-sm font-medium">{name}</span>
+                </Link>
+              ) : (
+                <details
+                  key={name}
+                  class="group [&_summary::-webkit-details-marker]:hidden"
+                  open
+                >
+                  <summary
+                    className={`flex items-center space-x-3 ${
+                      isActive
+                        ? "bg-stone-200 text-black dark:bg-stone-700"
+                        : ""
+                    } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
+                  >
+                    {icon}
+                    <span className="w-full text-sm font-medium">{name}</span>
+                    <ChevronDown width={18} />
+                  </summary>
+                  <div className="border-l-2 pl-2">
+                    {children.map(({ name, href, isActive, icon }) => (
+                      <Link
+                        key={name}
+                        href={href}
+                        className={`flex items-center space-x-3 ${
+                          isActive
+                            ? "bg-stone-200 text-black dark:bg-stone-700"
+                            : ""
+                        } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
+                      >
+                        {icon}
+                        <span className="text-sm font-medium">{name}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </details>
+              ),
+            )}
           </div>
         </div>
         <div>
