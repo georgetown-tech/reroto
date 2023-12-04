@@ -1,7 +1,7 @@
 import React from "react";
-import Text from "./Text";
-import Button from "./Button";
-import Container from "./Container";
+import Text from "./text";
+import Button from "./button";
+import Container from "./container";
 
 export default function Card({ background, padding = 20 }) {
   return (
