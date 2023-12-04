@@ -94,7 +94,7 @@ const chartdata = [
   return { ...i, Revenue: i.Advertisements + i.Memberships };
 });
 
-export default function ContactPage({ location }) {
+export default function ContactPage({}) {
   return (
     <>
       <section class="bg-white dark:bg-gray-900">

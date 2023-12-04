@@ -20,7 +20,7 @@ const style = {
   height: "100vh",
 };
 
-export default async function IndexPage({ location }) {
+export default async function IndexPage({}) {
   const monthDate = new Date();
   monthDate.setDate(0);
   monthDate.setDate(1);

@@ -114,7 +114,7 @@ function Plan({ name, price, benefits }) {
   );
 }
 
-export default function PricingPage({ location }) {
+export default function PricingPage({}) {
   return (
     <>
       <section>
