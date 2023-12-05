@@ -52,7 +52,7 @@ export default async function TeamOverview({
         <div className="flex flex-col items-center justify-between space-y-3 p-2 md:flex-row md:space-x-4 md:space-y-0">
           <div className="w-full md:w-1/2">
             <form className="flex items-center">
-              <label for="simple-search" className="sr-only">
+              <label htmlFor="simple-search" className="sr-only">
                 Search
               </label>
               <div className="relative w-full">
@@ -140,7 +140,7 @@ export default async function TeamOverview({
                       className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
                     />
                     <label
-                      for="apple"
+                      htmlFor="apple"
                       className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
                     >
                       Apple (56)
@@ -154,7 +154,7 @@ export default async function TeamOverview({
                       className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
                     />
                     <label
-                      for="fitbit"
+                      htmlFor="fitbit"
                       className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
                     >
                       Fitbit (56)
@@ -168,7 +168,7 @@ export default async function TeamOverview({
                       className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
                     />
                     <label
-                      for="dell"
+                      htmlFor="dell"
                       className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
                     >
                       Dell (56)
@@ -183,7 +183,7 @@ export default async function TeamOverview({
                       className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
                     />
                     <label
-                      for="asus"
+                      htmlFor="asus"
                       className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
                     >
                       Asus (97)
