@@ -168,9 +168,9 @@ export default async function TeamOverview({
               <TableCell>{item.user?.name}</TableCell>
               <TableCell>{""}</TableCell>
               <TableCell>
-                <Badge color={colors[item.status]} size="xs">
+                {/* <Badge color={colors[item.status]} size="xs">
                   {item.status}
-                </Badge>
+                </Badge> */}
               </TableCell>
               <TableCell>
                 {item.published ? (
