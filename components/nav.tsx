@@ -138,9 +138,6 @@ export default function Nav({ children }: { children: ReactNode }) {
   const { data: session, status } = useSession();
   const pathname = usePathname();
 
-  console.log("AAA");
-  console.log(session);
-
   useEffect(() => {
     // hide sidebar on path change
     setShowSidebar(false);
@@ -171,7 +168,10 @@ export default function Nav({ children }: { children: ReactNode }) {
               className="rounded-lg p-2 hover:bg-stone-200 dark:hover:bg-stone-700"
             >
               <img
-                src={session?.user?.logo || ""}
+                src={
+                  // @ts-ignore
+                  session?.user?.logo || ""
+                }
                 alt="Logo"
                 objectFit="cover"
                 className="h-8 w-full dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
