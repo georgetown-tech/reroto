@@ -24,7 +24,7 @@ export default async function SitePosts({
     redirect("/login");
   }
 
-console.log(session)
+  console.log(session);
 
   if (session.user?.siteId == undefined) {
     redirect("/create-site");
@@ -52,7 +52,7 @@ console.log(session)
         "Editor",
         "Writer",
         "Part-Time Writer",
-      ][i.role],
+      ][i.role || 0],
     };
   });
   const articles = await prisma.post.findMany({
