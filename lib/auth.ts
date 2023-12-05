@@ -71,9 +71,20 @@ export const authOptions: NextAuthOptions = {
         },
       });
 
+      if (userData == undefined) {
+        session.user = {
+          ...session.user,
+          // @ts-expect-error
+          id: token.sub,
+          // @ts-expect-error
+          username: token?.user?.username || token?.user?.gh_username,
+        };
+        return session;
+      }
+
       const siteData = await prisma.site.findUnique({
         where: {
-          id: (userData || { siteId: null }).siteId,
+          id: userData.siteId,
         },
       });
 
