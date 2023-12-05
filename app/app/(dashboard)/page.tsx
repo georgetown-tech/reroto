@@ -85,7 +85,7 @@ export default async function SitePosts({
 
   console.log(weeks);
 
-  var groupBy = function (xs:Array<any>, key:string) {
+  var groupBy = function (xs: Array<any>, key: string) {
     return xs.reduce(function (rv, x) {
       (rv[x[key]] = rv[x[key]] || []).push(x);
       return rv;
@@ -125,7 +125,7 @@ export default async function SitePosts({
             {url} ↗
           </a>
         </div>
-        <CreatePostButton />
+        <CreatePostButton id={session.user.siteId} />
       </div>
       <main className="h-auto p-4 pt-20">
         <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
