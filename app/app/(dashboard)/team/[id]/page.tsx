@@ -52,15 +52,17 @@ export default async function SiteAnalytics({
             {user.name}
           </h1>
           <p className="text-lg dark:text-white">
-            {[
-              "Owner",
-              "Admin",
-              "Treasurer",
-              "Designer",
-              "Editor",
-              "Writer",
-              "Part-Time Writer",
-            ][user.role] || "Unknown Role"}
+            {user.role
+              ? [
+                  "Owner",
+                  "Admin",
+                  "Treasurer",
+                  "Designer",
+                  "Editor",
+                  "Writer",
+                  "Part-Time Writer",
+                ][user.role]
+              : "Unknown Role"}
           </p>
         </div>
       </div>
@@ -68,7 +70,8 @@ export default async function SiteAnalytics({
         tabLabels={["About", "Articles", "Statistics"]}
         tabContents={[
           <div key="0">
-            Each user will customize their description and their description will appear here.
+            Each user will customize their description and their description
+            will appear here.
           </div>,
           <div key="1" className="grid grid-cols-4">
             {articles.map((i, n) => (
