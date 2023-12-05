@@ -42,9 +42,9 @@ export const createTranscript = async (formData: FormData) => {
     //   },
     // });
 
-    console.log(response);
+    // console.log(response);
 
-    return response;
+    return null;
   } catch (error: any) {
     if (error.code === "P2002") {
       return {
