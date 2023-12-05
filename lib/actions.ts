@@ -33,7 +33,7 @@ export const createTranscript = async (formData: FormData) => {
   const src = formData.get("audioSrc") as string;
 
   try {
-    const response = await prisma.transcript.create({
+    const response = await prisma.transcription.create({
       data: {
         name,
         description,
