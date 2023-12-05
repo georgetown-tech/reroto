@@ -188,15 +188,17 @@ export default function Nav({ children }: { children: ReactNode }) {
                 children,
               }: {
                 name: string;
-                href: string;
-                isActive: boolean;
+                href: string | undefined;
+                isActive: boolean | undefined;
                 icon: string;
-                children: Array<{
-                  name: string;
-                  href: string;
-                  isActive: boolean;
-                  icon: string;
-                }>;
+                children:
+                  | Array<{
+                      name: string;
+                      href: string;
+                      isActive: boolean;
+                      icon: string;
+                    }>
+                  | undefined;
               }) =>
                 children == undefined ? (
                   <Link
