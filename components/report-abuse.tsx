@@ -1,5 +1,4 @@
 "use client";
-// @ts-nocheck
 
 import { cn } from "@/lib/utils";
 import { AlertTriangle } from "lucide-react";

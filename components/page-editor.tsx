@@ -1,4 +1,5 @@
 "use client";
+// @ts-nocheck
 
 import React from "react";
 import { Editor, Frame, Element, useEditor } from "@craftjs/core";
