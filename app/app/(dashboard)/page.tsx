@@ -85,7 +85,7 @@ export default async function SitePosts({
 
   console.log(weeks);
 
-  var groupBy = function (xs, key) {
+  var groupBy = function (xs:Array<any>, key:string) {
     return xs.reduce(function (rv, x) {
       (rv[x[key]] = rv[x[key]] || []).push(x);
       return rv;
