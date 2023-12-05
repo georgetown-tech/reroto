@@ -81,7 +81,7 @@ export default function AudioUploader() {
 
   return (
     <>
-      <input type="hidden" name="audioSrc" value={data.audio} />
+      <input type="hidden" name="audioSrc" value={data.audio || ""} />
       {!uploadComplete && (
         <div>
           {/* <div className="mb-4 space-y-1">
@@ -111,7 +111,10 @@ export default function AudioUploader() {
                 className="w-full overflow-hidden rounded-md"
                 style={{ backgroundColor: "#f3f3f3" }}
               >
-                <source src={data.audio} type={file?.type || "audio/mp3"} />
+                <source
+                  src={data.audio || ""}
+                  type={file?.type || "audio/mp3"}
+                />
                 Your browser does not support the audio element.
               </audio>
             </div>
