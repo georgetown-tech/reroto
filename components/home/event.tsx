@@ -1,7 +1,19 @@
-import { Link } from "next";
+import Link from "next/link";
 import * as React from "react";
 
-const Event = ({ title, startTime, location, slug, image }) => {
+const Event = ({
+  title,
+  startTime,
+  location,
+  slug,
+  image,
+}: {
+  title: string;
+  startTime: Date;
+  location: string;
+  slug: string;
+  image: string;
+}) => {
   const suffix = [
     "",
     "st",

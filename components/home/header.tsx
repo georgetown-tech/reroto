@@ -5,10 +5,14 @@ import Image from "next/image";
 
 export default function Header({}) {
   return (
-    <header aria-label="Site Header" class="shadow-sm print:hidden">
-      <div class="flew-row mx-auto flex max-w-screen-lg gap-4 p-0">
-        <div class="flex items-center justify-center">
-          <Link activeClassName="m-0 p-0 mr-4" class="m-0 mr-4 p-0" href="/">
+    <header aria-label="Site Header" className="shadow-sm print:hidden">
+      <div className="flew-row mx-auto flex max-w-screen-lg gap-4 p-0">
+        <div className="flex items-center justify-center">
+          <Link
+            activeClassName="m-0 p-0 mr-4"
+            className="m-0 mr-4 p-0"
+            href="/"
+          >
             <Image
               objectFit="cover"
               className="h-20 w-max"
@@ -17,31 +21,31 @@ export default function Header({}) {
             />
           </Link>
         </div>
-        <div class="flex items-center justify-center gap-4 lg:gap-10">
+        <div className="flex items-center justify-center gap-4 lg:gap-10">
           <nav
             aria-label="Site Nav"
-            class="items-between flex w-full gap-4 text-sm font-medium md:gap-8"
+            className="items-between flex w-full gap-4 text-sm font-medium md:gap-8"
           >
-            <Link class="text-gray-500 no-underline" href="/features">
+            <Link className="text-gray-500 no-underline" href="/features">
               Features
             </Link>
-            <Link class="text-gray-500 no-underline" href="/blog">
+            <Link className="text-gray-500 no-underline" href="/blog">
               Blog
             </Link>
-            <Link class="text-gray-500 no-underline" href="/pricing">
+            <Link className="text-gray-500 no-underline" href="/pricing">
               Pricing
             </Link>
-            {/* <Link class="text-gray-500 no-underline" to="/contact">Contact</Link> */}
+            {/* <Link className="text-gray-500 no-underline" to="/contact">Contact</Link> */}
           </nav>
         </div>
-        <div class="w-full"></div>
-        <div class="flex items-center justify-center gap-4 lg:gap-10">
+        <div className="w-full"></div>
+        <div className="flex items-center justify-center gap-4 lg:gap-10">
           <nav
             aria-label="Site Nav"
-            class="items-between flex w-full gap-4 text-sm font-medium md:gap-8"
+            className="items-between flex w-full gap-4 text-sm font-medium md:gap-8"
           >
             <Link
-              class="bg-primary whitespace-nowrap rounded p-3 px-8 font-bold text-white no-underline"
+              className="whitespace-nowrap rounded bg-primary p-3 px-8 font-bold text-white no-underline"
               activeClassName="whitespace-nowrap"
               href="http://app.localhost:3000/login"
             >

@@ -1,6 +1,6 @@
 import * as React from "react";
 // import { GatsbyImage } from "gatsby-plugin-image"
-import { Link } from "next";
+import Link from "next/link";
 
 function aimForCharacterCount(sentence, count) {
   let i = 0;
@@ -17,7 +17,19 @@ function aimForCharacterCount(sentence, count) {
   return output;
 }
 
-function Person({ first, last, biography, location = "", crumbLabel }) {
+function Person({
+  first,
+  last,
+  biography,
+  location = "",
+  crumbLabel,
+}: {
+  first: string;
+  last: string;
+  biography: string;
+  location: string;
+  crumbLabel: string;
+}) {
   let slug = `${first}-${last}`.toLowerCase();
 
   const photo = `/members/${`${first} ${last}`
@@ -31,7 +43,7 @@ function Person({ first, last, biography, location = "", crumbLabel }) {
           <img
             src={photo}
             loading="lazy"
-            class="mb-4 aspect-square w-1/2 rounded-full object-cover"
+            className="mb-4 aspect-square w-1/2 rounded-full object-cover"
           />
           <h3 className="text-lg font-bold">
             {first} {last}
