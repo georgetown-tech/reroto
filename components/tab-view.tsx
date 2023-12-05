@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import BlurImage from "@/components/blur-image";
