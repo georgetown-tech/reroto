@@ -66,31 +66,31 @@ const plans = [
 
 function Plan({ name, price, benefits }) {
   return (
-    <div class="rounded-2xl border border-primary p-6 shadow-sm ring-1 ring-primary sm:order-last sm:px-8 lg:p-12">
-      <div class="text-center">
-        <h2 class="text-lg font-medium text-gray-900">
+    <div className="rounded-2xl border border-primary p-6 shadow-sm ring-1 ring-primary sm:order-last sm:px-8 lg:p-12">
+      <div className="text-center">
+        <h2 className="text-lg font-medium text-gray-900">
           {name}
-          <span class="sr-only">Plan</span>
+          <span className="sr-only">Plan</span>
         </h2>
-        <p class="mt-2 sm:mt-4">
-          <strong class="text-3xl font-bold text-gray-900 sm:text-4xl">
+        <p className="mt-2 sm:mt-4">
+          <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
             ${price}
           </strong>
-          <span class="text-sm font-medium text-gray-700">/month</span>
+          <span className="text-sm font-medium text-gray-700">/month</span>
         </p>
       </div>
 
-      <ul class="mt-6 space-y-2">
+      <ul className="mt-6 space-y-2">
         {(benefits || []).map((i, n) => {
           return (
-            <li key={n} class="flex items-center gap-1">
+            <li key={n} className="flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary"
+                className="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -98,7 +98,7 @@ function Plan({ name, price, benefits }) {
                   d="M4.5 12.75l6 6 9-13.5"
                 />
               </svg>
-              <span class="text-gray-700"> {i} </span>
+              <span className="text-gray-700"> {i} </span>
             </li>
           );
         })}
@@ -106,7 +106,7 @@ function Plan({ name, price, benefits }) {
 
       <a
         href="#plans"
-        class="mt-8 block rounded-full border border-primary bg-primary px-12 py-3 text-center text-sm font-medium text-white hover:bg-primary hover:ring-1 hover:ring-primary focus:outline-none focus:ring active:text-primary"
+        className="mt-8 block rounded-full border border-primary bg-primary px-12 py-3 text-center text-sm font-medium text-white hover:bg-primary hover:ring-1 hover:ring-primary focus:outline-none focus:ring active:text-primary"
       >
         See More
       </a>
@@ -118,9 +118,9 @@ export default function PricingPage({}) {
   return (
     <>
       <section>
-        <div class="mx-auto max-w-screen-xl px-4 pb-16 pt-48 lg:flex  lg:items-center">
-          <div class="mx-auto max-w-4xl text-center">
-            <h1 class="text-3xl font-extrabold sm:text-5xl">
+        <div className="mx-auto max-w-screen-xl px-4 pb-16 pt-48 lg:flex  lg:items-center">
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="text-3xl font-extrabold sm:text-5xl">
               Pricing and Plans
             </h1>
             <p className="m-2 text-xl">
@@ -130,8 +130,8 @@ export default function PricingPage({}) {
           </div>
         </div>
       </section>
-      <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:items-center md:gap-8">
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:items-center md:gap-8">
           <Plan
             name="College"
             price="120"
@@ -163,13 +163,13 @@ export default function PricingPage({}) {
           />
         </div>
       </div>
-      <section class="border-t border-gray-200 bg-white dark:bg-gray-900">
-        <div class="mx-auto max-w-screen-xl items-center gap-8 px-4 pt-16 sm:pt-32 md:grid md:grid-cols-2 lg:px-6 xl:gap-16">
-          <div class="mt-4 md:mt-0">
-            <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+      <section className="border-t border-gray-200 bg-white dark:bg-gray-900">
+        <div className="mx-auto max-w-screen-xl items-center gap-8 px-4 pt-16 sm:pt-32 md:grid md:grid-cols-2 lg:px-6 xl:gap-16">
+          <div className="mt-4 md:mt-0">
+            <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
               What features does each plan unlock?
             </h2>
-            <p class="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">
+            <p className="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">
               Discover the ideal plan that matches your needs and ambitions.
               Explore our range of customizable options below, each crafted to
               unlock unique features and support your growth journey. Choose the
@@ -177,11 +177,11 @@ export default function PricingPage({}) {
             </p>
             <a
               href="#plans"
-              class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+              className="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
             >
               See Features
               <svg
-                class="-mr-1 ml-2 h-5 w-5"
+                className="-mr-1 ml-2 h-5 w-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -196,11 +196,11 @@ export default function PricingPage({}) {
           </div>
         </div>
       </section>
-      <section id="plans" class="body-font overflow-hidden text-gray-700">
-        <div class="container mx-auto flex flex-wrap px-5 py-24">
-          <div class="mt-48 hidden lg:block lg:w-1/4">
-            <div class="mt-px overflow-hidden rounded-bl-lg rounded-tl-lg border-b border-l border-t border-gray-300">
-              <div class="-mt-px">
+      <section id="plans" className="body-font overflow-hidden text-gray-700">
+        <div className="container mx-auto flex flex-wrap px-5 py-24">
+          <div className="mt-48 hidden lg:block lg:w-1/4">
+            <div className="mt-px overflow-hidden rounded-bl-lg rounded-tl-lg border-b border-l border-t border-gray-300">
+              <div className="-mt-px">
                 {features.map((i, n) => (
                   <p
                     key={n}
@@ -214,26 +214,26 @@ export default function PricingPage({}) {
               </div>
             </div>
           </div>
-          <div class="flex w-full flex-wrap rounded-lg border-gray-300 lg:w-3/4 lg:border">
+          <div className="flex w-full flex-wrap rounded-lg border-gray-300 lg:w-3/4 lg:border">
             {plans.map((i, n) => (
               <div
                 key={n}
-                class={`${
+                className={`${
                   i.important
                     ? "border-2 border-primary-500"
                     : "border-2 border-gray-300 lg:rounded-none lg:border-none"
                 } relative mb-10 w-full rounded-lg lg:mb-0 lg:mt-px lg:w-1/3`}
               >
                 {i.important ? (
-                  <span class="absolute right-0 top-0 rounded-bl bg-primary-500 px-3 py-1 text-xs tracking-widest text-white">
+                  <span className="absolute right-0 top-0 rounded-bl bg-primary-500 px-3 py-1 text-xs tracking-widest text-white">
                     POPULAR
                   </span>
                 ) : (
                   <></>
                 )}
-                <div class="flex h-48 flex-col items-center justify-center px-2 text-center">
-                  <h3 class="uppercase tracking-widest">{i.name}</h3>
-                  <h2 class="mb-4 mt-2 text-5xl font-medium leading-none text-gray-900">
+                <div className="flex h-48 flex-col items-center justify-center px-2 text-center">
+                  <h3 className="uppercase tracking-widest">{i.name}</h3>
+                  <h2 className="mb-4 mt-2 text-5xl font-medium leading-none text-gray-900">
                     {typeof i.price == "string" ? (
                       i.price
                     ) : (
@@ -245,17 +245,19 @@ export default function PricingPage({}) {
                         })
                           .format(i.price)
                           .toString()}
-                        <span class="ml-1 text-base text-gray-600">/mo</span>
+                        <span className="ml-1 text-base text-gray-600">
+                          /mo
+                        </span>
                       </>
                     )}
                   </h2>
-                  <span class="text-sm text-gray-600">{i.time}</span>
+                  <span className="text-sm text-gray-600">{i.time}</span>
                 </div>
-                <div class="-mt-px border-t border-gray-300">
+                <div className="-mt-px border-t border-gray-300">
                   {features.map((j, m) => (
                     <p
                       key={m}
-                      class={`flex h-12 items-center justify-center ${
+                      className={`flex h-12 items-center justify-center ${
                         m % 2 == 0 ? "bg-gray-100" : ""
                       } ${
                         m == 0 ? "-mb-px" : ""
@@ -271,10 +273,10 @@ export default function PricingPage({}) {
                     </p>
                   ))}
                 </div>
-                <div class="rounded-bl-lg border-t border-gray-300 p-6 text-center">
+                <div className="rounded-bl-lg border-t border-gray-300 p-6 text-center">
                   <Link
                     href="https://app.reroto.com/login"
-                    class="mt-auto flex w-full items-center rounded border-0 bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600 focus:outline-none"
+                    className="mt-auto flex w-full items-center rounded border-0 bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600 focus:outline-none"
                   >
                     Get ReRoto
                     <svg
@@ -283,13 +285,13 @@ export default function PricingPage({}) {
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      class="ml-auto h-4 w-4"
+                      className="ml-auto h-4 w-4"
                       viewBox="0 0 24 24"
                     >
                       <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
                   </Link>
-                  <p class="mt-3 text-xs text-gray-500">
+                  <p className="mt-3 text-xs text-gray-500">
                     Billing is done at the each month&apos;s start for plans.
                     Metered services will appear on the next month&apos;s bill.
                   </p>
