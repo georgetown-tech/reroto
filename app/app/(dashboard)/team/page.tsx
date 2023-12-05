@@ -48,18 +48,18 @@ export default async function TeamOverview({
           </a>
         </div>
       </div>
-      <div class="relative w-full border-b bg-white dark:bg-gray-300">
-        <div class="flex flex-col items-center justify-between space-y-3 p-2 md:flex-row md:space-x-4 md:space-y-0">
-          <div class="w-full md:w-1/2">
-            <form class="flex items-center">
-              <label for="simple-search" class="sr-only">
+      <div className="relative w-full border-b bg-white dark:bg-gray-300">
+        <div className="flex flex-col items-center justify-between space-y-3 p-2 md:flex-row md:space-x-4 md:space-y-0">
+          <div className="w-full md:w-1/2">
+            <form className="flex items-center">
+              <label for="simple-search" className="sr-only">
                 Search
               </label>
-              <div class="relative w-full">
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <div className="relative w-full">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
                     aria-hidden="true"
-                    class="h-5 w-5 text-gray-500 dark:text-gray-400"
+                    className="h-5 w-5 text-gray-500 dark:text-gray-400"
                     fill="currentColor"
                     viewbox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -74,29 +74,29 @@ export default async function TeamOverview({
                 <input
                   type="text"
                   id="simple-search"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                   placeholder="Search"
                   required=""
                 />
               </div>
             </form>
           </div>
-          <div class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
+          <div className="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0">
             <AddUserButton>
               <AddUserModal />
             </AddUserButton>
-            <div class="flex w-full items-center space-x-3 md:w-auto">
+            <div className="flex w-full items-center space-x-3 md:w-auto">
               <button
                 id="filterDropdownButton"
                 data-dropdown-toggle="filterDropdown"
                 data-dropdown-trigger="hover"
-                class="relative flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 md:w-auto"
+                className="relative flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 md:w-auto"
                 type="button"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
-                  class="mr-2 h-4 w-4 text-gray-400"
+                  className="mr-2 h-4 w-4 text-gray-400"
                   viewbox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -108,7 +108,7 @@ export default async function TeamOverview({
                 </svg>
                 Filter
                 <svg
-                  class="-mr-1 ml-1.5 h-5 w-5"
+                  className="-mr-1 ml-1.5 h-5 w-5"
                   fill="currentColor"
                   viewbox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -123,65 +123,68 @@ export default async function TeamOverview({
               </button>
               <div
                 id="filterDropdown"
-                class="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-gray-700"
+                className="z-10 hidden w-48 rounded-lg bg-white p-3 shadow dark:bg-gray-700"
               >
-                <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                <h6 className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
                   Category
                 </h6>
-                <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
-                  <li class="flex items-center">
+                <ul
+                  className="space-y-2 text-sm"
+                  aria-labelledby="dropdownDefault"
+                >
+                  <li className="flex items-center">
                     <input
                       id="apple"
                       type="checkbox"
                       value=""
-                      class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
+                      className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
                     />
                     <label
                       for="apple"
-                      class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                      className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
                     >
                       Apple (56)
                     </label>
                   </li>
-                  <li class="flex items-center">
+                  <li className="flex items-center">
                     <input
                       id="fitbit"
                       type="checkbox"
                       value=""
-                      class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
+                      className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
                     />
                     <label
                       for="fitbit"
-                      class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                      className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
                     >
                       Fitbit (56)
                     </label>
                   </li>
-                  <li class="flex items-center">
+                  <li className="flex items-center">
                     <input
                       id="dell"
                       type="checkbox"
                       value=""
-                      class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
+                      className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
                     />
                     <label
                       for="dell"
-                      class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                      className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
                     >
                       Dell (56)
                     </label>
                   </li>
-                  <li class="flex items-center">
+                  <li className="flex items-center">
                     <input
                       id="asus"
                       type="checkbox"
                       value=""
                       checked
-                      class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
+                      className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700 dark:focus:ring-primary-600"
                     />
                     <label
                       for="asus"
-                      class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
+                      className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100"
                     >
                       Asus (97)
                     </label>
