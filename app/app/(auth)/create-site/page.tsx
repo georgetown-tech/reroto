@@ -5,7 +5,7 @@ import Link from "next/link";
 // import LoginButton from "./login-button";
 import { Suspense, useState } from "react";
 import Logo from "@/res/logo.svg";
-import Loading from "@/components/icons/loading-circle.tsx";
+import Loading from "@/components/icons/loading-circle";
 
 import { createSite } from "@/lib/actions";
 
