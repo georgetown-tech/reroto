@@ -185,7 +185,7 @@ export default function Nav({ children }: { children: ReactNode }) {
                 children == undefined ? (
                   <Link
                     key={name}
-                    href={href}
+                    href={href || ""}
                     className={`flex items-center space-x-3 ${
                       isActive
                         ? "bg-stone-200 text-black dark:bg-stone-700"
@@ -227,7 +227,7 @@ export default function Nav({ children }: { children: ReactNode }) {
                         }) => (
                           <Link
                             key={name}
-                            href={href}
+                            href={href || ""}
                             className={`flex items-center space-x-3 ${
                               isActive
                                 ? "bg-stone-200 text-black dark:bg-stone-700"
