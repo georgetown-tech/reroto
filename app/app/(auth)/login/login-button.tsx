@@ -6,7 +6,11 @@ import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
-export default function LoginButton({ method }: { method: string }) {
+export default function LoginButton({
+  method,
+}: {
+  method: "google" | "twitter" | "github";
+}) {
   const sites = {
     github: {
       name: "Github",
