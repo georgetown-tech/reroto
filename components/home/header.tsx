@@ -9,7 +9,7 @@ export default function Header({}) {
       <div className="flew-row mx-auto flex max-w-screen-lg gap-4 p-0">
         <div className="flex items-center justify-center">
           <Link
-            activeClassName="m-0 p-0 mr-4"
+            // activeClassName="m-0 p-0 mr-4"
             className="m-0 mr-4 p-0"
             href="/"
           >
@@ -46,7 +46,7 @@ export default function Header({}) {
           >
             <Link
               className="whitespace-nowrap rounded bg-primary p-3 px-8 font-bold text-white no-underline"
-              activeClassName="whitespace-nowrap"
+              // activeClassName="whitespace-nowrap"
               href="http://app.localhost:3000/login"
             >
               Sign Up
