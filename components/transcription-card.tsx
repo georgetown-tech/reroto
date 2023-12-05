@@ -4,7 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import LogoutButton from "./logout-button";
 
-export default async function TranscriptionCard({ transcription }) {
+export default async function TranscriptionCard({
+  transcription,
+}: {
+  transcription: any;
+}) {
   return (
     <div className="flex w-full items-center justify-between">
       <Link

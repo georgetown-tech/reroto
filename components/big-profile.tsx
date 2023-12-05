@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import LogoutButton from "./logout-button";
 
-export default async function BigProfile({ user }) {
+export default async function BigProfile({ user }: { user: any }) {
   return (
     <div className="flex w-full items-center justify-between">
       <Link

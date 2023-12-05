@@ -7,7 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import LoadingDots from "@/components/icons/loading-dots";
 import va from "@vercel/analytics";
 
-export default function CreatePostButton({ id }) {
+export default function CreatePostButton({ id }: { id: any }) {
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
