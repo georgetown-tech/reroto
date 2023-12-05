@@ -59,14 +59,16 @@ export default async function SitePosts({
     where: {
       siteId: session.user.siteId,
       createdAt: {
-        gte: new Date(new Date() - 2629743000),
+        gte: new Date(new Date().getTime() - 2629743000),
       },
     },
   });
-  const monthStart = new Date(new Date() - 2629743000);
+  const monthStart = new Date(new Date().getTime() - 2629743000);
   const postByWeek = [[], [], [], []];
   articles.forEach((element) => {
-    const week = Math.floor((element.createdAt - monthStart) / 604800000);
+    const week = Math.floor(
+      (element.createdAt.getTime() - monthStart) / 604800000,
+    );
 
     if (postByWeek[week] == undefined) postByWeek[week] = [];
     postByWeek[week].push(element);
