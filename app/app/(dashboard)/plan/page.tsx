@@ -179,7 +179,7 @@ export default async function TeamOverview({
                   <X width={22} className="text-red-500" />
                 )}
               </TableCell>
-              <TableCell className="text-right">{item.amount || ""}</TableCell>
+              <TableCell className="text-right">{""}</TableCell>
               <TableCell>
                 <Button size="xs" variant="secondary" color="gray">
                   See details
