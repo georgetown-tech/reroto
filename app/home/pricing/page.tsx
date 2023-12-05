@@ -64,7 +64,15 @@ const plans = [
   },
 ];
 
-function Plan({ name, price, benefits }: { name: string, price: number, benefits: Array<string | boolean> }) {
+function Plan({
+  name,
+  price,
+  benefits,
+}: {
+  name: string;
+  price: string;
+  benefits: Array<string | boolean>;
+}) {
   return (
     <div className="rounded-2xl border border-primary p-6 shadow-sm ring-1 ring-primary sm:order-last sm:px-8 lg:p-12">
       <div className="text-center">
