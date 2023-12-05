@@ -67,7 +67,7 @@ export default async function SitePosts({
   const postByWeek = [[], [], [], []];
   articles.forEach((element) => {
     const week = Math.floor(
-      (element.createdAt.getTime() - monthStart) / 604800000,
+      (element.createdAt.getTime() - monthStart.getTime()) / 604800000,
     );
 
     if (postByWeek[week] == undefined) postByWeek[week] = [];
