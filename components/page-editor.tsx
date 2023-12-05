@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Editor, Frame, Selector } from "@craftjs/core";
+import { Editor, Frame } from "@craftjs/core";
 // import TextComponent from "./user/text-component.tsx";
 
 import {
