@@ -31,7 +31,12 @@ export default function Form({
   };
   handleSubmit: any;
 }) {
-  const { data: session, update } = useSession({ required: true });
+  const {
+    data: session,
+    update,
+  }: { data: { session: { siteId: string } }; update: Function } = useSession({
+    required: true,
+  });
 
   const id = session?.user?.siteId || "";
   const router = useRouter();
