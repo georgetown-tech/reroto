@@ -322,7 +322,7 @@ export default function ContactPage({}) {
           <div>
             <Card>
               <NovelEditor
-                completionApi={false}
+                completionApi={""}
                 className="relative block"
                 defaultValue={
                   "### Simple Editing\n\nClick here to see how easy it is to start editing. You can even drag images in or copy and paste them instantly. This demo does not show off our AI-autocompletion."
