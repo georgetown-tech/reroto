@@ -18,6 +18,7 @@ export default function CreateSiteModal() {
     name: "",
     subdomain: "",
     description: "",
+    email: "",
   });
 
   useEffect(() => {
@@ -33,18 +34,19 @@ export default function CreateSiteModal() {
   return (
     <form
       action={async (data: FormData) =>
-        createSite(data).then((res: any) => {
-          if (res.error) {
-            toast.error(res.error);
-          } else {
-            va.track("Created Site");
-            const { id } = res;
-            router.refresh();
-            router.push(`/site/${id}`);
-            modal?.hide();
-            toast.success(`Successfully created site!`);
-          }
-        })
+        // createSite(data).then((res: any) => {
+        //   if (res.error) {
+        //     toast.error(res.error);
+        //   } else {
+        //     va.track("Created Site");
+        //     const { id } = res;
+        //     router.refresh();
+        //     router.push(`/site/${id}`);
+        //     modal?.hide();
+        //     toast.success(`Successfully created site!`);
+        //   }
+        // })
+        {}
       }
       className="w-full rounded-md bg-white dark:bg-black md:max-w-md md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
     >
