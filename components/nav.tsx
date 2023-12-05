@@ -179,53 +179,85 @@ export default function Nav({ children }: { children: ReactNode }) {
             </Link>
           </div>
           <div className="grid gap-1">
-            {tabs.map(({ name, href, isActive, icon, children }: { name: string, href: string, isActive: boolean, icon: string, children: Array<any> }) =>
-              children == undefined ? (
-                <Link
-                  key={name}
-                  href={href}
-                  className={`flex items-center space-x-3 ${
-                    isActive ? "bg-stone-200 text-black dark:bg-stone-700" : ""
-                  } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
-                >
-                  {icon}
-                  <span className="text-sm font-medium">{name}</span>
-                </Link>
-              ) : (
-                <details
-                  key={name}
-                  className="group [&_summary::-webkit-details-marker]:hidden"
-                  open
-                >
-                  <summary
+            {tabs.map(
+              ({
+                name,
+                href,
+                isActive,
+                icon,
+                children,
+              }: {
+                name: string;
+                href: string;
+                isActive: boolean;
+                icon: string;
+                children: Array<{
+                  name: string;
+                  href: string;
+                  isActive: boolean;
+                  icon: string;
+                }>;
+              }) =>
+                children == undefined ? (
+                  <Link
+                    key={name}
+                    href={href}
                     className={`flex items-center space-x-3 ${
                       isActive
                         ? "bg-stone-200 text-black dark:bg-stone-700"
                         : ""
-                    } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
+                    } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
                   >
                     {icon}
-                    <span className="w-full text-sm font-medium">{name}</span>
-                    <ChevronDown width={18} />
-                  </summary>
-                  <div className="border-l-2 pl-2">
-                    {children.map(({ name, href, isActive, icon }) => (
-                      <Link
-                        key={name}
-                        href={href}
-                        className={`flex items-center space-x-3 ${
-                          isActive
-                            ? "bg-stone-200 text-black dark:bg-stone-700"
-                            : ""
-                        } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
-                      >
-                        {icon}
-                        <span className="text-sm font-medium">{name}</span>
-                      </Link>
-                    ))}
-                  </div>
-                </details>
-              ),
+                    <span className="text-sm font-medium">{name}</span>
+                  </Link>
+                ) : (
+                  <details
+                    key={name}
+                    className="group [&_summary::-webkit-details-marker]:hidden"
+                    open
+                  >
+                    <summary
+                      className={`flex items-center space-x-3 ${
+                        isActive
+                          ? "bg-stone-200 text-black dark:bg-stone-700"
+                          : ""
+                      } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:cursor-pointer hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
+                    >
+                      {icon}
+                      <span className="w-full text-sm font-medium">{name}</span>
+                      <ChevronDown width={18} />
+                    </summary>
+                    <div className="border-l-2 pl-2">
+                      {children.map(
+                        ({
+                          name,
+                          href,
+                          isActive,
+                          icon,
+                        }: {
+                          name: string;
+                          href: string;
+                          isActive: boolean;
+                          icon: string;
+                        }) => (
+                          <Link
+                            key={name}
+                            href={href}
+                            className={`flex items-center space-x-3 ${
+                              isActive
+                                ? "bg-stone-200 text-black dark:bg-stone-700"
+                                : ""
+                            } rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800`}
+                          >
+                            {icon}
+                            <span className="text-sm font-medium">{name}</span>
+                          </Link>
+                        ),
+                      )}
+                    </div>
+                  </details>
+                ),
             )}
           </div>
         </div>
