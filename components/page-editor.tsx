@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Editor, Frame } from "@craftjs/core";
+import { Editor, Frame, Element, useEditor } from "@craftjs/core";
 // import TextComponent from "./user/text-component.tsx";
 
 import {
@@ -14,9 +14,8 @@ import Text from "./user/text";
 import Card from "./user/card";
 import Container from "./user/container";
 import Button from "./user/button";
-import Canvas from "./user/canvas";
+// import Canvas from "./user/canvas";
 import Row, { RowChild } from "./user/row";
-import { Element, useEditor } from "@craftjs/core";
 
 export function Topbar() {
   const { connectors, query } = useEditor();
