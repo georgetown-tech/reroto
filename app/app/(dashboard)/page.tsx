@@ -64,7 +64,7 @@ export default async function SitePosts({
     },
   });
   const monthStart = new Date(new Date().getTime() - 2629743000);
-  const postByWeek = [[], [], [], []];
+  const postByWeek: Array<Array<any>> = [[], [], [], []];
   articles.forEach((element) => {
     const week = Math.floor(
       (element.createdAt.getTime() - monthStart.getTime()) / 604800000,
