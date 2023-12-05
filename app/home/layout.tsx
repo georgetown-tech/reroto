@@ -11,7 +11,15 @@ import Header from "@/components/home/header";
 import Footer from "@/components/home/footer";
 // import { Breadcrumb } from "gatsby-plugin-breadcrumb";
 
-export default function Layout ({ children, location = "", crumbLabel }) {
+export default function Layout({
+  children,
+  location = "",
+  crumbLabel,
+}: {
+  children: Array<any>;
+  location: string;
+  crumbLabel: string;
+}) {
   return (
     <>
       <Header />
@@ -20,4 +28,4 @@ export default function Layout ({ children, location = "", crumbLabel }) {
       <Footer />
     </>
   );
-};
+}
