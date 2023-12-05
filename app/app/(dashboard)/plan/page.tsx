@@ -101,7 +101,7 @@ export default async function TeamOverview({
                 className="max-w-xs"
               >
                 {users.map((item) => (
-                  <MultiSelectItem key={item.name} value={item.name}>
+                  <MultiSelectItem key={item.name} value={item.name || ""}>
                     {item.name}
                   </MultiSelectItem>
                 ))}
