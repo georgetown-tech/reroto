@@ -188,10 +188,10 @@ export default function Nav({ children }: { children: ReactNode }) {
                 children,
               }: {
                 name: string;
-                href: string | undefined;
-                isActive: boolean | undefined;
+                href?: string | undefined;
+                isActive?: boolean | undefined;
                 icon: string;
-                children:
+                children?:
                   | Array<{
                       name: string;
                       href: string;
