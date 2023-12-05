@@ -165,7 +165,7 @@ export default async function TeamOverview({
           {posts.map((item) => (
             <TableRow key={item.title}>
               <TableCell className="truncate">{item.title}</TableCell>
-              <TableCell>{item.user.name}</TableCell>
+              <TableCell>{item.user?.name}</TableCell>
               <TableCell>{item.item}</TableCell>
               <TableCell>
                 <Badge color={colors[item.status]} size="xs">
