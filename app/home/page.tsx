@@ -118,9 +118,9 @@ export default async function IndexPage({}) {
                 <a
                   key={n}
                   href={
-                    i.domain == null
+                    i.customDomain == null
                       ? `https://${i.subdomain}.reroto.com/`
-                      : `https://${i.domain}`
+                      : `https://${i.customDomain}`
                   }
                   className="mb-5 mr-5 w-max hover:text-gray-800 dark:hover:text-gray-400 lg:mb-0"
                 >
