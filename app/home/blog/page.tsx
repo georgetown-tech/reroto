@@ -4,23 +4,23 @@ import articles from "./articles.json";
 const SolutionsPage = () => {
   return (
     <>
-      <section class="bg-white dark:bg-gray-900">
-        <div class="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
-          <div class="mx-auto mb-8 max-w-screen-sm text-center lg:mb-16">
-            <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white lg:text-4xl">
+      <section className="bg-white dark:bg-gray-900">
+        <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
+          <div className="mx-auto mb-8 max-w-screen-sm text-center lg:mb-16">
+            <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white lg:text-4xl">
               ReRoto Reveals
             </h2>
-            <p class="font-light text-gray-500 dark:text-gray-400 sm:text-xl">
+            <p className="font-light text-gray-500 dark:text-gray-400 sm:text-xl">
               Unlocking the Power of Content Management: Dive into the ReRoto
               Blog for Expert Tips, Industry Insights, and Latest CMS Updates
             </p>
           </div>
-          <div class="grid gap-8 lg:grid-cols-2">
-            <article class="rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
-              <div class="mb-5 flex items-center justify-between text-gray-500">
-                <span class="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
+              <div className="mb-5 flex items-center justify-between text-gray-500">
+                <span className="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800">
                   <svg
-                    class="mr-1 h-3 w-3"
+                    className="mr-1 h-3 w-3"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -29,33 +29,33 @@ const SolutionsPage = () => {
                   </svg>
                   Tutorial
                 </span>
-                <span class="text-sm">14 days ago</span>
+                <span className="text-sm">14 days ago</span>
               </div>
-              <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 <a href="#">How to quickly deploy a static website</a>
               </h2>
-              <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+              <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
                 Static websites are now used to bootstrap lots of websites and
                 are becoming the basis for a variety of tools that even
                 influence both web designers and developers influence both web
                 designers and developers.
               </p>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
                   <img
-                    class="h-7 w-7 rounded-full"
+                    className="h-7 w-7 rounded-full"
                     src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                     alt="Jese Leos avatar"
                   />
-                  <span class="font-medium dark:text-white">Jese Leos</span>
+                  <span className="font-medium dark:text-white">Jese Leos</span>
                 </div>
                 <a
                   href="#"
-                  class="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  className="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Read more
                   <svg
-                    class="ml-2 h-4 w-4"
+                    className="ml-2 h-4 w-4"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -69,11 +69,11 @@ const SolutionsPage = () => {
                 </a>
               </div>
             </article>
-            <article class="rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
-              <div class="mb-5 flex items-center justify-between text-gray-500">
-                <span class="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800">
+            <article className="rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
+              <div className="mb-5 flex items-center justify-between text-gray-500">
+                <span className="inline-flex items-center rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-200 dark:text-primary-800">
                   <svg
-                    class="mr-1 h-3 w-3"
+                    className="mr-1 h-3 w-3"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -87,33 +87,33 @@ const SolutionsPage = () => {
                   </svg>
                   Article
                 </span>
-                <span class="text-sm">14 days ago</span>
+                <span className="text-sm">14 days ago</span>
               </div>
-              <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 <a href="#">Our first project with React</a>
               </h2>
-              <p class="mb-5 font-light text-gray-500 dark:text-gray-400">
+              <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
                 Static websites are now used to bootstrap lots of websites and
                 are becoming the basis for a variety of tools that even
                 influence both web designers and developers influence both web
                 designers and developers.
               </p>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
                   <img
-                    class="h-7 w-7 rounded-full"
+                    className="h-7 w-7 rounded-full"
                     src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
                     alt="Bonnie Green avatar"
                   />
-                  <span class="font-medium dark:text-white">Bonnie Green</span>
+                  <span className="font-medium dark:text-white">Bonnie Green</span>
                 </div>
                 <a
                   href="#"
-                  class="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  className="inline-flex items-center font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Read more
                   <svg
-                    class="ml-2 h-4 w-4"
+                    className="ml-2 h-4 w-4"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
