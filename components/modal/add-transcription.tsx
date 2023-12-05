@@ -24,7 +24,7 @@ export default function CreateTranscriptionModal() {
   return (
     <form
       action={async (data: FormData) =>
-        createTranscription(data).then((res: any) => {
+        createTranscript(data).then((res: any) => {
           if (res.error) {
             toast.error(res.error);
           } else {
