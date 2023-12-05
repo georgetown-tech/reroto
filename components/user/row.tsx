@@ -1,7 +1,7 @@
 import React from "react";
 import { useNode, Element } from "@craftjs/core";
 
-export function RowChild({ children }) {
+export function RowChild({ children }: { children: any }) {
   const {
     connectors: { connect },
   } = useNode();
@@ -9,7 +9,13 @@ export function RowChild({ children }) {
   return <div ref={connect}>{children}</div>;
 }
 
-export default function Row({ gap = 5, padding = 5 }) {
+export default function Row({
+  gap = 5,
+  padding = 5,
+}: {
+  gap: number;
+  padding: number;
+}) {
   const {
     connectors: { connect, drag },
   } = useNode();

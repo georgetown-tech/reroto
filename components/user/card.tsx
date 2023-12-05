@@ -3,7 +3,13 @@ import Text from "./text";
 import Button from "./button";
 import Container from "./container";
 
-export default function Card({ background, padding = 20 }) {
+export default function Card({
+  background,
+  padding = 20,
+}: {
+  background: String;
+  padding: number;
+}) {
   return (
     <Container background={background} padding={padding}>
       <div className="text-only">

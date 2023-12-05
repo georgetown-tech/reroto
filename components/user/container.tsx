@@ -1,7 +1,15 @@
 import React from "react";
 import { useNode, Element } from "@craftjs/core";
 
-export default function Container({ background, padding = 0, children }) {
+export default function Container({
+  background,
+  padding = 0,
+  children,
+}: {
+  background: string;
+  padding: number;
+  children: any;
+}) {
   const {
     connectors: { connect, drag },
   } = useNode();
