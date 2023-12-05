@@ -166,7 +166,7 @@ export default async function TeamOverview({
             <TableRow key={item.title}>
               <TableCell className="truncate">{item.title}</TableCell>
               <TableCell>{item.user?.name}</TableCell>
-              <TableCell>{item.item}</TableCell>
+              <TableCell>{""}</TableCell>
               <TableCell>
                 <Badge color={colors[item.status]} size="xs">
                   {item.status}
