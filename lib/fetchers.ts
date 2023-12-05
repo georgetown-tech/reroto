@@ -43,6 +43,9 @@ export async function getPostsForSite(domain: string) {
           imageBlurhash: true,
           createdAt: true,
         },
+        include: {
+          user: true
+        },
         orderBy: [
           {
             createdAt: "desc",

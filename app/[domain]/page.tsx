@@ -74,13 +74,13 @@ export default async function SiteHomePage({
                 </p>
                 <div className="flex w-full items-center justify-start space-x-4">
                   <div className="relative h-8 w-8 flex-none overflow-hidden rounded-full">
-                    {data.user?.image ? (
+                    {posts[0].user?.image ? (
                       <BlurImage
-                        alt={data.user?.name ?? "User Avatar"}
+                        alt={posts[0].user?.name ?? "User Avatar"}
                         width={100}
                         height={100}
                         className="h-full w-full object-cover"
-                        src={data.user?.image}
+                        src={posts[0].user?.image}
                       />
                     ) : (
                       <div className="absolute flex h-full w-full select-none items-center justify-center bg-stone-100 text-4xl text-stone-500">
@@ -89,7 +89,7 @@ export default async function SiteHomePage({
                     )}
                   </div>
                   <p className="ml-3 inline-block whitespace-nowrap align-middle text-sm font-semibold dark:text-white md:text-base">
-                    {data.user?.name}
+                    {posts[0].user?.name}
                   </p>
                   <div className="h-6 border-l border-stone-600 dark:border-stone-400" />
                   <p className="m-auto my-5 w-10/12 text-sm font-light text-stone-500 dark:text-stone-400 md:text-base">
