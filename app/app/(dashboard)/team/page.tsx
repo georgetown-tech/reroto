@@ -61,7 +61,7 @@ export default async function TeamOverview({
                     aria-hidden="true"
                     className="h-5 w-5 text-gray-500 dark:text-gray-400"
                     fill="currentColor"
-                    viewbox="0 0 20 20"
+                    viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
@@ -97,7 +97,7 @@ export default async function TeamOverview({
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                   className="mr-2 h-4 w-4 text-gray-400"
-                  viewbox="0 0 20 20"
+                  viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path
@@ -110,7 +110,7 @@ export default async function TeamOverview({
                 <svg
                   className="-mr-1 ml-1.5 h-5 w-5"
                   fill="currentColor"
-                  viewbox="0 0 20 20"
+                  viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
                 >
