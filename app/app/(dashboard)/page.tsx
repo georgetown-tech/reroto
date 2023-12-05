@@ -177,7 +177,7 @@ export default async function SitePosts({
               className="h-72"
               data={weeks}
               categories={["Post Count"]}
-              labels={["Article Count"]}
+              // labels={["Article Count"]}
               index="date"
               colors={["indigo", "cyan"]}
             />
