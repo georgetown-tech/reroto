@@ -12,7 +12,7 @@ export default function TabView({
   tabContents,
 }: {
   tabLabels: Array<string>;
-  tabContents: Array<HTMLElement>;
+  tabContents: Array<ReactElement>;
 }) {
   const [index, setIndex] = useState(0);
 
