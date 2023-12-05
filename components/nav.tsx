@@ -179,27 +179,9 @@ export default function Nav({ children }: { children: ReactNode }) {
             </Link>
           </div>
           <div className="grid gap-1">
-            {tabs.map(
-              ({
-                name,
-                href,
-                isActive,
-                icon,
-                children,
-              }: {
-                name: string;
-                href?: string | undefined;
-                isActive?: boolean | undefined;
-                icon: string;
-                children?:
-                  | Array<{
-                      name: string;
-                      href: string;
-                      isActive: boolean;
-                      icon: string;
-                    }>
-                  | undefined;
-              }) =>
+            {
+              // @ts-ignore
+              tabs.map(({ name, href, isActive, icon, children }) =>
                 children == undefined ? (
                   <Link
                     key={name}
@@ -260,7 +242,8 @@ export default function Nav({ children }: { children: ReactNode }) {
                     </div>
                   </details>
                 ),
-            )}
+              )
+            }
           </div>
         </div>
       </div>
