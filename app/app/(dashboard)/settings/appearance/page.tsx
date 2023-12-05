@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 import { updateSite } from "@/lib/actions";
 import { getSession } from "@/lib/auth";
+import { notFound, redirect } from "next/navigation";
 
 export default async function SiteSettingsAppearance({
   params,
