@@ -126,8 +126,8 @@ export default async function IndexPage({}) {
                 >
                   <img
                     className="h-12 opacity-60 grayscale hover:opacity-80"
-                    src={i.logo}
-                    alt={i.name}
+                    src={i.logo || ""}
+                    alt={i.name || ""}
                   />
                 </a>
               ))}
