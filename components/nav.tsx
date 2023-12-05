@@ -173,7 +173,7 @@ export default function Nav({ children }: { children: ReactNode }) {
                   session?.user?.logo || ""
                 }
                 alt="Logo"
-                objectFit="cover"
+                // objectFit="cover"
                 className="h-8 w-full dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
               />
             </Link>
