@@ -31,13 +31,12 @@ export default function Form({
   };
   handleSubmit: any;
 }) {
-  const {
-    data: session,
-    update,
-  }: { data: { session: { siteId: string } }; update: Function } = useSession({
+  // @ts-ignore
+  const { data: session, update } = useSession({
     required: true,
   });
 
+  // @ts-ignore
   const id = session?.user?.siteId || "";
   const router = useRouter();
 
