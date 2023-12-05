@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import Posts from "@/components/posts";
 import CreatePostButton from "@/components/create-post-button";
 import Link from "next/link";
-import PageEditor from "@/components/page-editor.tsx";
+import PageEditor from "@/components/page-editor";
 
 export default async function SitePosts({
   params,
