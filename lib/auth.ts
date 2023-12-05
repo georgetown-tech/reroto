@@ -71,7 +71,7 @@ export const authOptions: NextAuthOptions = {
         },
       });
 
-      if (userData == undefined) {
+      if (userData == null) {
         session.user = {
           ...session.user,
           // @ts-expect-error
@@ -87,6 +87,17 @@ export const authOptions: NextAuthOptions = {
           id: userData.siteId,
         },
       });
+
+      if (siteData == null) {
+        session.user = {
+          ...session.user,
+          // @ts-expect-error
+          id: token.sub,
+          // @ts-expect-error
+          username: token?.user?.username || token?.user?.gh_username,
+        };
+        return session;
+      }
 
       session.user = {
         ...session.user,
