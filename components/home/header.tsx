@@ -47,7 +47,7 @@ export default function Header({}) {
             <Link
               className="whitespace-nowrap rounded bg-primary p-3 px-8 font-bold text-white no-underline"
               // activeClassName="whitespace-nowrap"
-              href="http://app.localhost:3000/login"
+              href="http://app.reroto.com/login"
             >
               Sign Up
             </Link>
