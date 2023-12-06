@@ -19,7 +19,7 @@ export async function GET(
     getPostsForSite(domain),
   ]);
 
-  if (data == null) return new Response(new RSS({}).xml({ indent: true }));
+  if (data == null) return new Response(new RSS().xml({ indent: true }));
 
   const site_url = data.customDomain
     ? data.customDomain
