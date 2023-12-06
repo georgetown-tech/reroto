@@ -96,6 +96,9 @@
   - [ ] Change Description
 - [ ] Creative commons images– Unsplash
 - [ ] Speech to text- Google Speech API
-- [ ] Calendar for Scheduling
+- [X] Calendar for Scheduling
 - [ ] RSS Feeds
 - [ ] Biography for each of the authors
+- [ ] Apple News
+- [ ] Google News
+- [ ] Google Search Console
