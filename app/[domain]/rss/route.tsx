@@ -40,7 +40,7 @@ export async function GET(
       title: post.title || "Untitled Post",
       description: post.description || "This post has no description.",
       url: `${site_url}/${post.slug}`,
-      date: post.date || new Date(),
+      date: post.createdAt || new Date(),
     });
   });
 
