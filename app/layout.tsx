@@ -5,16 +5,15 @@ import { Providers } from "./providers";
 import { Metadata } from "next";
 import { cn } from "@/lib/utils";
 
-const title =
-  "Platforms Starter Kit – The all-in-one starter kit for building multi-tenant applications.";
+const title = "ReRoto – Elevate Your Newsroom Efficiency";
 const description =
-  "The Platforms Starter Kit is a full-stack Next.js app with multi-tenancy and custom domain support. Built with Next.js App Router, Vercel Postgres and the Vercel Domains API.";
-const image = "https://vercel.pub/thumbnail.png";
+  "Discover seamless collaboration, streamlined workflows, and unparalleled editorial control— ReRoto CMS, empowering your newsroom.";
+const image = "https://reroto.com/thumbnail.png";
 
 export const metadata: Metadata = {
   title,
   description,
-  icons: ["https://vercel.pub/favicon.ico"],
+  icons: ["https://reroto.com/favicon.ico"],
   openGraph: {
     title,
     description,
@@ -25,9 +24,9 @@ export const metadata: Metadata = {
     title,
     description,
     images: [image],
-    creator: "@vercel",
+    creator: "@reroto",
   },
-  metadataBase: new URL("https://vercel.pub"),
+  metadataBase: new URL("https://reroto.com"),
 };
 
 export default function RootLayout({

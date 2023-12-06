@@ -280,7 +280,7 @@ export default async function IndexPage({}) {
       </section>
 
       <section className="bg-primary p-4">
-        <div className="mx-auto flex max-w-3xl flex-row justify-between">
+        <div className="mx-auto flex max-w-3xl flex-col justify-between gap-16 py-8 md:flex-row md:gap-0 md:py-0">
           <div className="flex flex-col items-center">
             <h2 className="font-bold uppercase text-white">In 2023</h2>
             <p className="text-4xl font-black text-white">
@@ -295,7 +295,7 @@ export default async function IndexPage({}) {
             <p className="font-bold uppercase text-white">Articles On ReRoto</p>
           </div>
           <div className="flex flex-col items-center">
-            <h2 className="font-bold uppercase text-white">Every Month</h2>
+            <h2 className="font-bold uppercase text-white">This Month</h2>
             <p className="text-4xl font-black text-white">
               {monthlyCount.toLocaleString("en-US", {
                 style: "decimal",
