@@ -31,7 +31,7 @@ export async function GET(
     description: data.description,
     site_url: site_url,
     feed_url: `${site_url}/rss`,
-    image_url: `${site_url}/logo.png`,
+    image_url: data.logo,
     pubDate: new Date(),
     copyright: `All rights reserved ${new Date().getFullYear()}, ${data.name}`,
   };
