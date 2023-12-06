@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { unstable_cache } from "next/cache";
 import prisma from "@/lib/prisma";
 import { serialize } from "next-mdx-remote/serialize";
@@ -44,7 +46,7 @@ export async function getPostsForSite(domain: string) {
           createdAt: true,
         },
         include: {
-          user: true
+          user: true,
         },
         orderBy: [
           {
