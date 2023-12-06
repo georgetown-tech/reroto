@@ -1,7 +1,6 @@
 import { type NextRequest } from "next/server";
 import RSS from "rss";
 import { getPostsForSite, getSiteData } from "@/lib/fetchers";
-import { getSortedPost } from "./mdx";
 
 export const dynamic = "force-dynamic";
 
