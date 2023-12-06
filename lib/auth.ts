@@ -67,7 +67,7 @@ export const authOptions: NextAuthOptions = {
     session: async ({ session, token }) => {
       const userData = await prisma.user.findUnique({
         where: {
-          id: token.sub,
+          id: token.sub as string,
         },
       });
 
@@ -84,7 +84,7 @@ export const authOptions: NextAuthOptions = {
 
       const siteData = await prisma.site.findUnique({
         where: {
-          id: userData.siteId,
+          id: userData.siteId as string,
         },
       });
 
