@@ -25,23 +25,21 @@ export async function GET(
     ? data.customDomain
     : `https://${data.subdomain}.reroto.com`;
 
-  const feedOptions = {
-    title: data.name,
-    description: data.description,
-    site_url: site_url,
-    feed_url: `${site_url}/rss`,
-    image_url: data.logo,
+  const feed = new RSS({
+    title: data.name || "Unnamed Website",
+    description: data.description || "This website has no description.",
+    site_url: site_url || domain,
+    feed_url: `${site_url}/rss` || domain,
+    image_url: data.logo || "https://reroto.com/logo.png",
     pubDate: new Date(),
     copyright: `All rights reserved ${new Date().getFullYear()}, ${data.name}`,
-  };
-
-  const feed = new RSS(feedOptions);
+  });
 
   posts.map((post) => {
     feed.item({
       title: post.title,
       description: post.description,
-      url: `${site_url}/blog/${post.slug}`,
+      url: `${site_url}/${post.slug}`,
       date: post.date,
     });
   });
