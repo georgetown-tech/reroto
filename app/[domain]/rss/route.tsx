@@ -37,10 +37,10 @@ export async function GET(
 
   posts.map((post) => {
     feed.item({
-      title: post.title,
-      description: post.description,
+      title: post.title || "Untitled Post",
+      description: post.description || "This post has no description.",
       url: `${site_url}/${post.slug}`,
-      date: post.date,
+      date: post.date || new Date(),
     });
   });
 
