@@ -83,8 +83,8 @@ export default function Form({
           />
         ) : inputAttrs.name === "importFile" ? (
           <TextUploader
-            // defaultValue={inputAttrs.defaultValue}
-            name={inputAttrs.name}
+          // defaultValue={inputAttrs.defaultValue}
+          // name={inputAttrs.name}
           />
         ) : inputAttrs.name === "font" ? (
           <div className="flex max-w-sm items-center overflow-hidden rounded-lg border border-stone-600">
