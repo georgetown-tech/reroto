@@ -83,7 +83,7 @@ export default function Form({
           />
         ) : inputAttrs.name === "importFile" ? (
           <TextUploader
-            defaultValue={inputAttrs.defaultValue}
+            // defaultValue={inputAttrs.defaultValue}
             name={inputAttrs.name}
           />
         ) : inputAttrs.name === "font" ? (
