@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import DomainStatus from "./domain-status";
 import DomainConfiguration from "./domain-configuration";
 import Uploader from "./uploader";
+import TextUploader from "@/components/textfile-uploader";
 import va from "@vercel/analytics";
 
 export default function Form({
@@ -77,6 +78,11 @@ export default function Form({
         </p>
         {inputAttrs.name === "image" || inputAttrs.name === "logo" ? (
           <Uploader
+            defaultValue={inputAttrs.defaultValue}
+            name={inputAttrs.name}
+          />
+        ) : inputAttrs.name === "importFile" ? (
+          <TextUploader
             defaultValue={inputAttrs.defaultValue}
             name={inputAttrs.name}
           />

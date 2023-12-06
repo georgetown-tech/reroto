@@ -246,6 +246,10 @@ export default function Nav({ children }: { children: ReactNode }) {
             }
           </div>
         </div>
+        <div>
+          <div className="my-2 border-t border-stone-200 dark:border-stone-700" />
+          {children}
+        </div>
       </div>
     </>
   );

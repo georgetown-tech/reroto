@@ -6,6 +6,7 @@ import { replaceLinks } from "@/lib/remark-plugins";
 import { Tweet } from "react-tweet";
 import BlurImage from "@/components/blur-image";
 import styles from "./mdx.module.css";
+import { NodeHtmlMarkdown, NodeHtmlMarkdownOptions } from "node-html-markdown";
 
 export default function MDX({ source }: { source: MDXRemoteProps }) {
   const components = {

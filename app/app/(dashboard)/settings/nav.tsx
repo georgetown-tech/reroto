@@ -24,6 +24,11 @@ export default function SiteSettingsNav() {
       href: `/settings/appearance`,
       segment: "appearance",
     },
+    {
+      name: "Transfer",
+      href: `/settings/transfer`,
+      segment: "transfer",
+    },
   ];
 
   return (
