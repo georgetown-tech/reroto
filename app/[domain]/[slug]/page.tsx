@@ -101,6 +101,7 @@ export default async function SitePostPage({
         src="https://unpkg.com/@tinybirdco/flock.js"
         data-host="https://api.us-east.aws.tinybird.co"
         data-token="p.eyJ1IjogImI0MTgwNzU2LTI1YzctNDNlMC04M2Q3LWQyN2ZhODA2NTk3YiIsICJpZCI6ICI1MTcwZTkwMi0xY2ZhLTQzZjgtODBhMi01OWM5N2ExY2FlYzEiLCAiaG9zdCI6ICJ1cy1lYXN0LWF3cyJ9.buvHzH2UJTTAyvejlSA_7_DWy27IWcg4R_zHLc9zoLg"
+        // @ts-ignore
         tb_domain={domain}
       />
       <div className="flex flex-col items-center justify-center">
