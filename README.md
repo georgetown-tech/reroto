@@ -97,8 +97,9 @@
 - [ ] Creative commons images– Unsplash
 - [ ] Speech to text- Google Speech API
 - [X] Calendar for Scheduling
-- [ ] RSS Feeds
+- [X] RSS Feeds
 - [ ] Biography for each of the authors
 - [ ] Apple News
 - [ ] Google News
 - [ ] Google Search Console
+- [ ] Bing News
