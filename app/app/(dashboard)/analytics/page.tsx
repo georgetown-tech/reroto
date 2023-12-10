@@ -22,6 +22,9 @@ export default async function SiteAnalytics({
   }
 
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
+  const domain = data.customDomain
+    ? data.customDomain
+    : `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
 
   return (
     <>
@@ -40,7 +43,7 @@ export default async function SiteAnalytics({
           </a>
         </div>
       </div>
-      <AnalyticsMockup />
+      <AnalyticsMockup domain={domain} />
     </>
   );
 }

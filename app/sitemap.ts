@@ -15,10 +15,14 @@ export default async function Sitemap() {
     {
       url: `https://${domain}`,
       lastModified: new Date(),
+      changeFrequency: "never",
+      priority: 1,
     },
     ...posts.map(({ slug }) => ({
       url: `https://${domain}/${slug}`,
       lastModified: new Date(),
+      changeFrequency: "never",
+      priority: 0.8,
     })),
   ];
 }

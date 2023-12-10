@@ -8,6 +8,9 @@ dependencies:
   '@craftjs/core':
     specifier: ^0.2.3
     version: 0.2.3(react@18.2.0)
+  '@grapesjs/react':
+    specifier: ^1.0.0
+    version: 1.0.0
   '@next-auth/prisma-adapter':
     specifier: ^1.0.7
     version: 1.0.7(@prisma/client@5.5.2)(next-auth@4.24.5)
@@ -50,6 +53,9 @@ dependencies:
   framer-motion:
     specifier: ^10.16.4
     version: 10.16.4(react-dom@18.2.0)(react@18.2.0)
+  grapesjs:
+    specifier: ^0.21.7
+    version: 0.21.7
   gray-matter:
     specifier: ^4.0.3
     version: 4.0.3
@@ -380,6 +386,10 @@ packages:
 
   /@floating-ui/utils@0.1.6:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
+    dev: false
+
+  /@grapesjs/react@1.0.0:
+    resolution: {integrity: sha512-HHttzxwgvhbxQqqsiiQzb+OJtKFl8yWI9Yp3IgPgiKXqwY19lEJWSkCukvfqxugbYRxi0M1uERLAt209AmY5vQ==}
     dev: false
 
   /@headlessui/react@1.7.17(react-dom@18.2.0)(react@18.2.0):
@@ -1594,6 +1604,13 @@ packages:
       '@types/estree': 1.0.5
     dev: false
 
+  /@types/backbone@1.4.18:
+    resolution: {integrity: sha512-/qo5+GegJsBPrvHnKLf6dhfe9sazHB/usPGv1vMii1nHkLIe/2aT/ArLc3/dabKd1a0VzDgdJhoaTdeextWl8Q==}
+    dependencies:
+      '@types/jquery': 3.5.29
+      '@types/underscore': 1.11.15
+    dev: false
+
   /@types/d3-array@3.2.1:
     resolution: {integrity: sha512-Y2Jn2idRrLzUfAKV2LyRImR+y4oa2AntrgID95SHJxuMUrkNXmanDSed71sRNZysveJVt1hLLemQZIady0FpEg==}
     dev: false
@@ -1672,6 +1689,12 @@ packages:
     resolution: {integrity: sha512-pk2B1NWalF9toCRu6gjBzR69syFjP4Od8WRAX+0mmf9lAjCRicLOWc+ZrxZHx/0XRjotgkF9t6iaMJ+aXcOdZQ==}
     dependencies:
       '@types/istanbul-lib-report': 3.0.3
+    dev: false
+
+  /@types/jquery@3.5.29:
+    resolution: {integrity: sha512-oXQQC9X9MOPRrMhPHHOsXqeQDnWeCDT3PelUIg/Oy8FAbzSZtFHRjc7IpbfFVmpLtJ+UOoywpRsuO5Jxjybyeg==}
+    dependencies:
+      '@types/sizzle': 2.3.8
     dev: false
 
   /@types/js-cookie@3.0.6:
@@ -1784,6 +1807,10 @@ packages:
   /@types/scheduler@0.16.6:
     resolution: {integrity: sha512-Vlktnchmkylvc9SnwwwozTv04L/e1NykF5vgoQ0XTmI8DD+wxfjQuHuvHS3p0r2jz2x2ghPs2h1FVeDirIteWA==}
 
+  /@types/sizzle@2.3.8:
+    resolution: {integrity: sha512-0vWLNK2D5MT9dg0iOo8GlKguPAU02QjmZitPEsXRuJXU/OGIOt9vT9Fc26wtYuavLxtO45v9PGleoL9Z0k1LHg==}
+    dev: false
+
   /@types/stack-utils@2.0.3:
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
     dev: false
@@ -1794,6 +1821,10 @@ packages:
 
   /@types/tough-cookie@4.0.5:
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
+    dev: false
+
+  /@types/underscore@1.11.15:
+    resolution: {integrity: sha512-HP38xE+GuWGlbSRq9WrZkousaQ7dragtZCruBVMi0oX1migFZavZ3OROKHSkNp/9ouq82zrWtZpg18jFnVN96g==}
     dev: false
 
   /@types/unist@2.0.10:
@@ -2352,6 +2383,20 @@ packages:
     resolution: {integrity: sha512-fpWrvyVHEKyeEvbKZTVOeZF3VSKKWtJxFIxX/jaVPf+cLbGUSitjb49pHLqPV2BUNNZ0LcoeEGfE/YCpyDYHIw==}
     dev: false
 
+  /backbone-undo@0.2.6:
+    resolution: {integrity: sha512-AsfpNiljLXlk7TcffDUu3EAUq7CxWbyTNwARWrql5XTzN4vh6WzEEBZYaKK4kTTz+iW1tSzqUooaGRIwO83kWA==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+    dependencies:
+      backbone: 1.4.1
+      underscore: 1.13.6
+    dev: false
+
+  /backbone@1.4.1:
+    resolution: {integrity: sha512-ADy1ztN074YkWbHi8ojJVFe3vAanO/lrzMGZWUClIP7oDD/Pjy2vrASraUP+2EVCfIiTtCW4FChVow01XneivA==}
+    dependencies:
+      underscore: 1.13.6
+    dev: false
+
   /bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
     dev: false
@@ -2532,6 +2577,14 @@ packages:
       acorn: 8.11.2
       estree-walker: 3.0.3
       periscopic: 3.1.0
+    dev: false
+
+  /codemirror-formatting@1.0.0:
+    resolution: {integrity: sha512-br9yM6eJI3pJHekEnoyHaBEb1B7XxxDjju+vRyBe8QGLp5saTIXXkZ+eFCTqXSAtI8QEZDFVEX2/SOjH2sVWRQ==}
+    dev: false
+
+  /codemirror@5.65.16:
+    resolution: {integrity: sha512-br21LjYmSlVL0vFCPWPfhzUCT34FM/pAdK7rRIZwa0rrtrIdotvP4Oh4GUHsu2E3IrQMCfRkL/fN3ytMNxVQvg==}
     dev: false
 
   /color-convert@1.9.3:
@@ -3882,6 +3935,18 @@ packages:
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+
+  /grapesjs@0.21.7:
+    resolution: {integrity: sha512-XSUIPD8M2bOsrqtKar8I2jpWOITmVXiq0+OMVD0NhBOjsI0s7Vm6tzvyY6hY2uSObDiy+qQg4EfdcHUPjnP1zg==}
+    dependencies:
+      '@types/backbone': 1.4.18
+      backbone: 1.4.1
+      backbone-undo: 0.2.6
+      codemirror: 5.65.16
+      codemirror-formatting: 1.0.0
+      promise-polyfill: 8.3.0
+      underscore: 1.13.6
+    dev: false
 
   /grapheme-splitter@1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
@@ -5762,6 +5827,10 @@ packages:
     dependencies:
       '@prisma/engines': 5.5.2
 
+  /promise-polyfill@8.3.0:
+    resolution: {integrity: sha512-H5oELycFml5yto/atYqmjyigJoAo3+OXwolYiH7OfQuYlAqhxNvTfiNMbV9hsC6Yp83yE5r2KTVmtrG6R9i6Pg==}
+    dev: false
+
   /prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
     dependencies:
@@ -7035,6 +7104,10 @@ packages:
       has-bigints: 1.0.2
       has-symbols: 1.0.3
       which-boxed-primitive: 1.0.2
+
+  /underscore@1.13.6:
+    resolution: {integrity: sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==}
+    dev: false
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
