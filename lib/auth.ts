@@ -18,17 +18,6 @@ export const authOptions: NextAuthOptions = {
     TwitterProvider({
       clientId: process.env.TWITTER_CLIENT_ID,
       clientSecret: process.env.TWITTER_CLIENT_SECRET,
-      profile(profile) {
-        console.log(profile)
-
-        return {
-          id: profile.id.toString(),
-          name: profile.name || profile.login,
-          gh_username: profile.login,
-          email: profile.email,
-          image: profile.avatar_url,
-        };
-      },
     }),
     GitHubProvider({
       clientId: process.env.AUTH_GITHUB_ID as string,
