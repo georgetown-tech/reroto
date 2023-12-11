@@ -25,11 +25,16 @@ export default function TabView({
             Tab
           </label>
 
-          <select id="Tab" className="w-full rounded-md border-gray-200">
-            <option>Settings</option>
-            <option>Messages</option>
-            <option>Archive</option>
-            <option select>Notifications</option>
+          <select onChange={(e) => {
+
+            setIndex(e.target.value);
+
+          }} id="Tab" className="w-full rounded-md border-gray-200">
+            {
+              tabLabels.map((i, n) => (
+                <option key={n} value={n} selected={n == index ? true : false}>{i}</option>
+              ))
+            }
           </select>
         </div>
 
@@ -42,7 +47,7 @@ export default function TabView({
                   onClick={() => {
                     setIndex(n);
                   }}
-                  classNameName={
+                  className={
                     n == index
                       ? "shrink-0 border-b-2 border-sky-500 px-1 pb-4 text-sm font-medium text-sky-600"
                       : "shrink-0 border-b-2 border-transparent px-1 pb-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"

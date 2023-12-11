@@ -1,7 +1,7 @@
 import { getSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
-import { Search, Plus } from "lucide-react";
+import { Search, Plus, BadgeCheck } from "lucide-react";
 import BigProfile from "@/components/big-profile";
 import Image from "next/image";
 import PostCard from "@/components/post-card";
@@ -33,8 +33,6 @@ export default async function SiteAnalytics({
     notFound();
   }
 
-  console.log(user);
-
   //   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
 
   return (
@@ -51,8 +49,8 @@ export default async function SiteAnalytics({
           <h1 className="mt-4 font-cal text-xl font-bold dark:text-white sm:text-3xl">
             {user.name}
           </h1>
-          <p className="text-lg dark:text-white">
-            {user.role
+          <p className="text-lg dark:text-white flex flex-row gap-2">
+            {user.role != null
               ? [
                   "Owner",
                   "Admin",
@@ -62,7 +60,7 @@ export default async function SiteAnalytics({
                   "Writer",
                   "Part-Time Writer",
                 ][user.role]
-              : "Unknown Role"}
+              : "Unknown Role"} • {user.email} {user.emailVerified != null ? <BadgeCheck width={18} /> : <></>}
           </p>
         </div>
       </div>
@@ -73,7 +71,7 @@ export default async function SiteAnalytics({
             Each user will customize their description and their description
             will appear here.
           </div>,
-          <div key="1" className="grid grid-cols-4">
+          <div key="1" className="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
             {articles.map((i, n) => (
               <PostCard key={n} data={i} />
             ))}
