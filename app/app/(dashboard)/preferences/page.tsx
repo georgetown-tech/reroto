@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import Form from "@/components/form";
-import { updateSite } from "@/lib/actions";
+// import { updateSite } from "@/lib/actions";
 import DeleteSiteForm from "@/components/form/delete-site-form";
 import { getSession } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
@@ -40,9 +40,9 @@ export default async function SiteSettingsIndex({
           placeholder: "Jane Doe",
           maxLength: 32,
         }}
-        handleSubmit={updateSite}
+        handleSubmit={() => {}}
       />
-
+{/* 
       <Form
         title="Description"
         description="A description of what you do and write about. Tell us a bit about yourself."
@@ -54,7 +54,7 @@ export default async function SiteSettingsIndex({
           placeholder: "A really, really nice person.",
         }}
         handleSubmit={updateSite}
-      />
+      /> */}
 
       {/* <DeleteSiteForm siteName={data?.name!} /> */}
     </div>
