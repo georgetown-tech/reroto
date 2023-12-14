@@ -62,30 +62,18 @@ export const authOptions: NextAuthOptions = {
     jwt: async ({ token, user }) => {
       if (user) {
         token.user = user;
-
-        console.log(user)
-
-        const userData = await prisma.user.findUnique({
-          where: {
-            id: user.id as string,
-          },
-        });
   
-        if (userData == null)
+        if (user.siteId == null || user.role == null) 
           return token;
-  
+
         const siteData = await prisma.site.findUnique({
           where: {
             id: userData.siteId as string,
           },
         });
   
-        if (siteData == null) 
-          return token;
-
         token.user = {
           ...token.user,
-          siteId: userData.siteId,
           logo: siteData.logo,
         };
 
