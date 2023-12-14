@@ -16,23 +16,23 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     TwitterProvider({
-      clientId: process.env.TWITTER_CLIENT_ID,
-      clientSecret: process.env.TWITTER_CLIENT_SECRET,
+      clientId: process.env.TWITTER_CLIENT_ID as string,
+      clientSecret: process.env.TWITTER_CLIENT_SECRET as string,
     }),
     GitHubProvider({
       clientId: process.env.AUTH_GITHUB_ID as string,
       clientSecret: process.env.AUTH_GITHUB_SECRET as string,
-      profile(profile) {
-        console.log(profile)
+      // profile(profile) {
+      //   console.log(profile)
 
-        return {
-          id: profile.id.toString(),
-          name: profile.name || profile.login,
-          gh_username: profile.login,
-          email: profile.email,
-          image: profile.avatar_url,
-        };
-      },
+      //   return {
+      //     id: profile.id.toString(),
+      //     name: profile.name || profile.login,
+      //     gh_username: profile.login,
+      //     email: profile.email,
+      //     image: profile.avatar_url,
+      //   };
+      // },
     }),
   ],
   pages: {
@@ -41,7 +41,7 @@ export const authOptions: NextAuthOptions = {
     error: "/login", // Error code passed in query string as ?error=
   },
   adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" },
+  session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },
   cookies: {
     sessionToken: {
       name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,
@@ -61,53 +61,39 @@ export const authOptions: NextAuthOptions = {
     jwt: async ({ token, user }) => {
       if (user) {
         token.user = user;
+
+        console.log(user)
+
+        const userData = await prisma.user.findUnique({
+          where: {
+            id: token.sub as string,
+          },
+        });
+  
+        if (userData == null)
+          return token;
+  
+        const siteData = await prisma.site.findUnique({
+          where: {
+            id: userData.siteId as string,
+          },
+        });
+  
+        if (siteData == null) 
+          return token;
+
+        token.user = {
+          ...token.user,
+          siteId: userData.siteId,
+          logo: siteData.logo,
+        };
+
       }
+      
       return token;
     },
     session: async ({ session, token }) => {
-      const userData = await prisma.user.findUnique({
-        where: {
-          id: token.sub as string,
-        },
-      });
-
-      if (userData == null) {
-        session.user = {
-          ...session.user,
-          // @ts-expect-error
-          id: token.sub,
-          // @ts-expect-error
-          username: token?.user?.username || token?.user?.gh_username,
-        };
-        return session;
-      }
-
-      const siteData = await prisma.site.findUnique({
-        where: {
-          id: userData.siteId as string,
-        },
-      });
-
-      if (siteData == null) {
-        session.user = {
-          ...session.user,
-          // @ts-expect-error
-          id: token.sub,
-          // @ts-expect-error
-          username: token?.user?.username || token?.user?.gh_username,
-        };
-        return session;
-      }
-
-      session.user = {
-        ...session.user,
-        siteId: userData.siteId,
-        logo: siteData.logo,
-        // @ts-expect-error
-        id: token.sub,
-        // @ts-expect-error
-        username: token?.user?.username || token?.user?.gh_username,
-      };
+      session.user = token.user;
       return session;
     },
   },

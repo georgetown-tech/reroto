@@ -29,9 +29,9 @@ export default function Header({}) {
             <Link className="text-gray-500 no-underline" href="/features">
               Features
             </Link>
-            <Link className="text-gray-500 no-underline" href="/blog">
+            { /* <Link className="text-gray-500 no-underline" href="/blog">
               Blog
-            </Link>
+  </Link> */ }
             <Link className="text-gray-500 no-underline" href="/pricing">
               Pricing
             </Link>
