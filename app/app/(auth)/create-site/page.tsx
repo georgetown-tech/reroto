@@ -8,7 +8,7 @@ import Logo from "@/res/logo.svg";
 import Loading from "@/components/icons/loading-circle";
 
 import { createSite } from "@/lib/actions";
-import Profile from "@/components/profile-client";
+import LogoutButton from "@/components/logout-button";
 
 export default function LoginPage() {
   const [index, setIndex] = useState(0);
@@ -42,6 +42,9 @@ export default function LoginPage() {
       key="0"
       className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md"
     >
+      <div className="w-full flex flex-row justify-end px-4">
+        <LogoutButton />
+      </div>
       <Image
         className="mx-auto h-16 w-max"
         objectFit="cover"
@@ -83,12 +86,14 @@ export default function LoginPage() {
           Enterprise Newspaper
         </button>
       </div>
-      <Profile className="px-4 mt-8" canAccess={false} />
     </div>,
     <div
       key="1"
       className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md"
     >
+      <div className="w-full flex flex-row justify-end px-4">
+        <LogoutButton />
+      </div>
       <Image
         className="mx-auto h-16 w-max"
         objectFit="cover"
@@ -119,12 +124,15 @@ export default function LoginPage() {
           Next Up!
         </button>
       </div>
-      <Profile className="px-4 mt-8" canAccess={false} />
+      
     </div>,
     <div
       key="2"
       className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md"
     >
+      <div className="w-full flex flex-row justify-end px-4">
+        <LogoutButton />
+      </div>
       <Image
         className="mx-auto h-16 w-max"
         objectFit="cover"
@@ -156,7 +164,7 @@ export default function LoginPage() {
           What&apos;s next?
         </button>
       </div>
-      <Profile className="px-4 mt-8" canAccess={false} />
+      
     </div>,
     <div
       key="3"
@@ -168,6 +176,9 @@ export default function LoginPage() {
       key="4"
       className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md"
     >
+      <div className="w-full flex flex-row justify-end px-4">
+        <LogoutButton />
+      </div>
       <Image
         className="mx-auto h-16 w-max"
         objectFit="cover"
@@ -188,7 +199,7 @@ export default function LoginPage() {
           Check It Out
         </Link>
       </div>
-      <Profile className="px-4 mt-8" canAccess={false} />
+      
     </div>,
   ];
 
