@@ -8,6 +8,7 @@ import Logo from "@/res/logo.svg";
 import Loading from "@/components/icons/loading-circle";
 
 import { createSite } from "@/lib/actions";
+import Profile from "@/components/profile-client";
 
 export default function LoginPage() {
   const [index, setIndex] = useState(0);
@@ -82,6 +83,7 @@ export default function LoginPage() {
           Enterprise Newspaper
         </button>
       </div>
+      <Profile className="px-4 mt-8" canAccess={false} />
     </div>,
     <div
       key="1"
@@ -117,6 +119,7 @@ export default function LoginPage() {
           Next Up!
         </button>
       </div>
+      <Profile className="px-4 mt-8" canAccess={false} />
     </div>,
     <div
       key="2"
@@ -153,6 +156,7 @@ export default function LoginPage() {
           What&apos;s next?
         </button>
       </div>
+      <Profile className="px-4 mt-8" canAccess={false} />
     </div>,
     <div
       key="3"
@@ -184,6 +188,7 @@ export default function LoginPage() {
           Check It Out
         </Link>
       </div>
+      <Profile className="px-4 mt-8" canAccess={false} />
     </div>,
   ];
 
