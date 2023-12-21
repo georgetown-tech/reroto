@@ -58,11 +58,11 @@ export async function generateStaticParams() {
       },
     },
     // feel free to remove this filter if you want to generate paths for all posts
-    where: {
-      site: {
-        subdomain: "demo",
-      },
-    },
+    // where: {
+    //   site: {
+    //     subdomain: "demo",
+    //   },
+    // },
   });
 
   const allPaths = allPosts

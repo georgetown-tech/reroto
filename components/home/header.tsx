@@ -35,7 +35,7 @@ export default function Header({}) {
             <Link className="text-gray-500 no-underline" href="/pricing">
               Pricing
             </Link>
-            {/* <Link className="text-gray-500 no-underline" to="/contact">Contact</Link> */}
+            <Link className="text-gray-500 no-underline" href="https://docs.reroto.com/">Docs</Link>
           </nav>
         </div>
         <div className="w-full"></div>
