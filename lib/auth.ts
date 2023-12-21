@@ -68,7 +68,7 @@ export const authOptions: NextAuthOptions = {
 
         const siteData = await prisma.site.findUnique({
           where: {
-            id: userData.siteId as string,
+            id: user.siteId as string,
           },
         });
   
