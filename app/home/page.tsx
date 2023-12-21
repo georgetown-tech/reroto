@@ -36,7 +36,12 @@ export default async function IndexPage({}) {
   });
   const siteCount = await prisma.site.count();
   const sites = await prisma.site.findMany({
-    take: 3,
+    take: 5,
+    where: {
+      logo: {
+        not: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/JRajRyC-PhBHEinQkupt02jqfKacBVHLWJq7Iy.png"
+      }
+    }
   });
 
   return (
