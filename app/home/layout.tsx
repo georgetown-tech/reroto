@@ -25,6 +25,11 @@ export default function Layout({
       <Header />
       {/* <Breadcrumb location={location} crumbLabel={crumbLabel} /> */}
       <main>{children}</main>
+      <script
+        async
+        src="https://tag.clearbitscripts.com/v1/pk_74ced819abd90c7984657761b2cc93ee/tags.js"
+        referrerPolicy="strict-origin-when-cross-origin"
+      ></script>
       <Footer />
     </>
   );
