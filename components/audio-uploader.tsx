@@ -5,7 +5,13 @@ import { toast } from "sonner";
 import { UploadCloud } from "lucide-react";
 import LoadingDots from "@/components/icons/loading-dots";
 
-export default function AudioUploader() {
+export default function AudioUploader({
+  url,
+  setUrl,
+}: {
+  url: string;
+  setUrl: (param: string) => void;
+}) {
   const [data, setData] = useState<{
     audio: string | null;
   }>({
@@ -38,6 +44,7 @@ export default function AudioUploader() {
             }).then(async (res) => {
               if (res.status === 200) {
                 const { url } = await res.json();
+                setUrl(url);
                 toast(
                   <div className="relative">
                     <div className="p-2">
@@ -81,7 +88,21 @@ export default function AudioUploader() {
 
   return (
     <>
-      <input type="hidden" name="audioSrc" value={data.audio || ""} />
+      <input type="hidden" name="audioSrc" value={url} />
+      {uploadComplete && (
+        <div className="w-full overflow-hidden rounded-md bg-slate-50">
+          <div>
+            <audio
+              controls
+              className="w-full overflow-hidden rounded-md"
+              style={{ backgroundColor: "#f3f3f3" }}
+            >
+              <source src={data.audio || ""} type={file?.type || "audio/mp3"} />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+      )}
       {!uploadComplete && (
         <div>
           {/* <div className="mb-4 space-y-1">
@@ -105,18 +126,8 @@ export default function AudioUploader() {
             </label>
           )}
           {data.audio && (
-            <div>
-              <audio
-                controls
-                className="w-full overflow-hidden rounded-md"
-                style={{ backgroundColor: "#f3f3f3" }}
-              >
-                <source
-                  src={data.audio || ""}
-                  type={file?.type || "audio/mp3"}
-                />
-                Your browser does not support the audio element.
-              </audio>
+            <div className="px-auto align-center border flex w-full content-center items-center justify-center overflow-hidden rounded-md bg-gray-50 p-4">
+              <LoadingDots color="#808080" />
             </div>
           )}
           <div className="mt-1 flex rounded-md shadow-sm">

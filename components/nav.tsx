@@ -212,7 +212,7 @@ export default function Nav({ children }: { children: ReactNode }) {
                       <span className="w-full text-sm font-medium">{name}</span>
                       <ChevronDown width={18} />
                     </summary>
-                    <div className="border-l-2 pl-2">
+                    <div className="gap-1 border-l-2 pl-2">
                       {children.map(
                         ({
                           name,

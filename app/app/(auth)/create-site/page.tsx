@@ -9,12 +9,14 @@ import Loading from "@/components/icons/loading-circle";
 
 import { createSite } from "@/lib/actions";
 import LogoutButton from "@/components/logout-button";
+import { useSession } from "next-auth/react";
 
 export default function LoginPage() {
   const [index, setIndex] = useState(0);
   const [siteType, setSiteType] = useState("");
   const [siteName, setSiteName] = useState("");
   const [siteDescription, setSiteDescription] = useState("");
+  const { data: session, update } = useSession();
 
   async function createWebsite() {
     let form = new FormData();
@@ -32,9 +34,16 @@ export default function LoginPage() {
 
     const result = await createSite(form);
 
-    console.log(result);
+    if (result instanceof Error) {
+      // TODO: Handle Error.
+      throw new Error(result.message);
+      setIndex(0);
+    } else {
+      await update({ siteId: result.id, role: 0 });
+      setIndex(4);
+    }
 
-    setIndex(4);
+    console.log(result);
   }
 
   const pages = [
@@ -42,7 +51,7 @@ export default function LoginPage() {
       key="0"
       className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md"
     >
-      <div className="w-full flex flex-row justify-end px-4">
+      <div className="flex w-full flex-row justify-end px-4">
         <LogoutButton />
       </div>
       <Image
@@ -91,7 +100,7 @@ export default function LoginPage() {
       key="1"
       className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md"
     >
-      <div className="w-full flex flex-row justify-end px-4">
+      <div className="flex w-full flex-row justify-end px-4">
         <LogoutButton />
       </div>
       <Image
@@ -119,18 +128,17 @@ export default function LoginPage() {
           onClick={() => {
             setIndex(2);
           }}
-          className="bg-primary w-full rounded  p-2 text-center font-bold text-white"
+          className="w-full rounded bg-primary  p-2 text-center font-bold text-white"
         >
           Next Up!
         </button>
       </div>
-      
     </div>,
     <div
       key="2"
       className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md"
     >
-      <div className="w-full flex flex-row justify-end px-4">
+      <div className="flex w-full flex-row justify-end px-4">
         <LogoutButton />
       </div>
       <Image
@@ -159,12 +167,11 @@ export default function LoginPage() {
             setIndex(3);
             createWebsite();
           }}
-          className="bg-primary w-full rounded p-2 text-center font-bold text-white"
+          className="w-full rounded bg-primary p-2 text-center font-bold text-white"
         >
           What&apos;s next?
         </button>
       </div>
-      
     </div>,
     <div
       key="3"
@@ -176,7 +183,7 @@ export default function LoginPage() {
       key="4"
       className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md"
     >
-      <div className="w-full flex flex-row justify-end px-4">
+      <div className="flex w-full flex-row justify-end px-4">
         <LogoutButton />
       </div>
       <Image
@@ -194,12 +201,11 @@ export default function LoginPage() {
       <div className="mt-8 flex flex-col gap-2 px-4">
         <Link
           href="/"
-          className="bg-primary w-full rounded p-2 text-center font-bold text-white"
+          className="w-full rounded bg-primary p-2 text-center font-bold text-white"
         >
           Check It Out
         </Link>
       </div>
-      
     </div>,
   ];
 

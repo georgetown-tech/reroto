@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { Post, Site } from "@prisma/client";
+import { Post, Site, User } from "@prisma/client";
 import { revalidateTag } from "next/cache";
 import { withPostAuth, withSiteAuth } from "./auth";
 import { getSession } from "@/lib/auth";
@@ -33,18 +33,33 @@ export const createTranscript = async (formData: FormData) => {
   const src = formData.get("audioSrc") as string;
 
   try {
-    // const response = await prisma.transcription.create({
-    //   data: {
-    //     name,
-    //     description,
-    //     src,
-    //     // seconds:
-    //   },
-    // });
+    const res = await fetch("https://api.deepgram.com/v1/listen?model=nova&punctuate=true&diarize=true", {
+    method: "POST",  
+    headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${process.env.DEEPGRAM_API_KEY}`
+      },
+      body: JSON.stringify({
+        url: src
+      })
+    });
+    const json = await res.json()
+
+    const response = await prisma.transcription.create({
+      data: {
+        name,
+        description,
+        url: src,
+        seconds: 40 * 60,
+        userId: session?.user.id,
+        transcription: json,
+        siteId: session?.user.siteId
+      },
+    });
 
     // console.log(response);
 
-    return null;
+    return response;
   } catch (error: any) {
     if (error.code === "P2002") {
       return {
@@ -58,12 +73,10 @@ export const createTranscript = async (formData: FormData) => {
   }
 };
 
-export const createSite = async (formData: FormData) => {
+export const createSite = async (formData: FormData):Promise<Site | Error> => {
   const session = await getSession();
   if (!session?.user.id) {
-    return {
-      error: "Not authenticated",
-    };
+    return new Error("Not authenticated");
   }
   const name = formData.get("name") as string;
   const type = formData.get("type") as string;
@@ -101,13 +114,9 @@ export const createSite = async (formData: FormData) => {
     return response;
   } catch (error: any) {
     if (error.code === "P2002") {
-      return {
-        error: `This subdomain is already taken`,
-      };
+      return new Error(`This subdomain is already taken`);
     } else {
-      return {
-        error: error.message,
-      };
+      return new Error(error.message);
     }
   }
 };
@@ -446,7 +455,28 @@ export const deletePost = withPostAuth(async (_: FormData, post: Post) => {
   }
 });
 
-export const editUser = async (
+export const deleteAccount = async (
+  formData: FormData,
+  _id: unknown,
+  key: string):Promise<User | Error> => {
+    const session = await getSession();
+    if (!session?.user.id) {
+      return new Error("Not authenticated");
+    }
+
+  try {
+    const response = await prisma.user.delete({
+      where: {
+        id: session?.user.id,
+      }
+    });
+    return response;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const editUser = withSiteAuth(async (
   formData: FormData,
   _id: unknown,
   key: string,
@@ -480,4 +510,4 @@ export const editUser = async (
       };
     }
   }
-};
+});

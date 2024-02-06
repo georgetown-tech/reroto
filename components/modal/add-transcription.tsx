@@ -18,8 +18,9 @@ export default function CreateTranscriptionModal() {
   const [data, setData] = useState({
     name: "",
     description: "",
-    audioSrc: "",
   });
+
+  const [url, setUrl] = useState<string>("");
 
   return (
     <form
@@ -33,7 +34,7 @@ export default function CreateTranscriptionModal() {
             modal?.hide();
             router.refresh();
             router.push(`/transcribe/${id}`);
-            toast.success(`Successfully added transcription!`);
+            toast.success(`Transcription Generated.`);
           }
         })
       }
@@ -89,27 +90,29 @@ export default function CreateTranscriptionModal() {
           >
             Audio File
           </label>
-          <AudioUploader />
+          <AudioUploader url={url} setUrl={setUrl} />
         </div>
       </div>
       <div className="flex items-center justify-end rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 md:px-10">
-        <AddTranscriptionFormButton />
+        <AddTranscriptionFormButton
+          disabled={data.name == "" || data.description == "" || url == ""}
+        />
       </div>
     </form>
   );
 }
 
-function AddTranscriptionFormButton() {
+function AddTranscriptionFormButton({ disabled }: { disabled: boolean }) {
   const { pending } = useFormStatus();
   return (
     <button
       className={cn(
-        "flex h-10 w-full items-center justify-center space-x-2 rounded-md border text-sm transition-all focus:outline-none",
+        "flex h-10 w-full disabled:opacity-60 items-center justify-center space-x-2 rounded-md border text-sm transition-all focus:outline-none",
         pending
           ? "cursor-not-allowed border-stone-200 bg-stone-100 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
           : "border-black bg-black text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
       )}
-      disabled={pending}
+      disabled={pending || disabled}
     >
       {pending ? <LoadingDots color="#808080" /> : <p>Add Transcription</p>}
     </button>

@@ -55,7 +55,7 @@ export default async function SiteSettingsAppearance({
         }}
         handleSubmit={updateSite}
       />
-      <Form
+      {/* <Form
         title="404 Page Message"
         description="Message to be displayed on the 404 page."
         helpText="Please use 240 characters maximum."
@@ -67,7 +67,7 @@ export default async function SiteSettingsAppearance({
           maxLength: 240,
         }}
         handleSubmit={updateSite}
-      />
+      /> */}
     </div>
   );
 }

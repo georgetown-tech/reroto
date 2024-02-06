@@ -4,6 +4,7 @@ import Form from "@/components/form";
 import DeleteSiteForm from "@/components/form/delete-site-form";
 import { getSession } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
+import { editUser } from "@/lib/actions";
 
 export default async function SiteSettingsIndex({
   params,
@@ -21,8 +22,6 @@ export default async function SiteSettingsIndex({
     },
   });
 
-  console.log(data);
-
   // if (!data) {
   //   notFound();
   // }
@@ -31,18 +30,18 @@ export default async function SiteSettingsIndex({
     <div className="flex flex-col space-y-6">
       <Form
         title="Display Name"
-        description="Your full legal name. This is what we will use for your individual page."
+        description="Your full name so your readers can trust who they are reading."
         helpText="Please use 64 character maximum."
         inputAttrs={{
           name: "name",
           type: "text",
           defaultValue: data?.name!,
           placeholder: "Jane Doe",
-          maxLength: 32,
+          maxLength: 64,
         }}
-        handleSubmit={() => {}}
+        handleSubmit={editUser}
       />
-{/* 
+
       <Form
         title="Description"
         description="A description of what you do and write about. Tell us a bit about yourself."
@@ -53,8 +52,8 @@ export default async function SiteSettingsIndex({
           defaultValue: data?.description!,
           placeholder: "A really, really nice person.",
         }}
-        handleSubmit={updateSite}
-      /> */}
+        handleSubmit={editUser}
+      />
 
       {/* <DeleteSiteForm siteName={data?.name!} /> */}
     </div>

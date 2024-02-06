@@ -22,7 +22,7 @@ export default async function PostOG({
   SELECT post.title, post.description, post.image, "user".name as "authorName", "user".image as "authorImage"
   FROM "Post" AS post 
   INNER JOIN "Site" AS site ON post."siteId" = site.id 
-  INNER JOIN "User" AS "user" ON site."userId" = "user".id 
+  INNER JOIN "User" AS "user" ON post."userId" = "user".id 
   WHERE 
     (
         site.subdomain = ${subdomain}

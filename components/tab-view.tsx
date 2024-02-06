@@ -6,13 +6,13 @@ import { placeholderBlurhash, random } from "@/lib/utils";
 import { Post, Site } from "@prisma/client";
 import { BarChart, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 
 export default function TabView({
   tabLabels,
   tabContents,
 }: {
-  tabLabels: Array<string>;
+  tabLabels: Array<string | ReactElement>;
   tabContents: Array<ReactElement>;
 }) {
   const [index, setIndex] = useState(0);
@@ -25,16 +25,18 @@ export default function TabView({
             Tab
           </label>
 
-          <select onChange={(e) => {
-
-            setIndex(e.target.value);
-
-          }} id="Tab" className="w-full rounded-md border-gray-200">
-            {
-              tabLabels.map((i, n) => (
-                <option key={n} value={n} selected={n == index ? true : false}>{i}</option>
-              ))
-            }
+          <select
+            onChange={(e) => {
+              setIndex(e.target.value);
+            }}
+            id="Tab"
+            className="w-full rounded-md border-gray-200"
+          >
+            {tabLabels.map((i, n) => (
+              <option key={n} value={n} selected={n == index ? true : false}>
+                {i}
+              </option>
+            ))}
           </select>
         </div>
 

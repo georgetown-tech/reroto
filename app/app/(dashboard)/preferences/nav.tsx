@@ -11,23 +11,18 @@ export default function SiteSettingsNav() {
   const navItems = [
     {
       name: "General",
-      href: `/settings`,
+      href: `/preferences`,
       segment: null,
     },
     {
-      name: "Domains",
-      href: `/settings/domains`,
-      segment: "domains",
+      name: "Notifications",
+      href: `/preferences/notifications`,
+      segment: "notifications",
     },
     {
-      name: "Appearance",
-      href: `/settings/appearance`,
-      segment: "appearance",
-    },
-    {
-      name: "Transfer",
-      href: `/settings/transfer`,
-      segment: "transfer",
+      name: "Danger Zone",
+      href: `/preferences/danger`,
+      segment: "danger",
     },
   ];
 

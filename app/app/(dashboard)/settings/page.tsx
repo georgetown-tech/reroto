@@ -21,7 +21,7 @@ export default async function SiteSettingsIndex({
     },
   });
 
-  console.log(data);
+  // console.log(data);
 
   // if (!data) {
   //   notFound();

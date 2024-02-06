@@ -59,6 +59,7 @@ export default async function SiteHomePage({
         tb_domain={domain}
       />
       <div className="mb-20 w-full">
+        {JSON.stringify(data, null, 4)}
         {posts.length > 0 ? (
           <div className="mx-auto w-full max-w-screen-xl md:mb-28 lg:w-5/6">
             <Link href={`/${posts[0].slug}`}>

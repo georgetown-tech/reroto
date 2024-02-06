@@ -1,44 +1,42 @@
+"use client";
+
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import LogoutButton from "./logout-button";
+import useTranscription from "@/lib/hooks/use-transcription";
+import { Pause, Play } from "lucide-react";
 
-export default async function TranscriptionCard({
+export default function TranscriptionCard({
   transcription,
 }: {
   transcription: any;
 }) {
-  return <></>;
+  const [playing, toggle] = useTranscription(transcription!);
 
-  // return (
-  //   <div className="flex w-full items-center justify-between">
-  //     <Link
-  //       href={`/team/${user.id}`}
-  //       className="flex w-full flex-1 items-center space-x-3 rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800"
-  //     >
-  //       <Image
-  //         src={user.image ?? `https://avatar.vercel.sh/${user.email}`}
-  //         width={80}
-  //         height={80}
-  //         alt={user.name ?? "User avatar"}
-  //         className="h-12 w-12 rounded-full"
-  //       />
-  //       <div className="flex flex-col">
-  //         <span className="truncate font-medium">{user.name}</span>
-  //         <span className="truncate text-sm font-medium text-gray-500">
-  //           {[
-  //             "Owner",
-  //             "Admin",
-  //             "Treasurer",
-  //             "Designer",
-  //             "Editor",
-  //             "Writer",
-  //             "Part-Time Writer",
-  //           ][user.role] || "Unknown Role"}
-  //         </span>
-  //       </div>
-  //     </Link>
-  //   </div>
-  // );
+  return (
+    <div className="flex w-full items-center justify-between">
+      <div className="flex w-full flex-row items-center space-x-3 rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800">
+        <button
+          onClick={() => {
+            // @ts-ignore
+            toggle();
+          }}
+          className="aspect-square w-min rounded-full bg-primary p-4 text-white transition-shadow duration-300 hover:shadow-lg"
+        >
+          {playing ? <Pause /> : <Play />}
+        </button>
+        <Link
+          className="flex w-full flex-col"
+          href={`/transcribe/${transcription.id}`}
+        >
+          <span className="truncate font-medium">{transcription.name}</span>
+          <span className="truncate text-sm font-medium text-gray-500">
+            {transcription.description}
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
 }

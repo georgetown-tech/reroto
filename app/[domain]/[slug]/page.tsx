@@ -104,6 +104,29 @@ export default async function SitePostPage({
         // @ts-ignore
         tb_domain={domain}
       />
+      {/* <script>
+        { JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": data.title,
+        "image": [
+          "https://example.com/photos/1x1/photo.jpg",
+          "https://example.com/photos/4x3/photo.jpg",
+          "https://example.com/photos/16x9/photo.jpg"
+         ],
+        "datePublished": "2015-02-05T08:00:00+08:00",
+        "dateModified": "2015-02-05T09:20:00+08:00",
+        "author": [{
+            "@type": "Person",
+            "name": "Jane Doe",
+            "url": "https://example.com/profile/janedoe123"
+          },{
+            "@type": "Person",
+            "name": "John Doe",
+            "url": "https://example.com/profile/johndoe123"
+        }]
+      }) }
+      </script> */}
       <div className="flex flex-col items-center justify-center">
         <div className="m-auto w-full text-center md:w-7/12">
           <p className="m-auto my-5 w-10/12 text-sm font-light text-stone-500 dark:text-stone-400 md:text-base">

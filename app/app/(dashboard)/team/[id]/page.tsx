@@ -49,7 +49,7 @@ export default async function SiteAnalytics({
           <h1 className="mt-4 font-cal text-xl font-bold dark:text-white sm:text-3xl">
             {user.name}
           </h1>
-          <p className="text-lg dark:text-white flex flex-row gap-2">
+          <p className="flex flex-row gap-2 text-lg dark:text-white">
             {user.role != null
               ? [
                   "Owner",
@@ -60,18 +60,20 @@ export default async function SiteAnalytics({
                   "Writer",
                   "Part-Time Writer",
                 ][user.role]
-              : "Unknown Role"} • {user.email} {user.emailVerified != null ? <BadgeCheck width={18} /> : <></>}
+              : "Unknown Role"}{" "}
+            • {user.email}{" "}
+            {user.emailVerified != null ? <BadgeCheck width={18} /> : <></>}
           </p>
         </div>
       </div>
       <TabView
         tabLabels={["About", "Articles", "Statistics"]}
         tabContents={[
-          <div key="0">
-            Each user will customize their description and their description
-            will appear here.
-          </div>,
-          <div key="1" className="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
+          <div key="0">{user.description ?? ""}</div>,
+          <div
+            key="1"
+            className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4"
+          >
             {articles.map((i, n) => (
               <PostCard key={n} data={i} />
             ))}
