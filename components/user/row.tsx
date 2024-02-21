@@ -1,43 +1,33 @@
-// @ts-nocheck
-import React from "react";
-import { useNode, Element } from "@craftjs/core";
+export const id = "row";
+export const name = "Row";
+export const description = "This is a row element, cells can sit inside of it.";
+export const category = "Basic";
 
-export function RowChild({ children }: { children: any }) {
-  const {
-    connectors: { connect },
-  } = useNode();
+export const parameters = {
+  padding: "vec4",
+  margin: "vec4",
+};
 
-  return <div ref={connect}>{children}</div>;
-}
-
-export default function Row({
-  gap = 5,
-  padding = 5,
+export default async function render({
+  children,
+  padding,
+  margin,
 }: {
-  gap: number;
-  padding: number;
+  children: any[];
+  padding: string;
+  margin: string;
 }) {
-  const {
-    connectors: { connect, drag },
-  } = useNode();
-
   return (
     <div
-      ref={(ref) => connect(drag(ref))}
-      className="flex w-full flex-row"
-      style={{ gap: `${gap}px`, padding: `${padding}px` }}
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "row",
+        padding,
+        margin,
+      }}
     >
-      <Element id="row_element" is={"div"} canvas></Element>
+      {children}
     </div>
   );
 }
-RowChild.craft = {
-  props: {},
-  rules: {
-    canDrop: () => true,
-    canDrag: () => true,
-    canMoveIn: () => true,
-    canMoveOut: () => true,
-  },
-  related: {},
-};

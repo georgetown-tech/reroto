@@ -95,8 +95,17 @@ export default async function SitePosts({
   const _roles = groupBy(users, "role");
   let roles = [];
 
+  // console.log(articles);
+
+  const _topics = groupBy(articles, "published");
+  let topics = [];
+
   for (let i in _roles) {
     roles.push({ name: i, count: _roles[i].length });
+  }
+
+  for (let i in _topics) {
+    topics.push({ name: i ? "Published" : "In-Progress", count: _topics[i].length });
   }
 
   if (!data) {
@@ -143,7 +152,7 @@ export default async function SitePosts({
             </List>
           </Card>
           <Card>
-            <Title>Roles</Title>
+            <Title>Organization Roles</Title>
             <DonutChart
               className="mt-6"
               data={roles}
@@ -160,12 +169,23 @@ export default async function SitePosts({
               {articles.slice(0, 10).map((item) => (
                 <ListItem key={item.id}>
                   <span className="truncate">{item.title}</span>
-                  <span>{item.createdAt.toLocaleDateString("en-US")}</span>
+                  <span>
+                    {item.createdAt.getMonth()}/{item.createdAt.getDate()}
+                  </span>
                 </ListItem>
               ))}
             </List>
           </Card>
-          <div className="h-32 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-64"></div>
+          <Card>
+            <Title>Article Statuses</Title>
+            <DonutChart
+              className="mt-6"
+              data={topics}
+              category="count"
+              index="name"
+              colors={["green", "slate"]}
+            />
+          </Card>
         </div>
         {/* <div className="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"></div> */}
         <div className="mb-4 grid grid-cols-2 gap-4">

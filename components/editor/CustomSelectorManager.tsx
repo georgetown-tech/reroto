@@ -22,26 +22,24 @@ export default function CustomSelectorManager({
   return (
     <div className="gjs-custom-selector-manager flex flex-col gap-2 p-2 text-left">
       <div className="flex items-center">
-        <div className="flex-grow">Selectors</div>
-        {/* <FormControl size="small">
-          <Select
-            value={selectedState}
-            onChange={(ev) => setState(ev.target.value)}
-            displayEmpty
-          >
-            <MenuItem value="">- State -</MenuItem>
-            {states.map((state) => (
-              <MenuItem value={state.id} key={state.id}>
-                {state.getName()}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl> */}
+        <div className="w-full flex-grow font-bold">Selectors</div>
+        <select
+          className="w-full rounded border border-slate-300 px-3 shadow"
+          value={selectedState}
+          onChange={(ev) => setState(ev.target.value)}
+          // displayEmpty
+        >
+          <option value="">- State -</option>
+          {states.map((state) => (
+            <option value={state.id} key={state.id}>
+              {state.getName()}
+            </option>
+          ))}
+        </select>
       </div>
       <div
         className={cx(
-          "flex min-h-[45px] flex-wrap items-center gap-2 rounded border bg-black/30 p-2",
-          MAIN_BORDER_COLOR,
+          "flex min-h-[45px] flex-wrap items-center gap-2 rounded border bg-white p-2",
         )}
       >
         {targetStr ? (
@@ -58,18 +56,18 @@ export default function CustomSelectorManager({
         {selectors.map((selector) => (
           <div
             key={selector.toString()}
-            className="flex items-center gap-1 whitespace-nowrap rounded bg-sky-500 px-2 py-1"
+            className="flex items-center gap-1 whitespace-nowrap rounded border bg-white px-2 py-1 font-bold shadow"
           >
             <div>{selector.getLabel()}</div>
             <button type="button" onClick={() => removeSelector(selector)}>
-              <X />
+              <X size={18} />
             </button>
           </div>
         ))}
       </div>
-      <div>
+      {/* <div>
         Selected: <span className="opacity-70">{targetStr || "None"}</span>
-      </div>
+      </div> */}
     </div>
   );
 }

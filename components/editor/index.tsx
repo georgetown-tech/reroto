@@ -37,29 +37,31 @@ import Topbar from "./Topbar";
 import RightSidebar from "./RightSidebar";
 // import "./style.css";
 
+import Row from "@/components/user/row";
+import { bindingToBlockConfig } from "@/lib/html";
+
 const gjsOptions: EditorConfig = {
   height: "100vh",
-  storageManager: true,
+  // storageManager: {
+  //   autosave: false,
+  //   setStepsBeforeSave: 1,
+  //   type: "remote",
+  //   // urlStore: 'http://cimailer.dev/templates/template',
+  //   // urlLoad: 'http://cimailer.dev/templates/template',
+  //   contentTypeJson: true,
+  // },
+  storageManager: false,
   undoManager: { trackSelection: true },
   selectorManager: { componentFirst: true },
-  projectData: {
-    assets: [
-      "https://via.placeholder.com/350x250/78c5d6/fff",
-      "https://via.placeholder.com/350x250/459ba8/fff",
-      "https://via.placeholder.com/350x250/79c267/fff",
-      "https://via.placeholder.com/350x250/c5d647/fff",
-      "https://via.placeholder.com/350x250/f28c33/fff",
-    ],
-    pages: [
-      {
-        name: "Home page",
-        component: `<h1>GrapesJS React Custom UI</h1>`,
-      },
-    ],
-  },
 };
 
-export default function Editor({ page }: { page: string }) {
+export default function Editor({
+  page,
+  content,
+}: {
+  page: string;
+  content: any;
+}) {
   const [width, setWidth] = useState(1000);
 
   // const session = await getSession();
@@ -83,6 +85,28 @@ export default function Editor({ page }: { page: string }) {
 
   const onEditor = (editor: GrapeEditor) => {
     (window as any).editor = editor;
+
+    const projectData = editor.getProjectData();
+    console.log(projectData);
+
+    // console.log(content);
+
+    editor.setComponents(content);
+
+    console.log(editor.getComponents());
+
+    // editor.load();
+
+    // console.log(content);
+    //   try {
+
+    //   editor.Blocks.add(bindingToBlockConfig(Row));
+
+    // } catch (e) {
+
+    //   console.log(e)
+
+    // }
   };
 
   return (
@@ -96,7 +120,7 @@ export default function Editor({ page }: { page: string }) {
           id: "gjs-blocks-basic",
           src: "https://unpkg.com/grapesjs-blocks-basic",
         },
-        "gjs-preset-webpage",
+        // "gjs-preset-webpage",
       ]}
       onEditor={onEditor}
     >

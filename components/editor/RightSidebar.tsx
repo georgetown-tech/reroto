@@ -39,17 +39,17 @@ export default function RightSidebar({
       <TabView
         tabLabels={["Properties", "Layers", "Blocks"]}
         tabContents={[
-          <>
+          <div key="Properties" className="h-full w-full overflow-scroll">
             <SelectorsProvider>
               {(props) => <CustomSelectorManager {...props} />}
             </SelectorsProvider>
-            <StylesProvider>
-              {(props) => <CustomStyleManager {...props} />}
-            </StylesProvider>
             <TraitsProvider>
               {(props) => <CustomTraitManager {...props} />}
             </TraitsProvider>
-          </>,
+            <StylesProvider>
+              {(props) => <CustomStyleManager {...props} />}
+            </StylesProvider>
+          </div>,
           <>
             <LayersProvider>
               {(props) => <CustomLayerManager {...props} />}

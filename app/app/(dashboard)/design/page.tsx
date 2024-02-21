@@ -4,6 +4,23 @@ import { notFound, redirect } from "next/navigation";
 import Posts from "@/components/posts";
 import CreatePostButton from "@/components/create-post-button";
 import Link from "next/link";
+// import { House } from "lucide-react";
+
+const pages = [
+  {
+    id: "home",
+    // icon: House,
+    name: "Home Page",
+    description:
+      "This is the first page that users find themselves on when stumbling upon your website. Make it bold but keep it simple. Be iconic but humble. That's what makes a user keep reading.",
+  },
+  {
+    id: "topbar",
+    // icon: House,
+    name: "Topbar",
+    description: "---",
+  },
+];
 
 export default async function SitePosts({
   params,
@@ -52,27 +69,23 @@ export default async function SitePosts({
         {/* <CreatePostButton id={session.user.siteId} /> */}
       </div>
       {/* <Posts siteId={session.user.siteId} /> */}
-      <div className="grid grid-cols-2">
-        <Link href={`/design/home`}>
-          <article className="rounded-xl border bg-white p-4 shadow hover:bg-gray-50 sm:p-6 lg:p-8">
-            <div className="flex items-start sm:gap-8">
-              <div>
-                <h3 className="mt-4 text-lg font-medium sm:text-xl">
-                  <a href="" className="hover:underline">
-                    Home Page
-                  </a>
-                </h3>
-
-                <p className="mt-1 text-sm text-gray-700">
-                  This is the first page that users find themselves on when
-                  stumbling upon your website. Make it bold but keep it simple.
-                  Be iconic but humble. That&apos;s what makes a user keep
-                  reading.
-                </p>
+      <div className="grid grid-cols-2 gap-4">
+        {pages.map((i, n) => (
+          <Link key={i.id} href={`/design/${i.id}`}>
+            <article className="rounded-xl border bg-white p-4 shadow hover:bg-gray-50 sm:p-6 lg:p-8">
+              <div className="flex items-start sm:gap-8">
+                <div>
+                  <h3 className="mt-4 text-lg font-medium sm:text-xl">
+                    <a href="" className="hover:underline">
+                      {i.name}
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-700">{i.description}</p>
+                </div>
               </div>
-            </div>
-          </article>
-        </Link>
+            </article>
+          </Link>
+        ))}
       </div>
     </>
   );

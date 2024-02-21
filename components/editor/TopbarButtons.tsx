@@ -60,7 +60,11 @@ export default function TopbarButtons({
 
   const save = async () => {
     try {
-      const response = await saveGrape(editor.getComponents(), page);
+      const formData = new FormData();
+      formData.append("components", JSON.stringify(editor.getComponents()));
+      formData.append("page", page);
+
+      const response = await saveGrape(formData);
 
       // router.push("/design/" + page);
     } catch (error: unknown) {

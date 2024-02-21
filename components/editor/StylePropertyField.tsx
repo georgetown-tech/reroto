@@ -28,6 +28,15 @@ import type {
   PropertyStack,
 } from "grapesjs";
 import { BTN_CLS, ROUND_BORDER_COLOR, cx } from "./common";
+import {
+  ChevronDown,
+  ChevronUp,
+  Delete,
+  MoveDown,
+  MoveUp,
+  Plus,
+  X,
+} from "lucide-react";
 
 interface StylePropertyFieldProps extends React.HTMLProps<HTMLDivElement> {
   prop: Property;
@@ -67,217 +76,212 @@ export default function StylePropertyField({
   const valueString = hasValue ? value : "";
   const valueWithDef = hasValue ? value : defValue;
 
-  return <></>
+  // return <></>
 
-  // let inputToRender = (
-  //   <TextField
-  //     placeholder={defValue}
-  //     value={valueString}
-  //     onChange={onChange}
-  //     size="small"
-  //     fullWidth
-  //   />
-  // );
+  let inputToRender = (
+    <input
+      placeholder={defValue}
+      value={valueString}
+      onChange={onChange}
+      // size="small"
+      // fullWidth
+      className="w-full rounded border border-slate-300 px-3 shadow"
+    />
+  );
 
-  // switch (type) {
-  //   case "radio":
-  //     {
-  //       const radioProp = prop as PropertyRadio;
-  //       inputToRender = (
-  //         <RadioGroup value={value} onChange={onChange} row>
-  //           {radioProp.getOptions().map((option) => (
-  //             <FormControlLabel
-  //               key={radioProp.getOptionId(option)}
-  //               value={radioProp.getOptionId(option)}
-  //               label={radioProp.getOptionLabel(option)}
-  //               control={<Radio size="small" />}
-  //             />
-  //           ))}
-  //         </RadioGroup>
-  //       );
-  //     }
-  //     break;
-  //   case "select":
-  //     {
-  //       const selectProp = prop as PropertySelect;
-  //       inputToRender = (
-  //         <FormControl fullWidth size="small">
-  //           <Select value={value} onChange={onChange}>
-  //             {selectProp.getOptions().map((option) => (
-  //               <MenuItem
-  //                 key={selectProp.getOptionId(option)}
-  //                 value={selectProp.getOptionId(option)}
-  //               >
-  //                 {selectProp.getOptionLabel(option)}
-  //               </MenuItem>
-  //             ))}
-  //           </Select>
-  //         </FormControl>
-  //       );
-  //     }
-  //     break;
-  //   case "color":
-  //     {
-  //       inputToRender = (
-  //         <TextField
-  //           fullWidth
-  //           placeholder={defValue}
-  //           value={valueString}
-  //           onChange={onChange}
-  //           size="small"
-  //           InputProps={{
-  //             startAdornment: (
-  //               <InputAdornment position="start">
-  //                 <div
-  //                   className={`h-[15px] w-[15px] ${ROUND_BORDER_COLOR}`}
-  //                   style={{ backgroundColor: valueWithDef }}
-  //                 >
-  //                   <input
-  //                     type="color"
-  //                     className="h-[15px] w-[15px] cursor-pointer opacity-0"
-  //                     value={valueWithDef}
-  //                     onChange={(ev) => handleChange(ev.target.value)}
-  //                   />
-  //                 </div>
-  //               </InputAdornment>
-  //             ),
-  //           }}
-  //         />
-  //       );
-  //     }
-  //     break;
-  //   case "slider":
-  //     {
-  //       const sliderProp = prop as PropertySlider;
-  //       inputToRender = (
-  //         <Slider
-  //           size="small"
-  //           value={parseFloat(value)}
-  //           min={sliderProp.getMin()}
-  //           max={sliderProp.getMax()}
-  //           step={sliderProp.getStep()}
-  //           onChange={onChange}
-  //           valueLabelDisplay="auto"
-  //         />
-  //       );
-  //     }
-  //     break;
-  //   case "file":
-  //     {
-  //       inputToRender = (
-  //         <div className="flex flex-col items-center gap-3">
-  //           {value && value !== defValue && (
-  //             <div
-  //               className="inline-block h-[50px] w-[50px] cursor-pointer rounded bg-cover bg-center"
-  //               style={{ backgroundImage: `url("${value}")` }}
-  //               onClick={() => handleChange("")}
-  //             />
-  //           )}
-  //           <button type="button" onClick={openAssets} className={BTN_CLS}>
-  //             Select Image
-  //           </button>
-  //         </div>
-  //       );
-  //     }
-  //     break;
-  //   case "composite":
-  //     {
-  //       const compositeProp = prop as PropertyComposite;
-  //       inputToRender = (
-  //         <div
-  //           className={cx("flex flex-wrap bg-black/20 p-2", ROUND_BORDER_COLOR)}
-  //         >
-  //           {compositeProp.getProperties().map((prop) => (
-  //             <StylePropertyField key={prop.getId()} prop={prop} />
-  //           ))}
-  //         </div>
-  //       );
-  //     }
-  //     break;
-  //   case "stack":
-  //     {
-  //       const stackProp = prop as PropertyStack;
-  //       const layers = stackProp.getLayers();
-  //       const isTextShadow = stackProp.getName() === "text-shadow";
-  //       inputToRender = (
-  //         <div
-  //           className={cx(
-  //             "flex min-h-[54px] flex-col gap-2 bg-black/20 p-2",
-  //             ROUND_BORDER_COLOR,
-  //           )}
-  //         >
-  //           {layers.map((layer) => (
-  //             <div key={layer.getId()} className={ROUND_BORDER_COLOR}>
-  //               <div className="flex items-center gap-1 bg-slate-800 px-2 py-1">
-  //                 <IconButton
-  //                   size="small"
-  //                   onClick={() => layer.move(layer.getIndex() - 1)}
-  //                 >
-  //                   <Icon size={0.7} path={mdiArrowUpDropCircle} />
-  //                 </IconButton>
-  //                 <IconButton
-  //                   size="small"
-  //                   onClick={() => layer.move(layer.getIndex() + 1)}
-  //                 >
-  //                   <Icon size={0.7} path={mdiArrowDownDropCircle} />
-  //                 </IconButton>
-  //                 <button className="flex-grow" onClick={() => layer.select()}>
-  //                   {layer.getLabel()}
-  //                 </button>
-  //                 <div
-  //                   className={cx(
-  //                     "flex min-h-[17px] min-w-[17px] justify-center bg-white text-sm text-black",
-  //                     ROUND_BORDER_COLOR,
-  //                   )}
-  //                   style={layer.getStylePreview({
-  //                     number: { min: -3, max: 3 },
-  //                     camelCase: true,
-  //                   })}
-  //                 >
-  //                   {isTextShadow && "T"}
-  //                 </div>
-  //                 <IconButton size="small" onClick={() => layer.remove()}>
-  //                   <Icon size={0.7} path={mdiDelete} />
-  //                 </IconButton>
-  //               </div>
-  //               {layer.isSelected() && (
-  //                 <div className="flex flex-wrap p-2">
-  //                   {stackProp.getProperties().map((prop) => (
-  //                     <StylePropertyField key={prop.getId()} prop={prop} />
-  //                   ))}
-  //                 </div>
-  //               )}
-  //             </div>
-  //           ))}
-  //         </div>
-  //       );
-  //     }
-  //     break;
-  // }
+  switch (type) {
+    case "radio":
+      {
+        const radioProp = prop as PropertyRadio;
+        inputToRender = (
+          <div onChange={onChange}>
+            {radioProp.getOptions().map((option) => (
+              <div
+                className="flex w-full flex-row items-center gap-1"
+                key={radioProp.getOptionId(option)}
+              >
+                <input
+                  type="radio"
+                  name={radioProp.getName()}
+                  id={radioProp.getOptionId(option)}
+                  value={radioProp.getOptionId(option)}
+                />
+                <label
+                  htmlFor={radioProp.getOptionId(option)}
+                  className="text-sm capitalize"
+                >
+                  {radioProp.getOptionLabel(option)}
+                </label>
+              </div>
+            ))}
+          </div>
+        );
+      }
+      break;
+    case "select":
+      {
+        const selectProp = prop as PropertySelect;
+        inputToRender = (
+          <select
+            className="w-full rounded border border-slate-300 px-3 shadow"
+            value={value}
+            onChange={onChange}
+          >
+            {selectProp.getOptions().map((option) => (
+              <option
+                key={selectProp.getOptionId(option)}
+                value={selectProp.getOptionId(option)}
+              >
+                {selectProp.getOptionLabel(option)}
+              </option>
+            ))}
+          </select>
+        );
+      }
+      break;
+    case "color":
+      {
+        inputToRender = (
+          <div className="flex w-full flex-row overflow-hidden rounded border border-slate-300 shadow">
+            <input
+              type="color"
+              className="m-0 aspect-square h-full cursor-pointer overflow-hidden bg-white"
+              value={valueWithDef}
+              onChange={(ev) => handleChange(ev.target.value)}
+            />
+            <input
+              className="w-full border-0 px-3"
+              onChange={onChange}
+              value={valueString}
+              placeholder={defValue}
+              type="text"
+            />
+          </div>
+        );
+      }
+      break;
+    case "slider":
+      {
+        const sliderProp = prop as PropertySlider;
+        inputToRender = (
+          <input
+            className="w-full"
+            type="range"
+            value={parseFloat(value)}
+            min={sliderProp.getMin()}
+            max={sliderProp.getMax()}
+            step={sliderProp.getStep()}
+            onChange={onChange}
+          />
+        );
+      }
+      break;
+    case "file":
+      {
+        inputToRender = (
+          <div className="flex flex-col items-center gap-3">
+            {value && value !== defValue && (
+              <div
+                className="inline-block h-[50px] w-[50px] cursor-pointer rounded bg-cover bg-center"
+                style={{ backgroundImage: `url("${value}")` }}
+                onClick={() => handleChange("")}
+              />
+            )}
+            <button type="button" onClick={openAssets} className={BTN_CLS}>
+              Select Image
+            </button>
+          </div>
+        );
+      }
+      break;
+    case "composite":
+      {
+        const compositeProp = prop as PropertyComposite;
+        inputToRender = (
+          <div
+            className={cx("flex flex-wrap rounded border border-dashed p-2")}
+          >
+            {compositeProp.getProperties().map((prop) => (
+              <StylePropertyField key={prop.getId()} prop={prop} />
+            ))}
+          </div>
+        );
+      }
+      break;
+    case "stack":
+      {
+        const stackProp = prop as PropertyStack;
+        const layers = stackProp.getLayers();
+        const isTextShadow = stackProp.getName() === "text-shadow";
+        inputToRender = (
+          <div className={cx("flex min-h-[54px] flex-col gap-2")}>
+            {layers.map((layer) => (
+              <div key={layer.getId()}>
+                <div className="flex items-center gap-1 rounded border bg-white px-2 py-1">
+                  <button onClick={() => layer.move(layer.getIndex() - 1)}>
+                    <ChevronUp size={18} />
+                  </button>
+                  <button onClick={() => layer.move(layer.getIndex() + 1)}>
+                    <ChevronDown size={18} />
+                  </button>
+                  <button className="flex-grow" onClick={() => layer.select()}>
+                    {layer.getLabel()}
+                  </button>
+                  <div
+                    className={cx(
+                      "flex min-h-[17px] min-w-[17px] justify-center bg-white text-sm text-black",
+                      ROUND_BORDER_COLOR,
+                    )}
+                    style={layer.getStylePreview({
+                      number: { min: -3, max: 3 },
+                      camelCase: true,
+                    })}
+                  >
+                    {isTextShadow && "T"}
+                  </div>
+                  <button onClick={() => layer.remove()}>
+                    <X size={18} />
+                  </button>
+                </div>
+                {layer.isSelected() && (
+                  <div className="mt-2 flex flex-wrap border-0 border-l-2 pl-2">
+                    {stackProp.getProperties().map((prop) => (
+                      <StylePropertyField key={prop.getId()} prop={prop} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        );
+      }
+      break;
+  }
 
-  // return (
-  //   <div
-  //     {...rest}
-  //     className={cx("mb-3 px-1", prop.isFull() ? "w-full" : "w-1/2")}
-  //   >
-  //     <div className={cx("mb-2 flex items-center", canClear && "text-sky-300")}>
-  //       <div className="flex-grow capitalize">{prop.getLabel()}</div>
-  //       {canClear && (
-  //         <button onClick={() => prop.clear()}>
-  //           <Icon path={mdiClose} size={0.7} />
-  //         </button>
-  //       )}
-  //       {type === "stack" && (
-  //         <IconButton
-  //           size="small"
-  //           className="!ml-2"
-  //           onClick={() => (prop as PropertyStack).addLayer({}, { at: 0 })}
-  //         >
-  //           <Icon size={1} path={mdiPlus} />
-  //         </IconButton>
-  //       )}
-  //     </div>
-  //     {inputToRender}
-  //   </div>
-  // );
+  return (
+    <div {...rest} className={cx("mb-3 px-1", "w-full")}>
+      <div
+        className={cx(
+          "mb-2 flex flex-row items-center",
+          canClear && "text-sky-300",
+        )}
+      >
+        <div className="font-bold capitalize">{prop.getLabel()}</div>
+        {canClear && (
+          <button onClick={() => prop.clear()}>
+            <X />
+          </button>
+        )}
+        {type === "stack" && (
+          <button
+            className="!ml-2"
+            onClick={() => (prop as PropertyStack).addLayer({}, { at: 0 })}
+          >
+            <Plus />
+          </button>
+        )}
+      </div>
+      {inputToRender}
+    </div>
+  );
 }
