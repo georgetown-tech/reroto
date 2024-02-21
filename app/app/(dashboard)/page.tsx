@@ -63,6 +63,12 @@ export default async function SitePosts({
       },
     },
   });
+
+  const kpiReq = await fetch(
+    `https://api.us-east.aws.tinybird.co/v0/pipes/kpis.json?token=p.eyJ1IjogImI0MTgwNzU2LTI1YzctNDNlMC04M2Q3LWQyN2ZhODA2NTk3YiIsICJpZCI6ICI5YmM4ODkxYy1mOTUwLTQ3MzEtODU5Ni0yNDViZjYwYTc2ODUiLCAiaG9zdCI6ICJ1cy1lYXN0LWF3cyJ9.FuRJxQ_c-4h5h0biIQ304lYPwnrWrP3U0m4SIWTjn5A&domain=${data?.customDomain}`,
+  );
+  const kpiData = await kpiReq.json();
+
   const monthStart = new Date(new Date().getTime() - 2629743000);
   const postByWeek: Array<Array<any>> = [[], [], [], []];
   articles.forEach((element) => {
@@ -105,7 +111,10 @@ export default async function SitePosts({
   }
 
   for (let i in _topics) {
-    topics.push({ name: i ? "Published" : "In-Progress", count: _topics[i].length });
+    topics.push({
+      name: i ? "Published" : "In-Progress",
+      count: _topics[i].length,
+    });
   }
 
   if (!data) {
@@ -189,8 +198,19 @@ export default async function SitePosts({
         </div>
         {/* <div className="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"></div> */}
         <div className="mb-4 grid grid-cols-2 gap-4">
-          <div className="h-48 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 md:h-72"></div>
-
+          <Card>
+            <Title>Visitors</Title>
+            <AreaChart
+              className="mt-4 h-72"
+              data={kpiData.data}
+              index="date"
+              categories={["visits"]}
+              colors={["indigo"]}
+              // valueFormatter={(number: number) =>
+              //   Intl.NumberFormat("us").format(number).toString()
+              // }
+            />
+          </Card>
           <Card>
             <Title>Post Counts this Month</Title>
             <AreaChart
