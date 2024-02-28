@@ -22,6 +22,7 @@ import {
   Wrench,
   ListMusic,
   Code,
+  Receipt,
 } from "lucide-react";
 import {
   useParams,
@@ -123,6 +124,12 @@ export default function Nav({ children }: { children: ReactNode }) {
         href: `/analytics`,
         isActive: segments.includes("analytics"),
         icon: <BarChart3 width={18} />,
+      },
+      {
+        name: "Billing",
+        href: `/billing`,
+        isActive: segments.includes("billing"),
+        icon: <Receipt width={18} />,
       },
       {
         name: "Settings",

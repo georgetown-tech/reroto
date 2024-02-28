@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useCallback, useMemo, ChangeEvent } from "react";
+import { useState, useCallback, useMemo, ChangeEvent, useEffect } from "react";
 import { toast } from "sonner";
 import { UploadCloud } from "lucide-react";
 import LoadingDots from "@/components/icons/loading-dots";
+import MediaPreview from "./media-preview";
 
 export default function FileUploader({
   url,
@@ -21,6 +22,21 @@ export default function FileUploader({
   const [uploadComplete, setUploadComplete] = useState(false); // New state for tracking upload completion
 
   const [dragActive, setDragActive] = useState(false);
+  const [name, setName] = useState("");
+  const [mime, setMime] = useState("");
+
+  useEffect(() => {
+    let _name = file?.name || "";
+    _name = _name.split(".")[0];
+    _name = _name.replace(/[\-\_]/g, " ");
+    _name = _name
+      .split(" ")
+      .map((i) => (i[0] || "").toUpperCase() + (i.slice(1) || "").toLowerCase())
+      .join(" ");
+
+    setName(_name);
+    setMime(file?.type || "");
+  }, [file]);
 
   const onChangeAudio = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +61,7 @@ export default function FileUploader({
               if (res.status === 200) {
                 const { url } = await res.json();
                 setUrl(url);
+
                 toast(
                   <div className="relative">
                     <div className="p-2">
@@ -88,20 +105,12 @@ export default function FileUploader({
 
   return (
     <>
-      <input type="hidden" name="audioSrc" value={url} />
+      <input type="hidden" name="fileSrc" value={url} />
+      <input type="hidden" name="name" value={name} />
+      <input type="hidden" name="mime" value={mime} />
       {uploadComplete && (
         <div className="w-full overflow-hidden rounded-md bg-slate-50">
-          <div>
-            {/* TODO: Change to General Media. */}
-            <audio
-              controls
-              className="w-full overflow-hidden rounded-md"
-              style={{ backgroundColor: "#f3f3f3" }}
-            >
-              <source src={data.audio || ""} type={file?.type || "audio/mp3"} />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
+          <MediaPreview url={url} mime={mime} />
         </div>
       )}
       {!uploadComplete && (
@@ -136,7 +145,7 @@ export default function FileUploader({
               id="audio-upload"
               name="audio"
               type="file"
-              accept="audio/*"
+              accept="*"
               className="sr-only"
               onChange={onChangeAudio}
             />

@@ -32,7 +32,8 @@ model User {
   site           Site?           @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   siteId         String?
   transcriptions Transcription[]
-  Media          Media[]
+  media          Media[]
+  invites        Invite[]
 
   @@index([siteId])
 }
@@ -115,7 +116,8 @@ model Site {
   posts          Post[]
   users          User[]
   transcriptions Transcription[]
-  Media          Media[]
+  media          Media[]
+  invites        Invite[]
 }
 
 model Example {
@@ -154,4 +156,15 @@ model Media {
   siteId String?
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String?
+}
+
+model Invite {
+  id    String  @id @default(cuid())
+  email String?
+  role  Int?
+
+  site      Site?   @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId    String?
+  creator   User?   @relation(fields: [creatorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  creatorId String?
 }

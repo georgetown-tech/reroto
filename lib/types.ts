@@ -56,3 +56,24 @@ export interface DomainVerificationResponse {
     reason: string;
   }[];
 }
+
+export interface TransferObject {
+  name:string;
+  description:string;
+  logo:string;
+  colors:string[];
+  domain:string;
+  articles:TransferArticle[];
+}
+
+export interface TransferArticle {
+  title: string;
+  description: string;
+  content: string;
+  slug:string;
+  createdAt: Date;
+  updatedAt: Date;
+  image: string;
+  imageBlurhash:string;
+  published: boolean;
+}

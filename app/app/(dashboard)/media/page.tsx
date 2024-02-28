@@ -2,7 +2,7 @@ import { getSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus } from "lucide-react";
-import TranscriptionCard from "@/components/transcription-card";
+import MediaCard from "@/components/media-card";
 import AddMediaButton from "@/components/add-media-button";
 import AddMediaModal from "@/components/modal/add-media";
 
@@ -90,7 +90,11 @@ export default async function MediaOverview({
       </div>
       <div className="flex flex-col gap-2 p-2">
         {medias.length != 0 ? (
-          medias.map((i, n) => <TranscriptionCard key={n} transcription={i} />)
+          <div className="grid grid-cols-4 gap-2">
+            {medias.map((i, n) => (
+              <MediaCard key={n} media={i} />
+            ))}
+          </div>
         ) : (
           <div className="flex w-full flex-col content-center items-center">
             <svg

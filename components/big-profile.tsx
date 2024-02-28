@@ -1,15 +1,32 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import LogoutButton from "./logout-button";
+import { MessagesSquare, MoreHorizontal, Pencil } from "lucide-react";
 
 export default async function BigProfile({ user }: { user: any }) {
   return (
-    <div className="flex w-full items-center justify-between">
+    <div className="flex w-full items-center justify-between gap-2 rounded-lg px-2 transition-all duration-150 ease-in-out hover:bg-stone-50 active:bg-stone-100 dark:text-white dark:hover:bg-stone-900 dark:active:bg-stone-950">
       <Link
         href={`/team/${user.id}`}
-        className="flex w-full flex-1 items-center space-x-3 rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800"
+        className="flex w-full flex-1 items-center space-x-3 px-2 py-1.5"
       >
         <Image
           src={user.image ?? `https://avatar.vercel.sh/${user.email}`}
@@ -33,6 +50,62 @@ export default async function BigProfile({ user }: { user: any }) {
           </span>
         </div>
       </Link>
+      {/* TODO: Implement quick edit for admins. */}
+      <Button variant="outline" size="icon" disabled>
+        <Pencil />
+      </Button>
+      {/* TODO: Implement chats. */}
+      <Button variant="outline" size="icon" disabled>
+        <MessagesSquare />
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" size="icon" disabled>
+            <MoreHorizontal />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56">
+          <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem>
+              Profile
+              {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              Articles
+              {/* <DropdownMenuShortcut>⌘B</DropdownMenuShortcut> */}
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              Statistics
+              {/* <DropdownMenuShortcut>⌘S</DropdownMenuShortcut> */}
+            </DropdownMenuItem>
+            <DropdownMenuItem disabled>
+              Manage
+              {/* <DropdownMenuShortcut>⌘K</DropdownMenuShortcut> */}
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem disabled>Quick Chat</DropdownMenuItem>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>Group Chats</DropdownMenuSubTrigger>
+              <DropdownMenuPortal>
+                <DropdownMenuSubContent>
+                  <DropdownMenuItem disabled>Create New Chat</DropdownMenuItem>
+                  <DropdownMenuItem disabled>
+                    Find Existing Chats
+                  </DropdownMenuItem>
+                </DropdownMenuSubContent>
+              </DropdownMenuPortal>
+            </DropdownMenuSub>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Website Page</DropdownMenuItem>
+          <DropdownMenuItem>Change Role</DropdownMenuItem>
+          <DropdownMenuItem>Delete User</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 }

@@ -20,6 +20,30 @@ const pages = [
     name: "Topbar",
     description: "---",
   },
+  {
+    id: "footer",
+    // icon: House,
+    name: "Footer",
+    description: "---",
+  },
+  {
+    id: "article",
+    // icon: House,
+    name: "Article Page",
+    description: "---",
+  },
+  {
+    id: "category",
+    // icon: House,
+    name: "Category Page",
+    description: "---",
+  },
+  {
+    id: "person",
+    // icon: House,
+    name: "Person Page",
+    description: "---",
+  },
 ];
 
 export default async function SitePosts({
@@ -66,10 +90,8 @@ export default async function SitePosts({
             {url} ↗
           </a>
         </div>
-        {/* <CreatePostButton id={session.user.siteId} /> */}
       </div>
-      {/* <Posts siteId={session.user.siteId} /> */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {pages.map((i, n) => (
           <Link key={i.id} href={`/design/${i.id}`}>
             <article className="rounded-xl border bg-white p-4 shadow hover:bg-gray-50 sm:p-6 lg:p-8">

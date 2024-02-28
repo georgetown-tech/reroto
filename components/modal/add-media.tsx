@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { createTranscript } from "@/lib/actions";
+import { createMedia } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
@@ -26,16 +26,16 @@ export default function CreateMediaModal() {
   return (
     <form
       action={async (data: FormData) =>
-        createTranscript(data).then((res: any) => {
+        createMedia(data).then((res: any) => {
           if (res.error) {
             toast.error(res.error);
           } else {
-            va.track("Created Transcription");
+            va.track("Uploaded Media");
             const { id } = res;
             modal?.hide();
             router.refresh();
             router.push(`/transcribe/${id}`);
-            toast.success(`Transcription Generated.`);
+            toast.success(`Media Uploaded.`);
           }
         })
       }
@@ -55,9 +55,7 @@ export default function CreateMediaModal() {
         </div>
       </div>
       <div className="flex items-center justify-end rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 md:px-10">
-        <AddMediaFormButton
-          disabled={data.name == "" || data.description == "" || url == ""}
-        />
+        <AddMediaFormButton disabled={url == ""} />
       </div>
     </form>
   );

@@ -15,11 +15,107 @@ import {
 import { put } from "@vercel/blob";
 import { customAlphabet } from "nanoid";
 import { getBlurDataURL } from "@/lib/utils";
+import { render } from '@react-email/render';
+import { SES } from '@aws-sdk/client-ses';
+import InviteEmail from '@/emails/invite';
+import { headers } from 'next/headers'
+import crypto from 'crypto';
 
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
   7,
 ); // 7-character random string
+
+export const inviteTeammate = async (formData: FormData) => {
+  const session = await getSession();
+  if (!session?.user.id) {
+    return {
+      error: "Not authenticated",
+    };
+  }
+
+  const header = headers()
+  const ip = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
+
+  const siteData = await prisma.site.findUnique({
+    where: {
+      id: session?.user.siteId
+    }
+  })
+
+  const email = formData.get("email") as string;
+  const role = parseInt(formData.get("role") as string);
+
+  try {
+    
+    let username = email.split('@')[0]
+    let hash = crypto.createHash('md5').update(email).digest("hex")
+    
+    let req = await fetch(`http://ip-api.com/json/${ip}`)
+    let reqJson = await req.json()
+
+    const response = await prisma.invite.create({
+      data: {
+        email: email,
+        role: role,
+        siteId: session.user.siteId,
+        creatorId: session.user.id
+      },
+    });
+
+    const emailContent = {
+      username: username,
+      userImage: `https://gravatar.com/avatar/${hash}`,
+      invitedByUsername: session.user.name,
+      invitedByEmail: session.user.email,
+      teamName: siteData?.name || "",
+      teamLogo: siteData?.logo || "",
+      teamBanner: siteData?.image || "",
+      inviteLink: `https://app.reroto.com/join/${response.id}`,
+      inviteFromIp: ip,
+      inviteFromLocation: `${reqJson.city}, ${reqJson.region}`,
+    }
+
+    const ses = new SES({ 
+      region: process.env.AWS_SES_REGION,
+     })
+    const emailHtml = render(InviteEmail(emailContent));
+    const emailText = render(InviteEmail(emailContent), { plainText: true });
+
+    const params = {
+      Source: 'no-reply@reroto.com',
+      Destination: {
+        ToAddresses: [email],
+      },
+      Message: {
+        Body: {
+          Html: {
+            Charset: 'UTF-8',
+            Data: emailHtml,
+          },
+          Text: {
+            Charset: 'UTF-8',
+            Data: emailText
+          }
+        },
+        Subject: {
+          Charset: 'UTF-8',
+          Data: `You are invited to ${siteData?.name}`,
+        },
+      },
+    };
+
+    await ses.sendEmail(params);
+    
+    return response;
+    
+  } catch (error: any) {
+    console.log(error)
+    return {
+      error: error.message,
+    };
+  }
+}
 
 export const createTranscript = async (formData: FormData) => {
   const session = await getSession();
@@ -61,15 +157,41 @@ export const createTranscript = async (formData: FormData) => {
 
     return response;
   } catch (error: any) {
-    if (error.code === "P2002") {
-      return {
-        error: `This subdomain is already taken`,
-      };
-    } else {
-      return {
-        error: error.message,
-      };
-    }
+    return {
+      error: error.message,
+    };
+  }
+};
+
+export const createMedia = async (formData: FormData) => {
+  const session = await getSession();
+  if (!session?.user.id) {
+    return {
+      error: "Not authenticated",
+    };
+  }
+  const src = formData.get("fileSrc") as string;
+  const name = formData.get("name") as string;
+  const mime = formData.get("mime") as string;
+
+  try {
+    const response = await prisma.media.create({
+      data: {
+        name,
+        meta: JSON.stringify({}),
+        url: src,
+        size: 0,
+        mime,
+        userId: session?.user.id,
+        siteId: session?.user.siteId
+      },
+    });
+
+    return response;
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
   }
 };
 

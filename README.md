@@ -13,18 +13,18 @@
 ## Todo
 
 - [ ] Overview
-  - [X] See total article counts
-  - [X] See teammate numbers
-  - [X] See Role Distribution
-  - [X] See article counts in terms of months
+  - [x] See total article counts
+  - [x] See teammate numbers
+  - [x] See Role Distribution
+  - [x] See article counts in terms of months
   - [ ] See viewership numbers
   - [ ] See viewership locations
 - [ ] Article Editor
-  - [X] HTML Editing
-  - [X] Publish/ Unpublish
-  - [X] Autosave
-  - [X] Image Support
-  - [X] AI Editing
+  - [x] HTML Editing
+  - [x] Publish/ Unpublish
+  - [x] Autosave
+  - [x] Image Support
+  - [x] AI Editing
   - [ ] Automatically Set Slug
   - [ ] Automatically Set Thumbnail
   - [ ] Select Thumbnail from Media Library
@@ -53,11 +53,11 @@
     - [ ] Show Loading Progress
 - [ ] Calendar Planning
 - [ ] Team Management
-  - [X] View Teammates
-  - [X] Individual Profiles for Teammates
-    - [X] Basic Information
+  - [x] View Teammates
+  - [x] Individual Profiles for Teammates
+    - [x] Basic Information
     - [ ] Description
-    - [X] Articles
+    - [x] Articles
     - [ ] Statistics
   - [ ] Search Teammates
   - [ ] Filter Teammates
@@ -65,16 +65,16 @@
 - [ ] Newspaper Typesetter
 - [ ] Billing Management
 - [ ] Design Management
-  - [X] View All Pages
-  - [X] Drag in Elements from Topbar
+  - [x] View All Pages
+  - [x] Drag in Elements from Topbar
   - [ ] Manage Elements with Sidebar
   - [ ] Save Designs
   - [ ] View Designs on Pages
   - [ ] Integrate Variables like Article Titles
   - [ ] Components
-    - [X] Text
-    - [X] Container
-    - [X] Row
+    - [x] Text
+    - [x] Container
+    - [x] Row
     - [ ] Widget
       - [ ] Weather
       - [ ] Sports
@@ -83,21 +83,21 @@
       - [ ] Normal Clock
       - [ ] Date
 - [ ] Site Settings
-  - [X] Change the Logo
-  - [X] Change the thumbnail
+  - [x] Change the Logo
+  - [x] Change the thumbnail
   - [ ] Change the Favicon
-  - [X] Change the Name
-  - [X] Change the Description
-  - [X] Change the Domain
-  - [X] Change the Subdomain
+  - [x] Change the Name
+  - [x] Change the Description
+  - [x] Change the Domain
+  - [x] Change the Subdomain
 - [ ] User Settings
   - [ ] Change Email
   - [ ] Change Username
   - [ ] Change Description
 - [ ] Creative commons images– Unsplash
 - [ ] Speech to text- Google Speech API
-- [X] Calendar for Scheduling
-- [X] RSS Feeds
+- [x] Calendar for Scheduling
+- [x] RSS Feeds
 - [ ] Biography for each of the authors
 - [ ] Apple News
 - [ ] Google News
