@@ -18,15 +18,6 @@ export async function POST(
 
     // console.log(transfer)
 
-    let temp = [
-    ].map(i => {
-
-      return i.text
-
-    }).join('; ') + ";"
-    
-  console.log(temp)
-
   try {
 
     await prisma.$executeRaw`UPDATE "Site" SET "name" = ${transfer.name}, "description" = ${transfer.description}, "logo" = ${transfer.logo}, "image" = ${transfer.banner}, "customDomain" = ${transfer.domain} WHERE "id"=${siteId}`;
