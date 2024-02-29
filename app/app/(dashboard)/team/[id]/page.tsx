@@ -7,11 +7,7 @@ import Image from "next/image";
 import PostCard from "@/components/post-card";
 import TabView from "@/components/tab-view";
 
-export default async function SiteAnalytics({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function TeamPage({ params }: { params: { id: string } }) {
   const session = await getSession();
   if (!session) {
     redirect("/login");

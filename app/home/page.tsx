@@ -2,7 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import prisma from "@/lib/prisma";
-import HoyaLogo from "@/res/hoya.svg";
+import GdtLogo from "@/res/gdt.svg";
 import {
   Pen,
   Users,
@@ -39,9 +39,9 @@ export default async function IndexPage({}) {
     take: 5,
     where: {
       logo: {
-        not: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/JRajRyC-PhBHEinQkupt02jqfKacBVHLWJq7Iy.png"
-      }
-    }
+        not: "https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/JRajRyC-PhBHEinQkupt02jqfKacBVHLWJq7Iy.png",
+      },
+    },
   });
 
   return (
@@ -287,7 +287,7 @@ export default async function IndexPage({}) {
       <section className="bg-primary p-4">
         <div className="mx-auto flex max-w-3xl flex-col justify-between gap-16 py-8 md:flex-row md:gap-0 md:py-0">
           <div className="flex flex-col items-center">
-            <h2 className="font-bold uppercase text-white">In 2023</h2>
+            <h2 className="font-bold uppercase text-white">Since 1994</h2>
             <p className="text-4xl font-black text-white">
               {articleCount.toLocaleString("en-US", {
                 style: "decimal",
@@ -332,23 +332,28 @@ export default async function IndexPage({}) {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)] opacity-20"></div>
         <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center"></div>
         <div className="mx-auto max-w-2xl lg:max-w-4xl">
-          <Image className="mx-auto h-12" src={HoyaLogo} width={200} alt="" />
+          <Image className="mx-auto h-12" src={GdtLogo} width={200} alt="" />
           <figure className="mt-10">
             <blockquote className="text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
               <p>
-                “Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-                expedita voluptas culpa sapiente alias molestiae. Numquam
-                corrupti in laborum sed rerum et corporis.”
+                “What separates us from the competition is our devotion to
+                understanding what our customers want. You don&apos;t get that
+                from other news software– they&apos;re all stuck in marketing
+                myopia.”
               </p>
             </blockquote>
             <figcaption className="mt-10">
-              <img
+              <Image
+                width="200"
+                height="200"
                 className="mx-auto h-16 w-16 rounded-full"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                src="https://github.com/william-mcgonagle.png"
                 alt=""
               />
               <div className="mt-4 flex items-center justify-center space-x-3 text-base">
-                <div className="font-semibold text-gray-900">Chris Delaney</div>
+                <div className="font-semibold text-gray-900">
+                  William McGonagle
+                </div>
                 <svg
                   viewBox="0 0 2 2"
                   width="3"
@@ -358,7 +363,7 @@ export default async function IndexPage({}) {
                 >
                   <circle cx="1" cy="1" r="1" />
                 </svg>
-                <div className="text-gray-600">Chief Technical Officer</div>
+                <div className="text-gray-600">Chief Executive Officer</div>
               </div>
             </figcaption>
           </figure>

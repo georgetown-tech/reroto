@@ -8,11 +8,13 @@ export const compilePage = (siteData: any, url:string) => {
 
   let ui = JSON.parse(siteData.siteData)
 
+  if (ui == null) return ""
+
   if (url == "/") {
 
     return [
-      arrayToHtml(ui['topbar']),
-      arrayToHtml(ui['home'])
+      arrayToHtml(ui['topbar'] || {}),
+      arrayToHtml(ui['home'] || {})
     ].join('')
 
   }
