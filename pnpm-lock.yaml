@@ -116,6 +116,9 @@ dependencies:
   node-html-markdown:
     specifier: ^1.3.0
     version: 1.3.0
+  node-html-parser:
+    specifier: ^6.1.12
+    version: 6.1.12
   novel:
     specifier: ^0.1.22
     version: 0.1.22(react@18.2.0)(solid-js@1.8.5)(svelte@4.2.3)(vue@3.3.8)
@@ -8514,11 +8517,11 @@ packages:
     resolution: {integrity: sha512-OeFi3QwC/cPjvVKZ114tzzu+YoR+v9UXW5RwSXGUqGb0qCl0DvP406tzdL7SFn8pZrMyzXoisfG2zcuF9+zw4g==}
     engines: {node: '>=10.0.0'}
     dependencies:
-      node-html-parser: 6.1.11
+      node-html-parser: 6.1.12
     dev: false
 
-  /node-html-parser@6.1.11:
-    resolution: {integrity: sha512-FAgwwZ6h0DSDWxfD0Iq1tsDcBCxdJB1nXpLPPxX8YyVWzbfCjKWEzaynF4gZZ/8hziUmp7ZSaKylcn0iKhufUQ==}
+  /node-html-parser@6.1.12:
+    resolution: {integrity: sha512-/bT/Ncmv+fbMGX96XG9g05vFt43m/+SYKIs9oAemQVYyVcZmDAI2Xq/SbNcpOA35eF0Zk2av3Ksf+Xk8Vt8abA==}
     dependencies:
       css-select: 5.1.0
       he: 1.2.0

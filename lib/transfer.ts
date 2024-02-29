@@ -1,10 +1,208 @@
 "use server"
 
-import { TransferObject } from "./types";
+import { parse } from 'node-html-parser';
+
+function htmlToMarkdown(htmlElement:any):string {
+
+    if (htmlElement._rawText != undefined) return htmlElement._rawText
+
+    if (htmlElement.parentNode == null) {
+
+        return htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('\n\n')
+
+    }
+
+    if (htmlElement.rawTagName == 'p') {
+
+        return htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')
+
+    }
+
+    if (htmlElement.rawTagName == 'b' || htmlElement.rawTagName == "strong") {
+
+        return "**" + htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('') + "**"
+
+    }
+
+    if (htmlElement.rawTagName == 'i' || htmlElement.rawTagName == 'em') {
+
+        return "*" + htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('') + "*"
+
+    }
+
+    if (htmlElement.rawTagName == 'a') {
+
+        return "[" + htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('') + "]" + `(${htmlElement.attributes['href'] || ""})`
+
+    }
+
+    if (htmlElement.rawTagName == 'img') {
+
+        return `![${htmlElement.attributes['alt'] || htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}](${htmlElement.attributes['src'] || ""})`
+
+    }
+
+    if (htmlElement.rawTagName == 'blockquote') {
+
+        return `> ${htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}`
+
+    }
+
+    if (htmlElement.rawTagName == 'h1') {
+
+        return `# ${htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}`
+
+    }
+
+    if (htmlElement.rawTagName == 'h2') {
+
+        return `## ${htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}`
+
+    }
+
+    if (htmlElement.rawTagName == 'h3') {
+
+        return `### ${htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}`
+
+    }
+
+    if (htmlElement.rawTagName == 'h4') {
+
+        return `#### ${htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}`
+
+    }
+
+    if (htmlElement.rawTagName == 'h5') {
+
+        return `##### ${htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}`
+
+    }
+
+    if (htmlElement.rawTagName == 'h6') {
+
+        return `###### ${htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}`
+
+    }
+
+    if (htmlElement.rawTagName == 'u') {
+
+        return `__${htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}__`
+
+    }
+
+    if (htmlElement.rawTagName == 'br' || htmlElement.rawTagName == 'span' || htmlElement.rawTagName == 'div') {
+
+        return `${htmlElement.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}`
+
+    }
+
+    if (htmlElement.rawTagName == 'figure') {
+
+        let figCaption = htmlElement.querySelector('figcaption')
+        let img = htmlElement.querySelector('img')
+        
+        if (img == null) return ``
+        if (figCaption == null) return `![This photo has no caption.](${img.attributes['src'] || ""})`
+
+        return `![${figCaption.childNodes.map((i:any) => {
+
+            return htmlToMarkdown(i)
+
+        }).join('')}](${img.attributes['src'] || ""})`
+
+    }
+
+    if (htmlElement.rawTagName == 'ol') {
+
+        return htmlElement.childNodes.map((i:any) => {
+
+            if (i.rawTagName == 'li') return `1. ${i.childNodes.map((j:any) => { return htmlToMarkdown(j) })}`
+            return htmlToMarkdown(i)
+
+        }).join('\n')
+
+    }
+
+    if (htmlElement.rawTagName == 'ul') {
+
+        return htmlElement.childNodes.map((i:any) => {
+
+            if (i.rawTagName == 'li') return `- ${i.childNodes.map((j:any) => { return htmlToMarkdown(j) })}`
+            return htmlToMarkdown(i)
+
+        }).join('\n')
+
+    }
+
+    return htmlElement.toString()
+
+}
 
 function getMarkdown(item:{rendered:string}):string {
 
-    return item.rendered || ""
+    let dom = parse(item.rendered || "")
+
+    return htmlToMarkdown(dom).trim()
 
 }
 
@@ -27,14 +225,6 @@ export async function downloadWordpress(params: { domain:string; host:string; })
         domain,
         articleCount
     }
-
-}
-
-export async function objectToQuery(transfer:TransferObject, siteId:string):Promise<string> {
-
-    return [
-        `Update "Site" SET "name" = '${transfer.name}', "description" = '${transfer.description}', "logo" = '${transfer.logo}', "customDomain" = '${transfer.domain}' WHERE "id"='${siteId}'`,
-    ].join('; ') + ';'
 
 }
 
@@ -75,7 +265,10 @@ export async function findWebsiteHost(formData:FormData) {
         })
         const baseText = await baseReq.text()
 
-        const metaReq = await fetch(`https://api.microlink.io/?url=${encodeURI(domain)}&palette=true&audio=false&video=false&iframe=false`)
+        let hostParts = url.hostname.split('.')
+        let rootDomain = hostParts.slice(hostParts.length - 2, hostParts.length).join('.')
+
+        const metaReq = await fetch(`https://api.microlink.io/?url=${encodeURI(`https://${rootDomain}`)}&palette=true&audio=false&video=false&iframe=false`)
         const metadata = await metaReq.json()
 
         if (baseText.includes("http://snosites.com")) {

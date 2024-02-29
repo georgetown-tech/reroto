@@ -62,6 +62,14 @@ export default async function SitePosts({
         gte: new Date(new Date().getTime() - 2629743000),
       },
     },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+      published: true,
+      content: false,
+      description: false
+    },
   });
 
   const kpiReq = await fetch(
@@ -172,10 +180,9 @@ export default async function SitePosts({
           </Card>
           <Card>
             <Title>Posts this Month</Title>
-
             <Metric>{articles.length}</Metric>
             <List>
-              {articles.slice(0, 10).map((item) => (
+              {articles.slice(0, 5).map((item) => (
                 <ListItem key={item.id}>
                   <span className="truncate">{item.title}</span>
                   <span>

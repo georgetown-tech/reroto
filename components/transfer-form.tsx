@@ -12,10 +12,12 @@ import {
   downloadWordpress,
   downloadWordpressArticleSegment,
   objectToQuery,
+  // objectToQuery,
 } from "@/lib/transfer";
 import { toast } from "sonner";
 import router from "next/router";
 import React from "react";
+import { TransferObject } from "@/lib/types";
 
 export default function TransferForm({ siteId }: { siteId: string }) {
   const [step, setStep] = React.useState("start");
@@ -24,6 +26,8 @@ export default function TransferForm({ siteId }: { siteId: string }) {
   const [articleCount, setArticleCount] = React.useState(0);
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [logo, setLogo] = React.useState("");
+  const [banner, setBanner] = React.useState("");
   const [transfer, setTransfer] = React.useState("");
 
   const [time, setTime] = React.useState(Date.now());
@@ -54,6 +58,13 @@ export default function TransferForm({ siteId }: { siteId: string }) {
                 toast.success(`Host identified as ${_host}.`);
               }
 
+              setName(res.data?.title || "");
+              setDescription(res.data?.description || "");
+              setLogo(res.data?.logo?.url || "");
+              setBanner(res.data?.image?.url || "");
+
+              console.log(res);
+
               return res;
             })
             .then(async (params: { domain: string; host: string }) => {
@@ -64,22 +75,19 @@ export default function TransferForm({ siteId }: { siteId: string }) {
                 let page = 1;
                 let _articles = [];
 
-                setName(start.name);
-                setDescription(start.description);
+                setArticleCount(start.articleCount);
 
-                // setArticleCount(start.articleCount);
+                while (page * 100 - 100 < start.articleCount) {
+                  let articleSegment = await downloadWordpressArticleSegment({
+                    ...params,
+                    page,
+                  });
 
-                // while (page * 100 - 100 < start.articleCount) {
-                //   let articleSegment = await downloadWordpressArticleSegment({
-                //     ...params,
-                //     page,
-                //   });
+                  _articles.push(...articleSegment);
 
-                //   _articles.push(...articleSegment);
-
-                //   page++;
-                //   setArticles(_articles);
-                // }
+                  page++;
+                  setArticles(_articles);
+                }
 
                 // console.log(_articles);
               }
@@ -128,14 +136,26 @@ export default function TransferForm({ siteId }: { siteId: string }) {
             ></div>
           </div>
           <div className="flex aspect-square w-full flex-col items-center justify-center gap-4">
-            <span className="text-center text-3xl font-bold">
-              {/* {articles.length} / {articleCount} */}
-              {name}
-            </span>
-            <span className="w-2/3 text-center text-xl text-slate-500">
-              {/* Downloading Articles... */}
-              {description}
-            </span>
+            <div className="relative flex w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-xl p-4">
+              <img
+                src={banner}
+                className="absolute bottom-0 left-0 right-0 top-0 z-10 bg-black opacity-30"
+                alt="Banner for Website"
+              />
+              <img
+                src={logo}
+                className="z-20 mb-4 aspect-square w-16 rounded"
+                alt="Logo for Website"
+              />
+              <span className="z-20 text-center text-3xl font-bold">
+                {/* {articles.length} / {articleCount} */}
+                {name}
+              </span>
+              <span className="z-20 w-2/3 text-center text-xl text-slate-500">
+                {/* Downloading Articles... */}
+                {description}
+              </span>
+            </div>
             <div />
             <span className="w-2/3 text-center text-xl text-slate-500">
               {articles.length} / {articleCount}
@@ -157,20 +177,23 @@ export default function TransferForm({ siteId }: { siteId: string }) {
           {articles.length == articleCount ? (
             <button
               onClick={async () => {
-                setStep("transfer");
+                // setStep("transfer");
 
-                const transferString = await objectToQuery(
-                  {
+                const transferReq = await fetch(`/api/transfer/${siteId}`, {
+                  method: "POST",
+                  body: JSON.stringify({
                     name,
                     description,
                     colors: [],
-                    logo: "",
+                    logo,
+                    banner,
                     domain: "",
                     articles,
-                  },
-                  siteId,
-                );
-                setTransfer(transferString);
+                  }),
+                });
+                // const transferData = await transferReq.json();
+
+                // setTransfer(JSON.stringify(transferData, null, 4));
               }}
               className="mt-8 w-full rounded-xl border bg-primary p-4 font-cal text-xl font-black text-white shadow hover:bg-primary-600 active:bg-primary-700"
             >

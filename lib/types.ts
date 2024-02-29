@@ -61,6 +61,7 @@ export interface TransferObject {
   name:string;
   description:string;
   logo:string;
+  banner:string;
   colors:string[];
   domain:string;
   articles:TransferArticle[];
