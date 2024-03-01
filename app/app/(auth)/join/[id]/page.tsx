@@ -5,10 +5,8 @@ import Logo from "@/res/logo.svg";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { MoveRight } from "lucide-react";
-
-function JoinButton(a: any) {
-  return <></>;
-}
+import JoinButton from "./join-button";
+import crypto from "crypto";
 
 export default async function LoginPage({
   params,
@@ -41,6 +39,11 @@ export default async function LoginPage({
     "a part-time writer",
   ];
 
+  let hash = crypto
+    .createHash("md5")
+    .update(invite.email || "")
+    .digest("hex");
+
   return (
     <div
       className="fixed bottom-0 left-0 right-0 top-0 flex content-center items-center"
@@ -56,7 +59,7 @@ export default async function LoginPage({
           <img
             className="aspect-square h-12 rounded-full"
             // objectFit="cover"
-            src={invite.site?.logo || ""}
+            src={`https://gravatar.com/avatar/${hash}` || ""}
             alt="User Icon"
           />
           <MoveRight />
@@ -81,7 +84,6 @@ export default async function LoginPage({
               <div className="my-2 h-10 w-full rounded-md border border-stone-200 bg-stone-100 dark:border-stone-700 dark:bg-stone-800" />
             }
           >
-            a
             <JoinButton method="google" />
           </Suspense>
           <Suspense
