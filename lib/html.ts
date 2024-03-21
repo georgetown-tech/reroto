@@ -1,43 +1,38 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { getSession, withSiteAuth } from "@/lib/auth";
+// import { getSession, withSiteAuth } from "@/lib/auth";
 // import {ite } from "@prisma/client";
+import grapesjs from "grapesjs";
+import { validateRequest } from "./auth";
 
-export const compilePage = (siteData: any, url:string) => {
-
+export const compileToHtml = (siteData: any, url:string) => {
   let ui = JSON.parse(siteData.siteData)
 
-  if (ui == null) return ""
+  return JSON.stringify(ui['footer'])
 
-  if (url == "/") {
+  // const editor = grapesjs.init({ headless: true });
+  
+  // if (ui == null) return ""
 
-    return [
-      arrayToHtml(ui['topbar'] || {}),
-      arrayToHtml(ui['home'] || {})
-    ].join('')
+  // if (url == "/") {
 
-  }
+  //   return [
+  //     grapeToHtml(ui['footer'] || null, editor),
+  //     // grapeToHtml(ui['home'] || null, editor),
+  //   ].join('')
 
-}
+  // }
 
-export const arrayToHtml = (nodes:any[]):string => {
-
-  if (nodes == undefined) return ""
-
-  return nodes.map(toHtml).join('')
+  // return ""
 
 }
 
-export const toHtml = (node:any) => {
+export const grapeToHtml = (nodes:any[], editor:any):string => {
 
-  if (node.type == "textnode") return node.content;
-  if (node.type == "link") return `<a href="${node.href}">${node.content}</a>`
+  if (nodes == null) return ""
 
-  if (node.name == "Row") return `<div class="flex flex-row w-full">${arrayToHtml(node.components)}</div>`
-  if (node.name == "Cell") return `<div class="w-full h-full">${arrayToHtml(node.components)}</div>`
-
-  return `<${node.tagName}>${arrayToHtml(node.components)}</${node.tagName}>`
+  return ""
 
 }
 
@@ -57,19 +52,19 @@ export const bindingToBlockConfig = (binding:any) => {
 }
 
 export const saveGrape = async (_: FormData) => {
-    const session = await getSession();
-    if (!session?.user.id) {
+    const { user } = await validateRequest();
+    if (!user) {
       return {
         error: "Not authenticated",
       };
     }
-    if (!session?.user.siteId) {
+    if (!user.siteId) {
       return {
         error: "No site",
       };
     }
     
-    let siteId = session?.user.siteId
+    let siteId = user.siteId
 
     const siteData = await prisma.site.findFirst({
         where: {
@@ -77,7 +72,7 @@ export const saveGrape = async (_: FormData) => {
         }
     });
 
-    let data = JSON.parse(siteData?.siteData?.toString() || "") || {}
+    let data = JSON.parse(siteData?.siteData?.toString() || "{}") || {}
 
     console.log(data)
 

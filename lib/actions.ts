@@ -3,8 +3,8 @@
 import prisma from "@/lib/prisma";
 import { Post, Site, User } from "@prisma/client";
 import { revalidateTag } from "next/cache";
-import { withPostAuth, withSiteAuth } from "./auth";
-import { getSession } from "@/lib/auth";
+// import { withPostAuth, withSiteAuth } from "./auth";
+import { lucia, validateRequest, withPostAuth, withSiteAuth } from "@/lib/auth";
 import {
   addDomainToVercel,
   // getApexDomain,
@@ -27,8 +27,8 @@ const nanoid = customAlphabet(
 ); // 7-character random string
 
 export const inviteTeammate = async (formData: FormData) => {
-  const session = await getSession();
-  if (!session?.user.id) {
+  const { user } = await validateRequest();
+  if (!user) {
     return {
       error: "Not authenticated",
     };
@@ -39,7 +39,7 @@ export const inviteTeammate = async (formData: FormData) => {
 
   const siteData = await prisma.site.findUnique({
     where: {
-      id: session?.user.siteId
+      id: user.siteId
     }
   })
 
@@ -58,16 +58,16 @@ export const inviteTeammate = async (formData: FormData) => {
       data: {
         email: email,
         role: role,
-        siteId: session.user.siteId,
-        creatorId: session.user.id
+        siteId: user.siteId,
+        creatorId: user.id
       },
     });
 
     const emailContent = {
       username: username,
       userImage: `https://gravatar.com/avatar/${hash}`,
-      invitedByUsername: session.user.name,
-      invitedByEmail: session.user.email,
+      invitedByUsername: user.displayName,
+      invitedByEmail: user.email,
       teamName: siteData?.name || "",
       teamLogo: siteData?.logo || "",
       teamBanner: siteData?.image || "",
@@ -115,11 +115,11 @@ export const inviteTeammate = async (formData: FormData) => {
       error: error.message,
     };
   }
-}
+};
 
 export const createTranscript = async (formData: FormData) => {
-  const session = await getSession();
-  if (!session?.user.id) {
+  const { user } = await validateRequest();
+  if (!user) {
     return {
       error: "Not authenticated",
     };
@@ -147,9 +147,9 @@ export const createTranscript = async (formData: FormData) => {
         description,
         url: src,
         seconds: 40 * 60,
-        userId: session?.user.id,
+        userId: user.id,
         transcription: json,
-        siteId: session?.user.siteId
+        siteId: user.siteId
       },
     });
 
@@ -164,8 +164,8 @@ export const createTranscript = async (formData: FormData) => {
 };
 
 export const createMedia = async (formData: FormData) => {
-  const session = await getSession();
-  if (!session?.user.id) {
+  const { user } = await validateRequest();
+  if (!user) {
     return {
       error: "Not authenticated",
     };
@@ -182,8 +182,8 @@ export const createMedia = async (formData: FormData) => {
         url: src,
         size: 0,
         mime,
-        userId: session?.user.id,
-        siteId: session?.user.siteId
+        userId: user.id,
+        siteId: user.siteId
       },
     });
 
@@ -196,8 +196,8 @@ export const createMedia = async (formData: FormData) => {
 };
 
 export const createSite = async (formData: FormData):Promise<Site | Error> => {
-  const session = await getSession();
-  if (!session?.user.id) {
+  const { user } = await validateRequest();
+  if (!user) {
     return new Error("Not authenticated");
   }
   const name = formData.get("name") as string;
@@ -217,9 +217,9 @@ export const createSite = async (formData: FormData):Promise<Site | Error> => {
         subdomain,
       },
     });
-    const user = await prisma.user.update({
+    const _user = await prisma.user.update({
       where: {
-        id: session.user.id,
+        id: user.id,
       },
       data: {
         siteId: response.id,
@@ -227,12 +227,10 @@ export const createSite = async (formData: FormData):Promise<Site | Error> => {
       },
     });
 
-    console.log(response);
-    console.log(user);
-
     await revalidateTag(
       `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}-metadata`,
     );
+
     return response;
   } catch (error: any) {
     if (error.code === "P2002") {
@@ -243,6 +241,7 @@ export const createSite = async (formData: FormData):Promise<Site | Error> => {
   }
 };
 
+// TODO: Add back site auth
 export const updateSite = withSiteAuth(
   async (formData: FormData, site: Site, key: string) => {
     const value = formData.get(key) as string;
@@ -380,8 +379,7 @@ export const updateSite = withSiteAuth(
         };
       }
     }
-  },
-);
+  });
 
 export const deleteSite = withSiteAuth(async (_: FormData, site: Site) => {
   try {
@@ -416,8 +414,8 @@ export const getSiteFromPostId = async (postId: string) => {
 };
 
 export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
-  const session = await getSession();
-  if (!session?.user.id) {
+  const { user } = await validateRequest();
+  if (!user) {
     return {
       error: "Not authenticated",
     };
@@ -425,7 +423,7 @@ export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
   const response = await prisma.post.create({
     data: {
       siteId: site.id,
-      userId: session.user.id,
+      userId: user.id,
     },
   });
 
@@ -439,8 +437,8 @@ export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
 
 // creating a separate function for this because we're not using FormData
 export const updatePost = async (data: Post) => {
-  const session = await getSession();
-  if (!session?.user.id) {
+  const { user } = await validateRequest();
+  if (!user) {
     return {
       error: "Not authenticated",
     };
@@ -453,7 +451,7 @@ export const updatePost = async (data: Post) => {
       site: true,
     },
   });
-  if (!post || post.userId !== session.user.id) {
+  if (!post || post.userId !== user.id) {
     return {
       error: "Post not found",
     };
@@ -490,6 +488,7 @@ export const updatePost = async (data: Post) => {
   }
 };
 
+// TODO: Add back post auth
 export const updatePostMetadata = withPostAuth(
   async (
     formData: FormData,
@@ -556,8 +555,7 @@ export const updatePostMetadata = withPostAuth(
         };
       }
     }
-  },
-);
+  });
 
 export const deletePost = withPostAuth(async (_: FormData, post: Post) => {
   try {
@@ -581,15 +579,15 @@ export const deleteAccount = async (
   formData: FormData,
   _id: unknown,
   key: string):Promise<User | Error> => {
-    const session = await getSession();
-    if (!session?.user.id) {
+    const { user } = await validateRequest();
+    if (!user) {
       return new Error("Not authenticated");
     }
 
   try {
     const response = await prisma.user.delete({
       where: {
-        id: session?.user.id,
+        id: user.id,
       }
     });
     return response;
@@ -598,13 +596,13 @@ export const deleteAccount = async (
   }
 };
 
-export const editUser = withSiteAuth(async (
+export const editUser = async (
   formData: FormData,
   _id: unknown,
   key: string,
 ) => {
-  const session = await getSession();
-  if (!session?.user.id) {
+  const { user } = await validateRequest();
+  if (!user) {
     return {
       error: "Not authenticated",
     };
@@ -614,7 +612,7 @@ export const editUser = withSiteAuth(async (
   try {
     const response = await prisma.user.update({
       where: {
-        id: session.user.id,
+        id: user.id,
       },
       data: {
         [key]: value,
@@ -632,4 +630,4 @@ export const editUser = withSiteAuth(async (
       };
     }
   }
-});
+}

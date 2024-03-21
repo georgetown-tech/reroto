@@ -8,7 +8,7 @@ import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
 import { deleteAccount } from "@/lib/actions";
 import va from "@vercel/analytics";
-import { signOut } from "next-auth/react";
+// import { signOut } from "next-auth/react";
 
 export default function DeleteAccountForm({ email }: { email: string }) {
   const { id } = useParams() as { id: string };
@@ -23,7 +23,10 @@ export default function DeleteAccountForm({ email }: { email: string }) {
               toast.error(res.message);
             } else {
               va.track("Deleted Account");
-              signOut();
+              // signOut();
+
+              // TODO: Add sign out
+
               router.refresh();
               router.push("https://reroto.com");
               toast.success(`Successfully deleted account!`);

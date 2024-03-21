@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import SiteSettingsNav from "./nav";
@@ -11,13 +11,13 @@ export default async function SiteAnalyticsLayout({
   params: { id: string };
   children: ReactNode;
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
   const data = await prisma.site.findUnique({
     where: {
-      id: session.user.siteId,
+      id: user.siteId,
     },
   });
 

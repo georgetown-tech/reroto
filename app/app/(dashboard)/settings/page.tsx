@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 import { updateSite } from "@/lib/actions";
 import DeleteSiteForm from "@/components/form/delete-site-form";
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 
 export default async function SiteSettingsIndex({
@@ -10,14 +10,14 @@ export default async function SiteSettingsIndex({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
 
   const data = await prisma.site.findUnique({
     where: {
-      id: session.user.siteId,
+      id: user.siteId,
     },
   });
 
@@ -30,6 +30,7 @@ export default async function SiteSettingsIndex({
   return (
     <div className="flex flex-col space-y-6">
       <Form
+        siteId={user.siteId}
         title="Name"
         description="The name of your site. This will be used as the meta title on Google as well."
         helpText="Please use 32 characters maximum."
@@ -44,6 +45,7 @@ export default async function SiteSettingsIndex({
       />
 
       <Form
+        siteId={user.siteId}
         title="Description"
         description="The description of your site. This will be used as the meta description on Google as well."
         helpText="Include SEO-optimized keywords that you want to rank for."

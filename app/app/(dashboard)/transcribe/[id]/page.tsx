@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus, BadgeCheck, Play, Pause } from "lucide-react";
@@ -14,8 +14,8 @@ export default async function TranscriptionPageServer({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
   const transcript = await prisma.transcription.findUnique({
@@ -24,10 +24,7 @@ export default async function TranscriptionPageServer({
     },
   });
 
-  if (transcript == null) {
-    // TODO: Implement not founds.
-    return <>404 Not Found</>;
-  }
+  if (transcript == null) notFound();
 
   return <TranscriptionPage transcript={transcript} />;
 }

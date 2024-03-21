@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 import { updateSite } from "@/lib/actions";
-import { getSession } from "@/lib/auth";
+import { getSession, validateRequest } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import { XMLParser, XMLBuilder, XMLValidator } from "fast-xml-parser";
 import { NodeHtmlMarkdown, NodeHtmlMarkdownOptions } from "node-html-markdown";
@@ -15,10 +15,11 @@ export default async function SiteSettingsDomains({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
 
-  return <TransferForm siteId={session?.user?.siteId || ""} />;
+  return <></>;
+  // return <TransferForm siteId={session?.user?.siteId || ""} />;
 }

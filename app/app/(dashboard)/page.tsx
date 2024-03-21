@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Posts from "@/components/posts";
@@ -13,32 +13,31 @@ import {
   DonutChart,
   AreaChart,
 } from "@tremor/react";
+import Link from "next/link";
 
 export default async function SitePosts({
   params,
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
-    redirect("/login");
+  const { user } = await validateRequest();
+  if (!user) {
+    return redirect("/login");
   }
 
-  console.log(session);
-
-  if (session.user?.siteId == undefined) {
+  if (user?.siteId == undefined) {
     redirect("/create-site");
   }
 
   const data = await prisma.site.findUnique({
     where: {
-      id: session.user.siteId,
+      id: user.siteId,
     },
   });
   const users = (
     await prisma.user.findMany({
       where: {
-        siteId: session.user.siteId,
+        siteId: user.siteId,
       },
     })
   ).map((i) => {
@@ -57,7 +56,7 @@ export default async function SitePosts({
   });
   const articles = await prisma.post.findMany({
     where: {
-      siteId: session.user.siteId,
+      siteId: user.siteId,
       createdAt: {
         gte: new Date(new Date().getTime() - 2629743000),
       },
@@ -68,7 +67,7 @@ export default async function SitePosts({
       createdAt: true,
       published: true,
       content: false,
-      description: false
+      description: false,
     },
   });
 
@@ -151,18 +150,22 @@ export default async function SitePosts({
             {url} ↗
           </a>
         </div>
-        <CreatePostButton id={session.user.siteId} />
+        <CreatePostButton id={user.siteId} />
       </div>
       <main className="h-auto p-4 pt-20">
         <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card>
             <Title>Teammates</Title>
-
             <Metric>{users.length}</Metric>
             <List>
               {users.slice(0, 10).map((item) => (
                 <ListItem key={item.id}>
-                  <span>{item.name}</span>
+                  <Link
+                    className="truncate hover:underline"
+                    href={`/team/${item.id}`}
+                  >
+                    {item.displayName}
+                  </Link>
                   <span>{item.role}</span>
                 </ListItem>
               ))}
@@ -184,7 +187,12 @@ export default async function SitePosts({
             <List>
               {articles.slice(0, 5).map((item) => (
                 <ListItem key={item.id}>
-                  <span className="truncate">{item.title}</span>
+                  <Link
+                    className="truncate hover:underline"
+                    href={`/posts/${item.id}`}
+                  >
+                    {item.title}
+                  </Link>
                   <span>
                     {item.createdAt.getMonth()}/{item.createdAt.getDate()}
                   </span>

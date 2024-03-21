@@ -6,7 +6,7 @@ import { placeholderBlurhash, toDateString } from "@/lib/utils";
 import BlogCard from "@/components/blog-card";
 import { getPostsForSite, getSiteData } from "@/lib/fetchers";
 import Image from "next/image";
-import { compilePage } from "@/lib/html";
+import { compileToHtml } from "@/lib/html";
 
 export async function generateStaticParams() {
   const allSites = await prisma.site.findMany({
@@ -59,7 +59,9 @@ export default async function SiteHomePage({
         // @ts-ignore
         tb_domain={domain}
       />
-      <div dangerouslySetInnerHTML={{ __html: compilePage(data, "/") || "" }} />
+      <div
+        dangerouslySetInnerHTML={{ __html: compileToHtml(data, "/") || "" }}
+      />
       <pre>
         {JSON.stringify(JSON.parse(data.siteData?.toString() || "{}"), null, 4)}
       </pre>

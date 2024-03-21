@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 import { updateSite } from "@/lib/actions";
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 
 export default async function SiteSettingsAppearance({
@@ -9,20 +9,21 @@ export default async function SiteSettingsAppearance({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
 
   const data = await prisma.site.findUnique({
     where: {
-      id: session.user.siteId,
+      id: user.siteId,
     },
   });
 
   return (
     <div className="flex flex-col space-y-6">
       <Form
+        siteId={user.siteId}
         title="Thumbnail image"
         description="The thumbnail image for your site. Accepted formats: .png, .jpg, .jpeg"
         helpText="Max file size 50MB. Recommended size 1200x630."
@@ -34,6 +35,7 @@ export default async function SiteSettingsAppearance({
         handleSubmit={updateSite}
       />
       <Form
+        siteId={user.siteId}
         title="Logo"
         description="The logo for your site. Accepted formats: .png, .jpg, .jpeg"
         helpText="Max file size 50MB. Recommended size 400x400."
@@ -44,7 +46,8 @@ export default async function SiteSettingsAppearance({
         }}
         handleSubmit={updateSite}
       />
-      <Form
+      {/* <Form
+        siteId={user.siteId}
         title="Font"
         description="The font for the heading text your site."
         helpText="Please select a font."
@@ -54,7 +57,7 @@ export default async function SiteSettingsAppearance({
           defaultValue: data?.font!,
         }}
         handleSubmit={updateSite}
-      />
+      /> */}
       {/* <Form
         title="404 Page Message"
         description="Message to be displayed on the 404 page."

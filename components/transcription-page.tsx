@@ -1,6 +1,6 @@
 "use client";
 
-import { getSession } from "@/lib/auth";
+// import { getSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus, BadgeCheck, Play, Pause } from "lucide-react";
@@ -78,8 +78,8 @@ export default function TranscriptionPage({
             words
           </p>
           <p>
-            Audio Length: {(transcript?.seconds || 0) / 60}m {(transcript?.seconds || 0) % 60}
-            s
+            Audio Length: {(transcript?.seconds || 0) / 60}m{" "}
+            {(transcript?.seconds || 0) % 60}s
           </p>
         </div>
       </div>

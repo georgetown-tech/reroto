@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus, Check, X } from "lucide-react";
@@ -36,23 +36,23 @@ export default async function TeamOverview({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
   const data = await prisma.site.findUnique({
     where: {
-      id: session.user.siteId,
+      id: user.siteId,
     },
   });
   const users = await prisma.user.findMany({
     where: {
-      siteId: session.user.siteId,
+      siteId: user.siteId,
     },
   });
   const posts = await prisma.post.findMany({
     where: {
-      siteId: session.user.siteId as string,
+      siteId: user.siteId as string,
       // ...(siteId ? { siteId } : {}),
     },
     orderBy: {

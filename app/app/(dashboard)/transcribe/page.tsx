@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus } from "lucide-react";
@@ -11,18 +11,18 @@ export default async function TranscribeOverview({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
   const data = await prisma.site.findUnique({
     where: {
-      id: session.user.siteId,
+      id: user.siteId,
     },
   });
   const transcriptions = await prisma.transcription.findMany({
     where: {
-      siteId: session.user.siteId,
+      siteId: user.siteId,
     },
   });
   if (!data) {

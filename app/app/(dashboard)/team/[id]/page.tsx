@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus, BadgeCheck } from "lucide-react";
@@ -8,8 +8,8 @@ import PostCard from "@/components/post-card";
 import TabView from "@/components/tab-view";
 
 export default async function TeamPage({ params }: { params: { id: string } }) {
-  const session = await getSession();
-  if (!session) {
+  const { user: _user } = await validateRequest();
+  if (!_user) {
     redirect("/login");
   }
   const user = await prisma.user.findUnique({
@@ -21,11 +21,18 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
     where: {
       userId: params.id,
     },
-    include: {
-      site: true,
+  });
+  const site = await prisma.site.findUnique({
+    where: {
+      id: _user.siteId,
     },
   });
+
   if (!user) {
+    notFound();
+  }
+
+  if (!site) {
     notFound();
   }
 
@@ -39,11 +46,11 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
             src={user.image ?? `https://avatar.vercel.sh/${user.email}`}
             width={80}
             height={80}
-            alt={user.name ?? "User avatar"}
+            alt={user.displayName ?? "User avatar"}
             className="h-32 w-32 rounded-full"
           />
           <h1 className="mt-4 font-cal text-xl font-bold dark:text-white sm:text-3xl">
-            {user.name}
+            {user.displayName}
           </h1>
           <p className="flex flex-row gap-2 text-lg dark:text-white">
             {user.role != null
@@ -71,7 +78,7 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
             className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4"
           >
             {articles.map((i, n) => (
-              <PostCard key={n} data={i} />
+              <PostCard subdomain={site.subdomain || ""} key={n} data={i} />
             ))}
           </div>,
         ]}

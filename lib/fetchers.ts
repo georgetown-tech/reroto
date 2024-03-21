@@ -15,6 +15,7 @@ export async function getSiteData(domain: string) {
       return prisma.site.findUnique({
         where: subdomain ? { subdomain } : { customDomain: domain },
         // include: { user: true },
+        
       });
     },
     [`${domain}-metadata`],
@@ -46,6 +47,7 @@ export async function getPostsForSite(domain: string) {
           createdAt: true,
           user: true,
         },
+        take: 50,
         orderBy: [
           {
             createdAt: "desc",

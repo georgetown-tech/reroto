@@ -6,19 +6,19 @@ import Link from "next/link";
 import { useParams, useSelectedLayoutSegment } from "next/navigation";
 
 import NavTab from "@/components/tab-nav";
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import AnalyticsMockup from "@/components/analytics";
 
 export default async function BillingLayout() {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
   const data = await prisma.site.findUnique({
     where: {
-      id: session.user.siteId,
+      id: user.siteId,
     },
   });
   if (!data) {

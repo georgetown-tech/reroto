@@ -14,14 +14,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import LogoutButton from "./logout-button";
 import { MessagesSquare, MoreHorizontal, Pencil } from "lucide-react";
+import { User } from "@prisma/client";
 
-export default async function BigProfile({ user }: { user: any }) {
+export default async function BigProfile({ user }: { user: User }) {
   return (
     <div className="flex w-full items-center justify-between gap-2 rounded-lg px-2 transition-all duration-150 ease-in-out hover:bg-stone-50 active:bg-stone-100 dark:text-white dark:hover:bg-stone-900 dark:active:bg-stone-950">
       <Link
@@ -32,11 +32,11 @@ export default async function BigProfile({ user }: { user: any }) {
           src={user.image ?? `https://avatar.vercel.sh/${user.email}`}
           width={80}
           height={80}
-          alt={user.name ?? "User avatar"}
+          alt={user.displayName ?? "User avatar"}
           className="h-12 w-12 rounded-full"
         />
         <div className="flex flex-col">
-          <span className="truncate font-medium">{user.name}</span>
+          <span className="truncate font-medium">{user.displayName}</span>
           <span className="truncate text-sm font-medium text-gray-500">
             {[
               "Owner",
@@ -46,7 +46,7 @@ export default async function BigProfile({ user }: { user: any }) {
               "Editor",
               "Writer",
               "Part-Time Writer",
-            ][user.role] || "Unknown Role"}
+            ][user.role == null ? 0 : user.role] || "Unknown Role"}
           </span>
         </div>
       </Link>

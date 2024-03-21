@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Form from "@/components/form";
@@ -10,16 +10,17 @@ export default async function PostSettings({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
+
   const data = await prisma.post.findUnique({
     where: {
       id: decodeURIComponent(params.id),
     },
   });
-  if (!data || data.userId !== session.user.id) {
+  if (!data || data.userId !== user.id) {
     notFound();
   }
   return (
@@ -29,6 +30,7 @@ export default async function PostSettings({
           Post Settings
         </h1>
         <Form
+          siteId={user.siteId}
           title="Post Slug"
           description="The slug is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens."
           helpText="Please use a slug that is unique to this post."
@@ -40,8 +42,8 @@ export default async function PostSettings({
           }}
           handleSubmit={updatePostMetadata}
         />
-
         <Form
+          siteId={user.siteId}
           title="Thumbnail image"
           description="The thumbnail image for your post. Accepted formats: .png, .jpg, .jpeg"
           helpText="Max file size 50MB. Recommended size 1200x630."

@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 // import { updateSite } from "@/lib/actions";
 import DeleteSiteForm from "@/components/form/delete-site-form";
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import { editUser } from "@/lib/actions";
 import DeleteAccountForm from "@/components/form/delete-account-form";
@@ -12,14 +12,14 @@ export default async function SiteSettingsIndex({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
 
   const data = await prisma.user.findUnique({
     where: {
-      id: session.user.id,
+      id: user.id,
     },
   });
 

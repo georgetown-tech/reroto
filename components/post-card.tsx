@@ -6,15 +6,17 @@ import Link from "next/link";
 
 export default function PostCard({
   data,
+  subdomain,
 }: {
-  data: Post & { site: Site | null };
+  data: Post;
+  subdomain: string;
 }) {
-  const url = `${data.site?.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/${data.slug}`;
+  const url = `${subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/${data.slug}`;
 
   return (
     <div className="relative rounded-lg border border-stone-200 pb-10 shadow-md transition-all hover:shadow-xl dark:border-stone-700 dark:hover:border-white">
       <Link
-        href={`/post/${data.id}`}
+        href={`/posts/${data.id}`}
         className="flex flex-col overflow-hidden rounded-lg"
       >
         <div className="relative h-44 overflow-hidden">
@@ -47,7 +49,7 @@ export default function PostCard({
           href={
             process.env.NEXT_PUBLIC_VERCEL_ENV
               ? `https://${url}`
-              : `http://${data.site?.subdomain}.localhost:3000/${data.slug}`
+              : `http://${subdomain}.localhost:3000/${data.slug}`
           }
           target="_blank"
           rel="noreferrer"

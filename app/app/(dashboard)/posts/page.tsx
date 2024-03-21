@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Posts from "@/components/posts";
@@ -9,16 +9,14 @@ export default async function SitePosts({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
 
-  console.log(session);
-
   const data = await prisma.site.findUnique({
     where: {
-      id: session.user.siteId,
+      id: user.siteId,
     },
   });
 
@@ -48,9 +46,9 @@ export default async function SitePosts({
             {url} ↗
           </a>
         </div>
-        <CreatePostButton id={session.user.siteId} />
+        <CreatePostButton id={user.siteId} />
       </div>
-      <Posts siteId={session.user.siteId} />
+      <Posts siteId={user.siteId} limit={40} subdomain={data.subdomain || ""} />
     </>
   );
 }

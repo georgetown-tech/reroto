@@ -32,7 +32,7 @@ import {
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import { getSiteFromPostId } from "@/lib/actions";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 
 export default function Nav({ children }: { children: ReactNode }) {
   const segments = useSelectedLayoutSegments();
@@ -41,7 +41,7 @@ export default function Nav({ children }: { children: ReactNode }) {
   const [siteId, setSiteId] = useState<string | null>();
 
   useEffect(() => {
-    if (segments[0] === "post" && id) {
+    if (segments[0] === "posts" && id) {
       getSiteFromPostId(id).then((id) => {
         setSiteId(id);
       });
@@ -49,7 +49,7 @@ export default function Nav({ children }: { children: ReactNode }) {
   }, [segments, id]);
 
   const tabs = useMemo(() => {
-    if (segments[0] === "post" && id) {
+    if (segments[0] === "posts" && id) {
       return [
         {
           name: "Back to All Posts",
@@ -58,13 +58,13 @@ export default function Nav({ children }: { children: ReactNode }) {
         },
         {
           name: "Editor",
-          href: `/post/${id}`,
+          href: `/posts/${id}`,
           isActive: segments.length === 2,
           icon: <Edit3 width={18} />,
         },
         {
           name: "Settings",
-          href: `/post/${id}/settings`,
+          href: `/posts/${id}/settings`,
           isActive: segments.includes("settings"),
           icon: <Settings width={18} />,
         },
@@ -89,12 +89,12 @@ export default function Nav({ children }: { children: ReactNode }) {
         isActive: segments.includes("team"),
         icon: <Users width={18} />,
       },
-      {
-        name: "Planning",
-        href: `/plan`,
-        isActive: segments.includes("plan"),
-        icon: <KanbanSquare width={18} />,
-      },
+      // {
+      //   name: "Planning",
+      //   href: `/plan`,
+      //   isActive: segments.includes("plan"),
+      //   icon: <KanbanSquare width={18} />,
+      // },
       {
         name: "Tools",
         children: [
@@ -104,33 +104,33 @@ export default function Nav({ children }: { children: ReactNode }) {
             isActive: segments.includes("design"),
             icon: <Code width={18} />,
           },
-          {
-            name: "Transcribe",
-            href: `/transcribe`,
-            isActive: segments.includes("transcribe"),
-            icon: <ListMusic width={18} />,
-          },
-          {
-            name: "Media Library",
-            href: `/media`,
-            isActive: segments.includes("media"),
-            icon: <LibraryBig width={18} />,
-          },
+          // {
+          //   name: "Transcribe",
+          //   href: `/transcribe`,
+          //   isActive: segments.includes("transcribe"),
+          //   icon: <ListMusic width={18} />,
+          // },
+          // {
+          //   name: "Media Library",
+          //   href: `/media`,
+          //   isActive: segments.includes("media"),
+          //   icon: <LibraryBig width={18} />,
+          // },
         ],
         icon: <Wrench width={24} />,
       },
-      {
-        name: "Analytics",
-        href: `/analytics`,
-        isActive: segments.includes("analytics"),
-        icon: <BarChart3 width={18} />,
-      },
-      {
-        name: "Billing",
-        href: `/billing`,
-        isActive: segments.includes("billing"),
-        icon: <Receipt width={18} />,
-      },
+      // {
+      //   name: "Analytics",
+      //   href: `/analytics`,
+      //   isActive: segments.includes("analytics"),
+      //   icon: <BarChart3 width={18} />,
+      // },
+      // {
+      //   name: "Billing",
+      //   href: `/billing`,
+      //   isActive: segments.includes("billing"),
+      //   icon: <Receipt width={18} />,
+      // },
       {
         name: "Settings",
         href: `/settings`,
@@ -142,7 +142,7 @@ export default function Nav({ children }: { children: ReactNode }) {
 
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const { data: session, status } = useSession();
+  // const { data: session, status } = verifyReq();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -177,7 +177,8 @@ export default function Nav({ children }: { children: ReactNode }) {
               <img
                 src={
                   // @ts-ignore
-                  session?.user?.logo || ""
+                  // session?.user?.logo ||
+                  ""
                 }
                 alt="Logo"
                 // objectFit="cover"

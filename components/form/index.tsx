@@ -2,7 +2,7 @@
 
 import LoadingDots from "@/components/icons/loading-dots";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import { toast } from "sonner";
@@ -18,6 +18,7 @@ export default function Form({
   helpText,
   inputAttrs,
   handleSubmit,
+  siteId,
 }: {
   title: string;
   description: string;
@@ -31,17 +32,11 @@ export default function Form({
     pattern?: string;
   };
   handleSubmit: any;
+  siteId: string;
 }) {
-  // @ts-ignore
-  const { data: session, update } = useSession({
-    required: true,
-  });
-
-  // @ts-ignore
-  const id = session?.user?.siteId || "";
   const router = useRouter();
 
-  if (id == "") return <></>;
+  if (siteId == "") return <></>;
 
   return (
     <form
@@ -54,15 +49,15 @@ export default function Form({
         ) {
           return;
         }
-        handleSubmit(data, id, inputAttrs.name).then(async (res: any) => {
+        handleSubmit(data, siteId, inputAttrs.name).then(async (res: any) => {
           if (res.error) {
             toast.error(res.error);
           } else {
-            va.track(`Updated ${inputAttrs.name}`, id ? { id } : {});
-            if (id) {
+            va.track(`Updated ${inputAttrs.name}`, siteId ? { siteId } : {});
+            if (siteId) {
               router.refresh();
             } else {
-              await update();
+              // await update();
               router.refresh();
             }
             toast.success(`Successfully updated ${inputAttrs.name}!`);

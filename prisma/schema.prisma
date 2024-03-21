@@ -12,20 +12,19 @@ generator client {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
+  id              String    @id @default(cuid())
+  name            String?
   // if you are using Github OAuth, you can get rid of the username attribute (that is for Twitter OAuth)
-  username      String?
-  gh_username   String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  role          Int?
-  description   String?   @default("This user has not updated their description...")
+  displayName     String?
+  email           String?   @unique
+  hashed_password String?
+  emailVerified   DateTime?
+  image           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  role            Int?
+  description     String?   @default("This user has not updated their description...")
 
-  accounts Account[]
   sessions Session[]
   posts    Post[]
 
@@ -38,37 +37,11 @@ model User {
   @@index([siteId])
 }
 
-model Account {
-  id                       String  @id @default(cuid())
-  userId                   String
-  type                     String
-  provider                 String
-  providerAccountId        String
-  refresh_token            String?
-  refresh_token_expires_in Int?
-  access_token             String?
-  expires_at               Int?
-  token_type               String?
-  scope                    String?
-  id_token                 String?
-  session_state            String?
-  oauth_token_secret       String?
-  oauth_token              String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@index([userId])
-}
-
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
 model VerificationToken {

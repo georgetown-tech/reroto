@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 import { updateSite } from "@/lib/actions";
-import { getSession } from "@/lib/auth";
+import { validateRequest } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 
 export default async function SiteSettingsDomains({
@@ -9,20 +9,21 @@ export default async function SiteSettingsDomains({
 }: {
   params: { id: string };
 }) {
-  const session = await getSession();
-  if (!session) {
+  const { user } = await validateRequest();
+  if (!user) {
     redirect("/login");
   }
 
   const data = await prisma.site.findUnique({
     where: {
-      id: session.user.siteId,
+      id: user.siteId,
     },
   });
 
   return (
     <div className="flex flex-col space-y-6">
       <Form
+        siteId={user.siteId}
         title="Subdomain"
         description="The subdomain for your site."
         helpText="Please use 32 characters maximum."
@@ -36,6 +37,7 @@ export default async function SiteSettingsDomains({
         handleSubmit={updateSite}
       />
       <Form
+        siteId={user.siteId}
         title="Custom Domain"
         description="The custom domain for your site."
         helpText="Please enter a valid domain."

@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import { cn } from "@/lib/utils";
+import { validateRequest } from "@/lib/auth";
 
 const title = "ReRoto – Elevate Your Newsroom Efficiency";
 const description =
@@ -34,13 +35,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // const session = await validateRequest();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(cal.variable, inter.variable)}>
+        {/* <SessionProvider value={session}> */}
         <Providers>
           {children}
           <Analytics />
         </Providers>
+        {/* </SessionProvider> */}
       </body>
     </html>
   );
