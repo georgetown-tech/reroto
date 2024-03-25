@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Card,
   CardContent,
@@ -9,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import type { FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,118 +26,66 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import prisma from "@/lib/prisma";
+import AuthJoinForm from "@/components/form/auth-join-form";
 
-const FormSchema = z.object({
-  displayName: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  email: z.string().min(2, {
-    message: "Email must be at least 2 characters.",
-  }),
-  password: z.string().min(2, {
-    message: "Password must be at least 2 characters.",
-  }),
-});
-
-export default function Page() {
-  const router = useRouter();
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      displayName: "",
+export default async function Page({ params }: { params: { id: string } }) {
+  const inviteData = await prisma.invite.findUnique({
+    where: {
+      id: params.id,
+    },
+    include: {
+      creator: true,
+      site: true,
     },
   });
 
-  function onSubmit(formData: FormData) {
-    fetch("/api/signup", {
-      method: "POST",
-      body: JSON.stringify(Object.fromEntries(formData.entries())),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      if (response.ok) {
-        router.push("/");
-      }
-    });
-  }
+  if (inviteData == null) return notFound();
 
   return (
-    <Form {...form}>
-      <form method="post" action={onSubmit}>
-        <Card className="mx-auto max-w-xl">
-          <CardHeader>
-            <CardTitle>Sign Up to ReRoto</CardTitle>
-            <CardDescription>
-              By creating an account on ReRoto, you agree to the{" "}
-              <Link
-                className="underline hover:no-underline"
-                href="https://reroto.com/terms"
-              >
-                Terms and Conditions
-              </Link>
-              .
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <FormField
-              control={form.control}
-              name="displayName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Display Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Joe Doe" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="joe.doe@example.com"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>This is your email.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="joe.doe@example.com"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>This is your password.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </CardContent>
-          <CardFooter>
-            <Button type="submit">Continue</Button>
-          </CardFooter>
-        </Card>
-      </form>
-    </Form>
+    <div
+      className="flex content-center items-center"
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        backgroundImage: "url(" + inviteData.site?.image + ")",
+        backgroundSize: "cover",
+      }}
+    >
+      <Card className="mx-auto max-w-xl bg-white">
+        <CardHeader>
+          <div className="flex w-full flex-row gap-4">
+            <div className="aspect-square w-16">
+              <Image
+                className="mb-4 w-full"
+                width={512}
+                height={512}
+                src={inviteData.site?.logo || ""}
+                alt={`Logo for ${inviteData.site?.name}`}
+              />
+            </div>
+            <div className="w-full">
+              <CardTitle>Join {inviteData.site?.name} on ReRoto</CardTitle>
+              <CardDescription>
+                By creating an account on ReRoto, you agree to the{" "}
+                <Link
+                  className="underline hover:no-underline"
+                  href="https://reroto.com/terms"
+                >
+                  Terms and Conditions
+                </Link>
+                .
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <AuthJoinForm inviteData={inviteData} />
+        </CardContent>
+      </Card>
+    </div>
   );
 }

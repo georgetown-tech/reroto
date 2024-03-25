@@ -20,6 +20,7 @@ module.exports = {
       { hostname: "flag.vercel.app" },
       { hostname: "illustrations.popsy.co" },
       { hostname: "github.com" },
+      { hostname: "source.unsplash.com" }
     ]
   },
 	reactStrictMode: true,

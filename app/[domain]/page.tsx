@@ -7,7 +7,10 @@ import BlogCard from "@/components/blog-card";
 import { getPostsForSite, getSiteData } from "@/lib/fetchers";
 import Image from "next/image";
 import { compileToHtml } from "@/lib/html";
-
+import Render from "@/components/render";
+import { config } from "@/lib/puck";
+// import { Render } from "@measured/puck/rsc";
+ 
 export async function generateStaticParams() {
   const allSites = await prisma.site.findMany({
     select: {
@@ -59,12 +62,15 @@ export default async function SiteHomePage({
         // @ts-ignore
         tb_domain={domain}
       />
-      <div
-        dangerouslySetInnerHTML={{ __html: compileToHtml(data, "/") || "" }}
-      />
-      <pre>
-        {JSON.stringify(JSON.parse(data.siteData?.toString() || "{}"), null, 4)}
-      </pre>
+      <Render 
+      // config={config} 
+      data={JSON.parse(data.siteData?.toString() || "{}")["header"]} />
+      <Render 
+      // config={config} 
+      data={JSON.parse(data.siteData?.toString() || "{}")["home"]} />
+      <Render 
+      // config={config} 
+      data={JSON.parse(data.siteData?.toString() || "{}")["footer"]} />
     </>
   );
 }

@@ -52,22 +52,28 @@ export default function Page() {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((response) => {
+    }).then(async (response) => {
       if (response.ok) {
         router.push("/");
       } else {
-        console.log(response)
-        form.setError("password", {
-          type: "value",
-          message: "Incorrect email or password."
-        }, { shouldFocus: true });
+        console.log(response);
+        const data = await response.json();
+
+        form.setError(
+          "password",
+          {
+            type: "value",
+            message: data.error,
+          },
+          { shouldFocus: true },
+        );
       }
     });
   }
 
   return (
     <Form {...form}>
-      <form method="post" action={onSubmit}>
+      <form method="POST" action={onSubmit}>
         <Card className="mx-auto max-w-xl">
           <CardHeader>
             <CardTitle>Login to ReRoto</CardTitle>
