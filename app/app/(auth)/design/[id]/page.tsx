@@ -26,6 +26,7 @@ export default async function SitePosts({
   return (
     // <div className="fixed bottom-0 left-60 right-0 top-0 z-50 h-full bg-white">
     <Editor
+      siteData={data}
       page={params.id}
       content={JSON.parse(data.siteData?.toString() || "{}")[params.id]}
     />

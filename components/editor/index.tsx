@@ -5,8 +5,9 @@ import { Puck } from "@measured/puck";
 import "@measured/puck/puck.css";
 
 // Create Puck component config
-import { config } from "@/lib/puck";
+import config from "@/lib/puck";
 import router from "next/router";
+import { Post, Site, User } from "@prisma/client";
 
 // Describe the initial data
 const initialData = {
@@ -35,14 +36,20 @@ const save = (page: string) => {
 export default function Editor({
   page,
   content,
+  siteData,
+  author,
+  article,
 }: {
   page: string;
   content: any;
+  siteData: Site;
+  author?: User;
+  article?: Post;
 }) {
   return (
     <Puck
       // @ts-ignore
-      config={config}
+      config={config(siteData, author, article)}
       data={
         // initialData
         content || initialData
