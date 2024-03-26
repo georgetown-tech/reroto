@@ -23,7 +23,7 @@ export default function Rendered({
   return (
     <Render
       // @ts-ignore
-      config={config(siteData, author, article)}
+      config={config(siteData, article, author)}
       data={data || initialData}
     />
   );

@@ -2,10 +2,66 @@ import { DropZone } from "@measured/puck";
 import Link from "next/link";
 import Image from "next/image";
 import { Site, User, Post } from "@prisma/client";
+import Render from "@/components/render";
+import MDX from "@/components/mdx";
 
-export default function config(siteData: Site, article: Post, author: User) {
+export default function config(
+  siteData: Site,
+  article?: Post & { mdxSource: any },
+  author?: User,
+) {
   return {
     components: {
+      ArticleTitle: {
+        fields: {
+          size: {
+            type: "select",
+            options: [
+              { label: "Main Heading", value: "h1" },
+              { label: "Secondary Heading", value: "h2" },
+              { label: "Third Heading", value: "h3" },
+              { label: "Small Section Heading", value: "h4" },
+              { label: "Sub-section Heading", value: "h5" },
+            ],
+          },
+        },
+        render: ({ padding, margin, border, children }: any) => {
+          return (
+            <h1 className="w-full text-5xl font-black">
+              {article?.title || "Article Title."}
+            </h1>
+          );
+        },
+      },
+      ArticleContent: {
+        fields: {},
+        render: ({ padding, margin, border, children }: any) => {
+          return article?.mdxSource != undefined ? (
+            <MDX source={article?.mdxSource} />
+          ) : (
+            <>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Incidunt repudiandae animi commodi excepturi soluta odit culpa
+                voluptatum molestiae non cumque nesciunt molestias similique eum
+                perspiciatis, vel nostrum ut voluptas expedita?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Incidunt repudiandae animi commodi excepturi soluta odit culpa
+                voluptatum molestiae non cumque nesciunt molestias similique eum
+                perspiciatis, vel nostrum ut voluptas expedita?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Incidunt repudiandae animi commodi excepturi soluta odit culpa
+                voluptatum molestiae non cumque nesciunt molestias similique eum
+                perspiciatis, vel nostrum ut voluptas expedita?
+              </p>
+            </>
+          );
+        },
+      },
       Container: {
         fields: {
           padding: {
@@ -19,11 +75,11 @@ export default function config(siteData: Site, article: Post, author: User) {
             options: [
               {
                 label: "Yes",
-                value: "true",
+                value: "yes",
               },
               {
                 label: "No",
-                value: "false",
+                value: "no",
               },
             ],
           },
@@ -32,10 +88,10 @@ export default function config(siteData: Site, article: Post, author: User) {
           return (
             <div
               style={{
-                width: "100%",
+                // width: "100%",
                 padding: padding,
                 margin: margin,
-                border: border == "true" ? "1px solid #dddddd" : "",
+                border: border == "yes" ? "1px solid #dddddd" : "",
               }}
             >
               <DropZone zone="content" />
@@ -75,11 +131,55 @@ export default function config(siteData: Site, article: Post, author: User) {
       },
       Logo: {
         fields: {
-          children: {
-            type: "text",
+          type: {
+            type: "select",
+            options: [
+              {
+                label: "Normal",
+                value: "default",
+              },
+              {
+                label: "Light",
+                value: "light",
+              },
+              {
+                label: "Dark",
+                value: "dark",
+              },
+            ],
           },
         },
-        render: ({ children }: any) => {
+        render: ({ type }: any) => {
+          if (type == "light")
+            return (
+              <Image
+                style={{
+                  height: 60,
+                  width: "min-content",
+                  objectFit: "cover",
+                  filter: "brightness(0) invert(1)",
+                }}
+                width={400}
+                height={300}
+                src={siteData.logo || ""}
+                alt={`Logo for ${siteData.name}`}
+              />
+            );
+          if (type == "dark")
+            return (
+              <Image
+                style={{
+                  height: 60,
+                  width: "min-content",
+                  objectFit: "cover",
+                  filter: "brightness(0)",
+                }}
+                width={400}
+                height={300}
+                src={siteData.logo || ""}
+                alt={`Logo for ${siteData.name}`}
+              />
+            );
           return (
             <Image
               style={{
@@ -315,41 +415,13 @@ export default function config(siteData: Site, article: Post, author: User) {
         fields: {},
         render: ({ size }: any) => {
           return (
-            <div
-              style={{
-                maxWidth: "420px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
-                padding: "16px",
-              }}
-            >
-              <Image
-                style={{
-                  width: "100%",
-                  aspectRatio: 4 / 3,
-                  objectFit: "cover",
-                }}
-                width={400}
-                height={300}
-                src="https://source.unsplash.com/random"
-                alt="Random Thumbnail"
-              />
-              <h2
-                style={{
-                  fontSize: "18pt",
-                  fontWeight: "900",
-                }}
-              >
-                This is an article
-              </h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
-                sint asperiores cumque placeat quo fugit explicabo! Quo quaerat,
-                inventore sed maxime odio natus, repellat debitis atque velit
-                vel doloribus? Eum.
-              </p>
-            </div>
+            <Render
+              siteData={siteData}
+              // config={config}
+              data={
+                JSON.parse(siteData.siteData?.toString() || "{}")["article"]
+              }
+            />
           );
         },
       },

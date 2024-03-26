@@ -49,7 +49,7 @@ export default function Editor({
   return (
     <Puck
       // @ts-ignore
-      config={config(siteData, author, article)}
+      config={config(siteData, article, author)}
       data={
         // initialData
         content || initialData
