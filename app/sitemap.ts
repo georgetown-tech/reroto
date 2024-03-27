@@ -19,7 +19,7 @@ export default async function Sitemap() {
       priority: 1,
     },
     ...posts.map(({ slug }) => ({
-      url: `https://${domain}/${slug}`,
+      url: `https://${domain}/article/${slug}`,
       lastModified: new Date(),
       changeFrequency: "never",
       priority: 0.8,

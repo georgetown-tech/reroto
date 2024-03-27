@@ -39,7 +39,7 @@ export async function GET(
     feed.item({
       title: post.title || "Untitled Post",
       description: post.description || "This post has no description.",
-      url: `${site_url}/${post.slug}`,
+      url: `${site_url}/article/${post.slug}`,
       date: post.createdAt || new Date(),
     });
   });
