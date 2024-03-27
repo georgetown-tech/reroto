@@ -4,8 +4,10 @@ import prisma from "@/lib/prisma";
 
 import type { NextApiRequest } from "next";
 import { Argon2id } from "oslo/password";
+import { headers } from "next/headers";
 
 export async function POST(req: Request, { params }: { params: { id: string } }) {
+	const headersList = headers()
 
 	const data = await req.json();
 

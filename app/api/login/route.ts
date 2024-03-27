@@ -1,9 +1,12 @@
+import {headers} from 'next/headers'
 import { Argon2id } from "oslo/password";
 import { lucia } from "@/lib/auth";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export async function POST(req: Request) {
+	const headersList = headers()
+
 	const data = await req.json();
 	const email = data?.email;
 	if (

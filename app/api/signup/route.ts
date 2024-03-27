@@ -1,11 +1,13 @@
 import { lucia } from "@/lib/auth";
 import { generateId } from "lucia";
 import prisma from "@/lib/prisma";
+import {headers} from 'next/headers'
 
 import type { NextApiRequest } from "next";
 import { Argon2id } from "oslo/password";
 
 export async function POST(req: Request) {
+	const headersList = headers()
 
     // return Response.json({ message: "string" })
 
