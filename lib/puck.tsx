@@ -90,7 +90,7 @@ export default function config(
           }, []);
 
           return (
-            <div className="grid w-full grid-cols-3">
+            <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {(articles || []).map((i: Post, n: number) => (
                 <Link key={n} href={`/article/${i.slug}`}>
                   <Render
