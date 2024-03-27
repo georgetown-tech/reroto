@@ -17,6 +17,7 @@
     "@measured/puck": "^0.13.1",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@node-rs/argon2": "^1.8.0",
+    "@node-rs/bcrypt": "^1.10.1",
     "@prisma/client": "^5.5.2",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-label": "^2.0.2",
