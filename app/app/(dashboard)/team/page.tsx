@@ -88,7 +88,7 @@ export default async function TeamOverview({
           </div>
         </div>
       </div>
-      <div className="flex gap-2 p-2">
+      <div className="flex gap-2 p-2 flex-col">
         {users.map((i, n) => (
           <BigProfile key={n} user={i} />
         ))}

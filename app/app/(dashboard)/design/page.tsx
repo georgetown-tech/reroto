@@ -15,31 +15,40 @@ const pages = [
       "This is the first page that users find themselves on when stumbling upon your website. Make it bold but keep it simple. Be iconic but humble. That's what makes a user keep reading.",
   },
   {
-    id: "topbar",
+    id: "header",
     // icon: House,
     name: "Topbar",
-    description: "---",
+    description:
+      "The header is present on every page of your website. It helps provide a basic navigation to the different parts of the site so that your readers can get around.",
   },
   {
     id: "footer",
     // icon: House,
     name: "Footer",
-    description: "---",
+    description:
+      "The footer, like the header, is present on every page. In most cases, it includes more serious information like copyright, contacts, and other important information.",
+  },
+  {
+    id: "article_page",
+    // icon: House,
+    name: "Article Page",
+    description:
+      "An article page is the page where your audience will read what your writers have posted. You can use the article components to add the article content.",
   },
   {
     id: "article",
     // icon: House,
-    name: "Article Page",
+    name: "Article Card",
     description: "---",
   },
   {
-    id: "category",
+    id: "category_page",
     // icon: House,
     name: "Category Page",
     description: "---",
   },
   {
-    id: "person",
+    id: "person_page",
     // icon: House,
     name: "Person Page",
     description: "---",
