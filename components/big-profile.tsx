@@ -65,7 +65,7 @@ export default async function BigProfile({ user }: { user: User }) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+          <DropdownMenuLabel>{user.displayName}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>

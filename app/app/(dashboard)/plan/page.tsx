@@ -101,8 +101,11 @@ export default async function TeamOverview({
                 className="max-w-xs"
               >
                 {users.map((item) => (
-                  <MultiSelectItem key={item.name} value={item.name || ""}>
-                    {item.name}
+                  <MultiSelectItem
+                    key={item.displayName}
+                    value={item.displayName || ""}
+                  >
+                    {item.displayName}
                   </MultiSelectItem>
                 ))}
               </MultiSelect>
@@ -165,7 +168,7 @@ export default async function TeamOverview({
           {posts.map((item) => (
             <TableRow key={item.title}>
               <TableCell className="truncate">{item.title}</TableCell>
-              <TableCell>{item.user?.name}</TableCell>
+              <TableCell>{item.user?.displayName}</TableCell>
               <TableCell>{""}</TableCell>
               <TableCell>
                 {/* <Badge color={colors[item.status]} size="xs">

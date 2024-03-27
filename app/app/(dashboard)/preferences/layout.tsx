@@ -31,7 +31,7 @@ export default async function SiteAnalyticsLayout({
     <>
       <div className="flex flex-col items-center space-x-4 space-y-2 sm:flex-row sm:space-y-0">
         <h1 className="font-cal text-xl font-bold dark:text-white sm:text-3xl">
-          Preferences for {data.name}
+          Preferences for {data.displayName}
         </h1>
         {/* <a
           href={
