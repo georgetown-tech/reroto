@@ -1,3 +1,5 @@
+import prisma from "@/lib/prisma"
+
 import {headers} from 'next/headers'
 import { Argon2id } from "oslo/password";
 import { lucia } from "@/lib/auth";
