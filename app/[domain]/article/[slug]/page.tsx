@@ -38,12 +38,12 @@ export async function generateMetadata({
       creator: "@vercel",
     },
     // Optional: Set canonical URL to custom domain if it exists
-    // ...(params.domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) &&
-    //   siteData.customDomain && {
-    //     alternates: {
-    //       canonical: `https://${siteData.customDomain}/${params.slug}`,
-    //     },
-    //   }),
+    ...(params.domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) &&
+      siteData.customDomain && {
+        alternates: {
+          canonical: `https://${siteData.customDomain}/${params.slug}`,
+        },
+      }),
   };
 }
 
