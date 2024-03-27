@@ -71,41 +71,7 @@ export default function config(
         },
       },
       "Article Grid": {
-        fields: {
-          articles: {
-            type: "external",
-            fetchList: async () => {
-              // const articles = await fetch(
-              //   `/api/s/${
-              //     siteData.customDomain ||
-              `${siteData.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
-              //   }/posts`,
-              // );
-              // const articleData = await articles.json();
-              return [];
-            },
-          },
-        },
-        resolveData: async ({ props }: any, { changed }: any) => {
-          if (!props.articles) return {};
-
-          // Don't query unless `data` has changed since resolveData was last run
-          if (!changed.articles) return { props };
-
-          const articles = await fetch(
-            `/api/s/${
-              siteData.customDomain ||
-              `${siteData.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
-            }/posts`,
-          );
-          const articleData = articles.json();
-          return {
-            props: {
-              // Update the value for `data`
-              articles: articleData,
-            },
-          };
-        },
+        fields: {},
         render: ({}: any) => {
           // @ts-ignore
           const [articles, setArticles] = useState([]);
@@ -126,15 +92,18 @@ export default function config(
           return (
             <div className="grid w-full grid-cols-3">
               {(articles || []).map((i: Post, n: number) => (
-                <Render
-                  key={n}
-                  siteData={siteData}
-                  article={i}
-                  // config={config}
-                  data={
-                    JSON.parse(siteData.siteData?.toString() || "{}")["article"]
-                  }
-                />
+                <Link key={n} href={`/article/${i.slug}`}>
+                  <Render
+                    siteData={siteData}
+                    article={i}
+                    // config={config}
+                    data={
+                      JSON.parse(siteData.siteData?.toString() || "{}")[
+                        "article"
+                      ]
+                    }
+                  />
+                </Link>
               ))}
             </div>
           );
