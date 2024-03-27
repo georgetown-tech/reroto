@@ -34,9 +34,9 @@ export default async function SiteSettingsIndex({
         description="Your full name so your readers can trust who they are reading."
         helpText="Please use 64 character maximum."
         inputAttrs={{
-          name: "name",
+          name: "displayName",
           type: "text",
-          defaultValue: data?.name!,
+          defaultValue: data?.displayName!,
           placeholder: "Jane Doe",
           maxLength: 64,
         }}
