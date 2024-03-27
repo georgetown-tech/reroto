@@ -437,12 +437,18 @@ export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
 
 // creating a separate function for this because we're not using FormData
 export const updatePost = async (data: Post) => {
+  console.log("Update post")
+  
   const { user } = await validateRequest();
   if (!user) {
     return {
       error: "Not authenticated",
     };
   }
+
+  console.log(data)
+  console.log(user)
+
   const post = await prisma.post.findUnique({
     where: {
       id: data.id,
@@ -451,9 +457,14 @@ export const updatePost = async (data: Post) => {
       site: true,
     },
   });
-  if (!post || post.userId !== user.id) {
+  if (!post) {
     return {
       error: "Post not found",
+    };
+  }
+  if (post.userId != user.id) {
+    return {
+      error: "You don't own this post",
     };
   }
   try {
@@ -461,7 +472,7 @@ export const updatePost = async (data: Post) => {
       where: {
         id: data.id,
       },
-      data: {
+      data: { 
         title: data.title,
         description: data.description,
         content: data.content,

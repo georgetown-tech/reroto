@@ -62,21 +62,27 @@ export default async function SiteHomePage({
         // @ts-ignore
         tb_domain={domain}
       />
-      <Render
-        // config={config}
-        siteData={data}
-        data={JSON.parse(data.siteData?.toString() || "{}")["header"]}
-      />
-      <Render
-        siteData={data}
-        // config={config}
-        data={JSON.parse(data.siteData?.toString() || "{}")["home"]}
-      />
-      <Render
-        siteData={data}
-        // config={config}
-        data={JSON.parse(data.siteData?.toString() || "{}")["footer"]}
-      />
+      <header>
+        <Render
+          // config={config}
+          siteData={data}
+          data={JSON.parse(data.siteData?.toString() || "{}")["header"]}
+        />
+      </header>
+      <main className="h-screen">
+        <Render
+          siteData={data}
+          // config={config}
+          data={JSON.parse(data.siteData?.toString() || "{}")["home"]}
+        />
+      </main>
+      <footer>
+        <Render
+          siteData={data}
+          // config={config}
+          data={JSON.parse(data.siteData?.toString() || "{}")["footer"]}
+        />
+      </footer>
     </>
   );
 }

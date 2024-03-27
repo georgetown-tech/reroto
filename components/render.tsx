@@ -1,8 +1,9 @@
 "use client";
 
 import config from "@/lib/puck";
-import { Render } from "@measured/puck";
+import { Render, resolveAllData } from "@measured/puck";
 import { Site, User, Post } from "@prisma/client";
+import { useEffect, useState } from "react";
 
 const initialData = {
   content: [],
@@ -20,6 +21,17 @@ export default function Rendered({
   author?: User;
   article?: Post;
 }) {
+  // const [renderedData, setRenderedData] = useState(data);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     setRenderedData(
+  //       // @ts-ignore
+  //       await resolveAllData(data, config(siteData, article, author)),
+  //     );
+  //   })();
+  // }, []);
+
   return (
     <Render
       // @ts-ignore

@@ -76,10 +76,19 @@ export function withSiteAuth(action: any) {
 		  site: true,
 		},
 	  });
-	  if (!post || post.userId !== user.id) {
+
+	  console.log(post);
+	  console.log(postId);
+
+	  if (!post) {
 		return {
 		  error: "Post not found",
 		};
+	  }
+	  if (post.userId !== user.id) {
+		return {
+			error: "You do not own this post",
+		  };
 	  }
   
 	  return action(formData, post, key);

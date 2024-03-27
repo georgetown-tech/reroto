@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { DropZone } from "@measured/puck";
 import Link from "next/link";
 import Image from "next/image";
 import { Site, User, Post } from "@prisma/client";
 import Render from "@/components/render";
 import MDX from "@/components/mdx";
+import { useEffect, useState } from "react";
 
 export default function config(
   siteData: Site,
@@ -11,8 +13,22 @@ export default function config(
   author?: User,
 ) {
   return {
+    categories: {
+      basic: {
+        components: ["Heading", "Text", "Margins"],
+      },
+      article: {
+        components: [
+          "Article Title",
+          "Article Content",
+          "Article Description",
+          "Article Thumbnail",
+          "Article Grid",
+        ],
+      },
+    },
     components: {
-      ArticleTitle: {
+      "Article Title": {
         fields: {
           size: {
             type: "select",
@@ -27,13 +43,128 @@ export default function config(
         },
         render: ({ padding, margin, border, children }: any) => {
           return (
-            <h1 className="w-full text-5xl font-black">
+            <h1 className="w-full text-3xl font-black">
               {article?.title || "Article Title."}
             </h1>
           );
         },
       },
-      ArticleContent: {
+      "Article Description": {
+        fields: {
+          size: {
+            type: "select",
+            options: [
+              { label: "Main Heading", value: "h1" },
+              { label: "Secondary Heading", value: "h2" },
+              { label: "Third Heading", value: "h3" },
+              { label: "Small Section Heading", value: "h4" },
+              { label: "Sub-section Heading", value: "h5" },
+            ],
+          },
+        },
+        render: ({ padding, margin, border, children }: any) => {
+          return (
+            <p className="w-full text-lg">
+              {article?.description || "This is an article description."}
+            </p>
+          );
+        },
+      },
+      "Article Grid": {
+        fields: {
+          articles: {
+            type: "external",
+            fetchList: async () => {
+              // const articles = await fetch(
+              //   `/api/s/${
+              //     siteData.customDomain ||
+              `${siteData.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
+              //   }/posts`,
+              // );
+              // const articleData = await articles.json();
+              return [];
+            },
+          },
+        },
+        resolveData: async ({ props }: any, { changed }: any) => {
+          if (!props.articles) return {};
+
+          // Don't query unless `data` has changed since resolveData was last run
+          if (!changed.articles) return { props };
+
+          const articles = await fetch(
+            `/api/s/${
+              siteData.customDomain ||
+              `${siteData.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
+            }/posts`,
+          );
+          const articleData = articles.json();
+          return {
+            props: {
+              // Update the value for `data`
+              articles: articleData,
+            },
+          };
+        },
+        render: ({}: any) => {
+          // @ts-ignore
+          const [articles, setArticles] = useState([]);
+
+          // @ts-ignore
+          useEffect(() => {
+            (async () => {
+              const articlesReq = await fetch(
+                `/api/s/${
+                  siteData.customDomain ||
+                  `${siteData.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
+                }/posts`,
+              );
+              setArticles(await articlesReq.json());
+            })();
+          }, []);
+
+          return (
+            <div className="grid w-full grid-cols-3">
+              {(articles || []).map((i: Post, n: number) => (
+                <Render
+                  key={n}
+                  siteData={siteData}
+                  article={i}
+                  // config={config}
+                  data={
+                    JSON.parse(siteData.siteData?.toString() || "{}")["article"]
+                  }
+                />
+              ))}
+            </div>
+          );
+        },
+      },
+      "Article Thumbnail": {
+        fields: {
+          size: {
+            type: "select",
+            options: [
+              { label: "Main Heading", value: "h1" },
+              { label: "Secondary Heading", value: "h2" },
+              { label: "Third Heading", value: "h3" },
+              { label: "Small Section Heading", value: "h4" },
+              { label: "Sub-section Heading", value: "h5" },
+            ],
+          },
+        },
+        render: ({ padding, margin, border, children }: any) => {
+          return (
+            <Image
+              width={400}
+              height={300}
+              src={article?.image || ""}
+              alt={article?.title || ""}
+            />
+          );
+        },
+      },
+      "Article Content": {
         fields: {},
         render: ({ padding, margin, border, children }: any) => {
           return article?.mdxSource != undefined ? (
@@ -404,6 +535,7 @@ export default function config(
               style={{
                 maxWidth: size,
                 margin: "0px auto",
+                padding: 15,
               }}
             >
               <DropZone zone="content" />
