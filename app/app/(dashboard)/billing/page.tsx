@@ -61,37 +61,6 @@ export default async function SiteAnalytics({
       <Card className="p-4">
         <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
           <a href={""} className="focus:outline-none">
-            {/* extend link to entire card */}
-            <span className="absolute inset-0" aria-hidden={true} />
-            Testing
-          </a>
-        </p>
-      </Card>
-      <Card className="p-4">
-        <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-          <a href={""} className="focus:outline-none">
-            {/* extend link to entire card */}
-            <span className="absolute inset-0" aria-hidden={true} />
-            Testing
-          </a>
-        </p>
-      </Card>
-      <Card className="p-4">
-        <p className="flex items-center justify-between text-tremor-default">
-          <span className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-            example.com
-          </span>
-          <span className="text-tremor-content dark:text-dark-tremor-content">
-            uptime 99.1%
-          </span>
-        </p>
-        <Tracker data={data} className="mt-2" />
-      </Card>
-      <Card className="p-4">
-        <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-          <a href={""} className="focus:outline-none">
-            {/* extend link to entire card */}
-            <span className="absolute inset-0" aria-hidden={true} />
             Testing
           </a>
         </p>

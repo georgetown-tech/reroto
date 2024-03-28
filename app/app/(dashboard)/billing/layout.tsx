@@ -18,8 +18,6 @@ import { setupBilling } from "@/lib/actions";
 import va from "@vercel/analytics";
 // import router from "next/router";
 
-const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
-
 export default async function BillingLayout({
   children,
 }: {
@@ -94,7 +92,6 @@ export default async function BillingLayout({
 
   return (
     <div className="flex flex-col space-y-6">
-      {/* <div className="flex items-center justify-center sm:justify-start"> */}
       <div className="flex flex-col items-center space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
         <h1 className="font-cal text-xl font-bold dark:text-white sm:text-3xl">
           Billing for {data.name}
@@ -127,9 +124,9 @@ export default async function BillingLayout({
               segment: "invoices",
             },
             {
-              name: "Setup",
-              href: `/billing/history`,
-              segment: "history",
+              name: "Settings",
+              href: `/billing/settings`,
+              segment: "settings",
             },
           ]}
         />
