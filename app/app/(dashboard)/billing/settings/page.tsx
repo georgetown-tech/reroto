@@ -5,7 +5,7 @@ import AnalyticsMockup from "@/components/analytics";
 import { Card } from "@/components/ui/card";
 import { Tracker, type Color } from "@tremor/react";
 
-export default async function InvoicesBillingPage({
+export default async function SettingsBillingPage({
   params,
 }: {
   params: { id: string };
@@ -23,5 +23,7 @@ export default async function InvoicesBillingPage({
     notFound();
   }
 
-  return <></>;
+  return <p>
+    {site.stripeId}
+  </p>;
 }
