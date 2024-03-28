@@ -80,5 +80,5 @@ export default async function SiteLayout({
     return redirect(`https://${data.customDomain}`);
   }
 
-  return <div className={fontMapper[data.font]}>{children}</div>;
+  return <div>{children}</div>;
 }

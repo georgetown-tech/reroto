@@ -25,6 +25,7 @@ module.exports = {
           800: "#2C008A",
           900: "#150042",
           950: "#0B0024",
+          foreground: "#ffffff"
         },
         active: {
           DEFAULT: "#8B55FF",
@@ -40,6 +41,7 @@ module.exports = {
           800: "#2C008A",
           900: "#150042",
           950: "#0B0024",
+          foreground: "#ffffff"
         },
         secondary: {
           DEFAULT: "#5652A3",
@@ -55,6 +57,7 @@ module.exports = {
           800: "#0B0A14",
           900: "#05050A",
           950: "#020203",
+          foreground: "#ffffff"
         },
         // light mode
         tremor: {

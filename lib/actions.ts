@@ -21,6 +21,8 @@ import InviteEmail from '@/emails/invite';
 import { headers } from 'next/headers'
 import crypto from 'crypto';
 
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
   7,
@@ -435,19 +437,67 @@ export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
   return response;
 });
 
-// creating a separate function for this because we're not using FormData
-export const updatePost = async (data: Post) => {
-  console.log("Update post")
-  
+export const setupBilling = withSiteAuth(async (_: FormData, site: Site) => {
   const { user } = await validateRequest();
   if (!user) {
     return {
       error: "Not authenticated",
     };
   }
+  
+  if (site.stripeId != null) return {
+    error: "Billing Already Set Up"
+  }
 
-  console.log(data)
-  console.log(user)
+  const addressLine1 = _.get("addressLine1")
+  const addressLine2 = _.get("addressLine2")
+  const state = _.get("state")
+  const city = _.get("city")
+  const zip = _.get("zip")
+
+  const customer = await stripe.customers.create({
+    name: `${site.name} (${site.customDomain != undefined ? site.customDomain : `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}` })`,
+    email: user.email,
+    address: {
+      city: city,
+      line1: addressLine1,
+      line2: addressLine2,
+      state: state,
+      postal_code: zip
+    },
+    shipping: {
+      name: `${user.displayName} (${site.name})`,
+      address: {
+      city: city,
+      line1: addressLine1,
+      line2: addressLine2,
+      state: state,
+      postal_code: zip
+      }
+    }, 
+    description: site.description
+  });
+
+  let response = await prisma.site.update({
+    where: {
+      id: site.id
+    },
+    data: {
+      stripeId: customer.id
+    }
+  })
+
+  return response;
+});
+
+// creating a separate function for this because we're not using FormData
+export const updatePost = async (data: Post) => {
+  const { user } = await validateRequest();
+  if (!user) {
+    return {
+      error: "Not authenticated",
+    };
+  }
 
   const post = await prisma.post.findUnique({
     where: {

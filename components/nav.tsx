@@ -125,12 +125,12 @@ export default function Nav({ children }: { children: ReactNode }) {
       //   isActive: segments.includes("analytics"),
       //   icon: <BarChart3 width={18} />,
       // },
-      // {
-      //   name: "Billing",
-      //   href: `/billing`,
-      //   isActive: segments.includes("billing"),
-      //   icon: <Receipt width={18} />,
-      // },
+      {
+        name: "Billing",
+        href: `/billing`,
+        isActive: segments.includes("billing"),
+        icon: <Receipt width={18} />,
+      },
       {
         name: "Settings",
         href: `/settings`,
@@ -178,7 +178,7 @@ export default function Nav({ children }: { children: ReactNode }) {
                 src={
                   // @ts-ignore
                   // session?.user?.logo ||
-                  ""
+                  "/favicon.svg"
                 }
                 alt="Logo"
                 // objectFit="cover"
