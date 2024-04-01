@@ -671,15 +671,45 @@ export const editUser = async (
   const value = formData.get(key) as string;
 
   try {
-    const response = await prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        [key]: value,
-      },
-    });
-    return response;
+    if (key === "image") {
+      if (!process.env.BLOB_READ_WRITE_TOKEN) {
+        return {
+          error:
+            "Missing BLOB_READ_WRITE_TOKEN token. Note: Vercel Blob is currently in beta – please fill out this form for access: https://tally.so/r/nPDMNd",
+        };
+      }
+
+      console.log(key)
+      console.log(value)
+      
+      const file = formData.get(key) as File;
+      const filename = `${nanoid()}.${file.type.split("/")[1]}`;
+
+      const { url } = await put(filename, file, {
+        access: "public",
+      });
+
+      const response = await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          "image": url,
+          // ...(blurhash && { imageBlurhash: blurhash }),
+        },
+      });
+      return response;
+    } else {
+      const response = await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          [key]: value,
+        },
+      });
+      return response;
+    }
   } catch (error: any) {
     if (error.code === "P2002") {
       return {

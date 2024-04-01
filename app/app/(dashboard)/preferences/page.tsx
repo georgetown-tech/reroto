@@ -45,6 +45,18 @@ export default async function SiteSettingsIndex({
 
       <Form
         siteId={user.siteId}
+        title="Profile Image"
+        description="Your profile picture. Accepted formats: .png, .jpg, .jpeg"
+        helpText="Max file size 50MB. Recommended size 400x400."
+        inputAttrs={{
+          name: "image",
+          type: "file",
+          defaultValue: data?.image!,
+        }}
+        handleSubmit={editUser}
+      />
+      <Form
+        siteId={user.siteId}
         title="Description"
         description="A description of what you do and write about. Tell us a bit about yourself."
         helpText="You can include keywords to help people find you on Google."
