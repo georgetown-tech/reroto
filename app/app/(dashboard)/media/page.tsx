@@ -2,7 +2,7 @@ import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus } from "lucide-react";
-import MediaCard from "@/components/media-card";
+import MediaCard from "@/components/cards/media-card";
 import AddMediaButton from "@/components/add-media-button";
 import AddMediaModal from "@/components/modal/add-media";
 

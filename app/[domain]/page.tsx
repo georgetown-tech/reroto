@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import BlurImage from "@/components/blur-image";
 import { placeholderBlurhash, toDateString } from "@/lib/utils";
-import BlogCard from "@/components/blog-card";
+import BlogCard from "@/components/cards/blog-card";
 import { getPostsForSite, getSiteData } from "@/lib/fetchers";
 import Image from "next/image";
 import { compileToHtml } from "@/lib/html";

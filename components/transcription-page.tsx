@@ -6,7 +6,7 @@ import { notFound, redirect } from "next/navigation";
 import { Search, Plus, BadgeCheck, Play, Pause } from "lucide-react";
 import BigProfile from "@/components/big-profile";
 import Image from "next/image";
-import PostCard from "@/components/post-card";
+import PostCard from "@/components/cards/post-card";
 import TabView from "@/components/tab-view";
 import useTranscription from "@/lib/hooks/use-transcription";
 import { Transcription } from "@prisma/client";

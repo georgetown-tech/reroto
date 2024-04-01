@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { Search, Plus, BadgeCheck } from "lucide-react";
 import BigProfile from "@/components/big-profile";
 import Image from "next/image";
-import PostCard from "@/components/post-card";
+import PostCard from "@/components/cards/post-card";
 import TabView from "@/components/tab-view";
 
 export default async function TeamPage({ params }: { params: { id: string } }) {

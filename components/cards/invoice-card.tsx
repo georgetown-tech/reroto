@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import LogoutButton from "./logout-button";
+import LogoutButton from "../logout-button";
 import { MessagesSquare, MoreHorizontal, Pencil } from "lucide-react";
 import { User } from "@prisma/client";
 

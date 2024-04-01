@@ -2,7 +2,7 @@ import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus } from "lucide-react";
-import TranscriptionCard from "@/components/transcription-card";
+import TranscriptionCard from "@/components/cards/transcription-card";
 import AddTranscriptionButton from "@/components/add-transcription-button";
 import AddTranscriptionModal from "@/components/modal/add-transcription";
 

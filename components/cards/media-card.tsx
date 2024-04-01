@@ -4,10 +4,10 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import LogoutButton from "./logout-button";
+import LogoutButton from "../logout-button";
 import { Pause, Play } from "lucide-react";
 import { Media } from "@prisma/client";
-import MediaPreview from "./media-preview";
+import MediaPreview from "../media-preview";
 
 export default function MediaCard({ media }: { media: Media }) {
   return (

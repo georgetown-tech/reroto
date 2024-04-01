@@ -4,7 +4,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import LogoutButton from "./logout-button";
+import LogoutButton from "../logout-button";
 import useTranscription from "@/lib/hooks/use-transcription";
 import { Pause, Play } from "lucide-react";
 

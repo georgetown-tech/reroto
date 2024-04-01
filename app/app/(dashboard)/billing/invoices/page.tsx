@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import AnalyticsMockup from "@/components/analytics";
 import { Card } from "@/components/ui/card";
 import { Tracker, type Color } from "@tremor/react";
-import InvoiceCard from "@/components/invoice-card";
+import InvoiceCard from "@/components/cards/invoice-card";
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
