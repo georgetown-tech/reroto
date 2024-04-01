@@ -124,9 +124,9 @@ export default async function BillingLayout({
               segment: "invoices",
             },
             {
-              name: "Settings",
-              href: `/billing/settings`,
-              segment: "settings",
+              name: "Setup",
+              href: `/billing/setup`,
+              segment: "setup",
             },
           ]}
         />
