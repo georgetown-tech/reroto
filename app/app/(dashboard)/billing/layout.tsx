@@ -74,12 +74,12 @@ export default async function BillingLayout({
               correspondence from Stripe that bears ReRoto&apos;s name is fully
               authorized by Georgetown Disruptive Tech.
             </p>
-            <TextInput placeholder="Address Line 1" />
-            <TextInput placeholder="Address Line 2" />
-            <TextInput placeholder="City" />
+            <TextInput name="addressLine1" placeholder="Address Line 1" />
+            <TextInput name="addressLine2" placeholder="Address Line 2" />
+            <TextInput name="city" placeholder="City" />
             <div className="flex flex-row gap-2">
-              <TextInput placeholder="State" />
-              <TextInput placeholder="Zip" />
+              <TextInput name="state" placeholder="State" />
+              <TextInput name="zip" placeholder="Zip" />
             </div>
             <div className="flex justify-end">
               <Button type="submit">Enable Invoices</Button>

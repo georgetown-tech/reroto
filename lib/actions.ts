@@ -21,7 +21,7 @@ import InviteEmail from '@/emails/invite';
 import { headers } from 'next/headers'
 import crypto from 'crypto';
 
-const stripe = require('stripe')('pk_live_51LKrcgHSFWYfEtuCysiqIl3T9LPLMYG6Wx6q0E0Zf7jkTNHCeG0AM5D3ekI92fzbLpBBLdjvyqnyMCaamQWmpMee00Wk8oQQT3');
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
