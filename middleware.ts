@@ -41,6 +41,12 @@ export default async function middleware(req: NextRequest) {
 
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
+    const user = req.cookies.get('auth_session') != undefined;
+    if (!user && path !== "/login" && path !== "/signup" && !path.startsWith("/join")) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    } else if (user && (path == "/login" || path == "/signup" || path.startsWith("/join"))) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
     return NextResponse.rewrite(
       new URL(`/app${path === "/" ? "" : path}`, req.url),
     );
