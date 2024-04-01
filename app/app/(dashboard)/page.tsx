@@ -212,7 +212,7 @@ export default async function SitePosts({
           </Card>
         </div>
         {/* <div className="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"></div> */}
-        <div className="mb-4 grid grid-cols-2 gap-4">
+        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card>
             <Title>Visitors</Title>
             <AreaChart
