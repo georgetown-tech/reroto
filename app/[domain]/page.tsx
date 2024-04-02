@@ -72,7 +72,7 @@ export default async function SiteHomePage({
           }
         />
       </header>
-      <main className="h-screen">
+      <main className="min-h-screen">
         <Render
           siteData={data}
           // config={config}

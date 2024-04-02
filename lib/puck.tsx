@@ -35,7 +35,7 @@ export default function config(
         ],
       },
       author: {
-        components: ["Author Name"],
+        components: ["Author Name", "Author Photo", "Author Description"],
       },
     },
     components: {
@@ -60,6 +60,16 @@ export default function config(
           );
         },
       },
+      "Author Description": {
+        fields: {},
+        render: ({ padding, margin, border, children }: any) => {
+          return (
+            <p className="w-full text-xl">
+              {author?.description || "This is a short description..."}
+            </p>
+          );
+        },
+      },
       "Author Photo": {
         fields: {
           size: {
@@ -71,11 +81,36 @@ export default function config(
             ],
           },
         },
-        render: ({ padding, margin, border, children }: any) => {
+        render: ({ size }: any) => {
+          if (size == "small")
+            return (
+              <Image
+                width={64}
+                height={64}
+                className="w-8"
+                src={author?.image}
+                alt={author?.displayName || "Jane Doe"}
+              />
+            );
+          if (size == "medium")
+            return (
+              <Image
+                width={512}
+                height={512}
+                className="w-32"
+                src={author?.image}
+                alt={author?.displayName || "Jane Doe"}
+              />
+            );
+
           return (
-            <h1 className="w-full text-3xl font-black">
-              {author?.displayName || "Jane Doe"}
-            </h1>
+            <Image
+              width={1024}
+              height={1024}
+              className="w-64"
+              src={author?.image}
+              alt={author?.displayName || "Jane Doe"}
+            />
           );
         },
       },

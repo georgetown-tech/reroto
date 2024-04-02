@@ -87,7 +87,7 @@ export default async function SitePostPage({
           }
         />
       </header>
-      <main className="h-screen">
+      <main className="min-h-screen">
         <Render
           siteData={site}
           author={data}
