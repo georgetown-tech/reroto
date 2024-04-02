@@ -104,6 +104,7 @@ export default function Editor({ post }: { post: PostWithSite }) {
         />
       </div>
       <NovelEditor
+        disableLocalStorage={true}
         className="relative block"
         defaultValue={post?.content || undefined}
         onUpdate={(editor) => {
