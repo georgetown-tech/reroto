@@ -21,16 +21,8 @@ export default function Rendered({
   author?: User;
   article?: Post;
 }) {
-  // const [renderedData, setRenderedData] = useState(data);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     setRenderedData(
-  //       // @ts-ignore
-  //       await resolveAllData(data, config(siteData, article, author)),
-  //     );
-  //   })();
-  // }, []);
+  // check if 'data == {}'
+  if (Object.keys(data).length === 0) return <></>;
 
   return (
     <Render
