@@ -5,6 +5,21 @@ import prisma from "@/lib/prisma";
 import { serialize } from "next-mdx-remote/serialize";
 import { replaceExamples, replaceTweets } from "@/lib/remark-plugins";
 
+export async function getAuthorData(id: string) {
+  return await unstable_cache(
+    async () => {
+      return prisma.user.findUnique({
+        where: { id },
+      });
+    },
+    [`user-${id}-metadata`],
+    {
+      revalidate: 900,
+      tags: [`user-${id}-metadata`],
+    },
+  )();
+}
+
 export async function getSiteData(domain: string) {
   const subdomain = domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`)
     ? domain.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, "")

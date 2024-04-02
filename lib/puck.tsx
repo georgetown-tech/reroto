@@ -34,8 +34,51 @@ export default function config(
           "Article Grid",
         ],
       },
+      author: {
+        components: ["Author Name"],
+      },
     },
     components: {
+      "Author Name": {
+        fields: {
+          size: {
+            type: "select",
+            options: [
+              { label: "Main Heading", value: "h1" },
+              { label: "Secondary Heading", value: "h2" },
+              { label: "Third Heading", value: "h3" },
+              { label: "Small Section Heading", value: "h4" },
+              { label: "Sub-section Heading", value: "h5" },
+            ],
+          },
+        },
+        render: ({ padding, margin, border, children }: any) => {
+          return (
+            <h1 className="w-full text-3xl font-black">
+              {author?.displayName || "Jane Doe"}
+            </h1>
+          );
+        },
+      },
+      "Author Photo": {
+        fields: {
+          size: {
+            type: "select",
+            options: [
+              { label: "Large", value: "large" },
+              { label: "Medium", value: "medium" },
+              { label: "Small", value: "small" },
+            ],
+          },
+        },
+        render: ({ padding, margin, border, children }: any) => {
+          return (
+            <h1 className="w-full text-3xl font-black">
+              {author?.displayName || "Jane Doe"}
+            </h1>
+          );
+        },
+      },
       "Article Title": {
         fields: {
           size: {
