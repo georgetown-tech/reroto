@@ -12,6 +12,14 @@ export default function config(
   article?: Post & { mdxSource: any },
   author?: User,
 ) {
+  const design: any = {
+    primary_color: "#ED6A5A",
+    secondary_color: "#9BC1BC",
+    white_color: "#F4F1BB",
+    black_color: "#5D576B",
+    ...((siteData.siteData as any).design || {}),
+  };
+
   return {
     categories: {
       basic: {
@@ -230,6 +238,27 @@ export default function config(
       },
       Logo: {
         fields: {
+          color: {
+            type: "select",
+            options: [
+              {
+                label: "Primary",
+                value: "primary_color",
+              },
+              {
+                label: "Secondary",
+                value: "secondary_color",
+              },
+              {
+                label: "White",
+                value: "white_color",
+              },
+              {
+                label: "Black",
+                value: "black_color",
+              },
+            ],
+          },
           type: {
             type: "select",
             options: [
@@ -238,46 +267,46 @@ export default function config(
                 value: "default",
               },
               {
-                label: "Light",
-                value: "light",
-              },
-              {
-                label: "Dark",
-                value: "dark",
+                label: "Colored",
+                value: "color",
               },
             ],
           },
         },
-        render: ({ type }: any) => {
-          if (type == "light")
+        render: ({ type, color }: { type: string; color: string }) => {
+          if (type == "color")
             return (
-              <Image
+              <div
                 style={{
-                  height: 60,
-                  width: "min-content",
-                  objectFit: "cover",
-                  filter: "brightness(0) invert(1)",
+                  position: "relative",
+                  mixBlendMode: "revert",
                 }}
-                width={400}
-                height={300}
-                src={siteData.logo || ""}
-                alt={`Logo for ${siteData.name}`}
-              />
-            );
-          if (type == "dark")
-            return (
-              <Image
-                style={{
-                  height: 60,
-                  width: "min-content",
-                  objectFit: "cover",
-                  filter: "brightness(0)",
-                }}
-                width={400}
-                height={300}
-                src={siteData.logo || ""}
-                alt={`Logo for ${siteData.name}`}
-              />
+              >
+                <Image
+                  style={{
+                    height: 60,
+                    width: "min-content",
+                    objectFit: "cover",
+                    filter: "brightness(100) invert(0)",
+                    mixBlendMode: "normal",
+                  }}
+                  width={400}
+                  height={300}
+                  src={siteData.logo || ""}
+                  alt={`Logo for ${siteData.name}`}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    left: 0,
+                    top: 0,
+                    background: design[color],
+                    mixBlendMode: "darken",
+                  }}
+                />
+              </div>
             );
           return (
             <Image
@@ -296,11 +325,32 @@ export default function config(
       },
       Date: {
         fields: {
+          color: {
+            type: "select",
+            options: [
+              {
+                label: "Primary",
+                value: "primary_color",
+              },
+              {
+                label: "Secondary",
+                value: "secondary_color",
+              },
+              {
+                label: "White",
+                value: "white_color",
+              },
+              {
+                label: "Black",
+                value: "black_color",
+              },
+            ],
+          },
           format: {
             type: "text",
           },
         },
-        render: ({ format }: any) => {
+        render: ({ format, color }: { format: string; color: string }) => {
           let out = format || "";
           out = out.replace(/month/g, new Date().getMonth());
           out = out.replace(
@@ -364,7 +414,7 @@ export default function config(
           );
           out = out.replace(/date/g, new Date().getDate());
 
-          return <span>{out}</span>;
+          return <span style={{ color: design[color] }}>{out}</span>;
         },
       },
       Link: {
@@ -471,6 +521,27 @@ export default function config(
       },
       Margins: {
         fields: {
+          color: {
+            type: "select",
+            options: [
+              {
+                label: "Primary",
+                value: "primary_color",
+              },
+              {
+                label: "Secondary",
+                value: "secondary_color",
+              },
+              {
+                label: "White",
+                value: "white_color",
+              },
+              {
+                label: "Black",
+                value: "black_color",
+              },
+            ],
+          },
           size: {
             type: "select",
             options: [
@@ -497,16 +568,22 @@ export default function config(
             ],
           },
         },
-        render: ({ size }: any) => {
+        render: ({ size, color }: { size: string; color: string }) => {
           return (
             <div
               style={{
-                maxWidth: size,
-                margin: "0px auto",
-                padding: 15,
+                background: design[color],
               }}
             >
-              <DropZone zone="content" />
+              <div
+                style={{
+                  maxWidth: size,
+                  margin: "0px auto",
+                  padding: 15,
+                }}
+              >
+                <DropZone zone="content" />
+              </div>
             </div>
           );
         },
