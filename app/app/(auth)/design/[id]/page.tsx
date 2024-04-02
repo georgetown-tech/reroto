@@ -1,4 +1,4 @@
-import Editor from "@/components/editor/index";
+import Editor from "@/components/visual-editor";
 import { validateRequest } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
