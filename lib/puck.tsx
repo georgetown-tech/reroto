@@ -352,7 +352,7 @@ export default function config(
         },
         render: ({ format, color }: { format: string; color: string }) => {
           let out = format || "";
-          out = out.replace(/month/g, new Date().getMonth());
+          out = out.replace(/month/g, new Date().getMonth().toString());
           out = out.replace(
             /MONTH/g,
             [
@@ -370,7 +370,7 @@ export default function config(
               "December",
             ][new Date().getMonth()],
           );
-          out = out.replace(/YEAR/g, new Date().getFullYear());
+          out = out.replace(/YEAR/g, new Date().getFullYear().toString());
           out = out.replace(
             /year/g,
             new Date().getFullYear().toString().slice(2, 4),
@@ -412,7 +412,7 @@ export default function config(
               "31st",
             ][new Date().getDate()],
           );
-          out = out.replace(/date/g, new Date().getDate());
+          out = out.replace(/date/g, new Date().getDate().toString());
 
           return <span style={{ color: design[color] }}>{out}</span>;
         },
