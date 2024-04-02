@@ -20,8 +20,9 @@ export default function TeamOverviewClient({
   site: Site;
   user: AuthUser;
 }) {
-  const [search, setSearch] = useState("");
-  const url = `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
+  const url = site.customDomain
+    ? site.customDomain
+    : `${site.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
 
   return (
     <>
@@ -43,7 +44,7 @@ export default function TeamOverviewClient({
       <div className="relative w-full border-b bg-white dark:bg-gray-300">
         <div className="flex flex-col items-center justify-between space-y-3 p-2 md:flex-row md:space-x-4 md:space-y-0">
           <div className="w-full md:w-1/2">
-            <form className="flex items-center">
+            <form method="GET" action="/team" className="flex items-center">
               <label htmlFor="simple-search" className="sr-only">
                 Search
               </label>
@@ -65,11 +66,8 @@ export default function TeamOverviewClient({
                 </div>
                 <input
                   type="text"
+                  name="q"
                   id="simple-search"
-                  value={search}
-                  onChange={(e) => {
-                    setSearch(e.target.value);
-                  }}
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                   placeholder="Search"
                   required
@@ -85,13 +83,9 @@ export default function TeamOverviewClient({
         </div>
       </div>
       <div className="flex flex-col gap-2 p-2">
-        {teammates
-          .filter(
-            (i) => i.displayName?.toLowerCase().includes(search.toLowerCase()),
-          )
-          .map((i, n) => (
-            <BigProfile key={n} user={i} />
-          ))}
+        {teammates.map((i, n) => (
+          <BigProfile key={n} user={i} />
+        ))}
       </div>
     </>
   );

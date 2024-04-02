@@ -9,8 +9,10 @@ import TeamOverviewClient from "@/components/pages/team-overview";
 
 export default async function TeamOverview({
   params,
+  searchParams,
 }: {
   params: { id: string };
+  searchParams: { q?: string };
 }) {
   const { user } = await validateRequest();
   if (!user) {
@@ -24,6 +26,10 @@ export default async function TeamOverview({
   const users: CardUserData[] = await prisma.user.findMany({
     where: {
       siteId: user.siteId,
+      displayName: {
+        contains: searchParams.q,
+        mode: "insensitive",
+      },
     },
     select: {
       displayName: true,
