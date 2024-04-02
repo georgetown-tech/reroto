@@ -302,9 +302,9 @@ export default function config(
         },
         render: ({ format }: any) => {
           let out = format || "";
-          out = out.replace(/m/g, new Date().getMonth());
+          out = out.replace(/month/g, new Date().getMonth());
           out = out.replace(
-            /M/g,
+            /MONTH/g,
             [
               "January",
               "February",
@@ -320,13 +320,13 @@ export default function config(
               "December",
             ][new Date().getMonth()],
           );
-          out = out.replace(/Y/g, new Date().getFullYear());
+          out = out.replace(/YEAR/g, new Date().getFullYear());
           out = out.replace(
-            /y/g,
+            /year/g,
             new Date().getFullYear().toString().slice(2, 4),
           );
           out = out.replace(
-            /D/g,
+            /DATE/g,
             [
               "0th",
               "1st",
@@ -362,7 +362,7 @@ export default function config(
               "31st",
             ][new Date().getDate()],
           );
-          out = out.replace(/d/g, new Date().getDate());
+          out = out.replace(/date/g, new Date().getDate());
 
           return <span>{out}</span>;
         },
