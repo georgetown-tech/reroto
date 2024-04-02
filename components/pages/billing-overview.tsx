@@ -112,7 +112,7 @@ export default function BillingOverviewClientPage({
       if (!checkInvoiceMonthYear(element.created, j, new Date().getFullYear()))
         return;
 
-      element.lines.data.forEach((line) => {
+      element.lines.data.forEach((line: any) => {
         if (line.amount < 0) Revenue -= line.amount / 100;
         else Costs += line.amount / 100;
       });
