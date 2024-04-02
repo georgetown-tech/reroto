@@ -245,13 +245,34 @@ export const createSite = async (formData: FormData):Promise<Site | Error> => {
 
 export const updateSiteAppearance = withSiteAuth(
   async (formData: FormData, site: Site, key: string) => {
-    const value = formData.get(key) as string;
 
-    // const siteData = JSON.parse((site.siteData || {}).toString());
+    try {
 
-    // console.log(JSON.stringify(siteData, null, 4))
+      const value = formData.get(key) as string;
 
-    return { error: "This is a fake error." }
+      const siteData:any = site.siteData || {}
+
+      if (siteData['design'] == undefined) siteData['design'] = {}
+      siteData['design'][key] = value
+
+      await prisma.site.update({
+        where: {
+          id: site.id
+        },
+        data: {
+          siteData
+        }
+      })
+
+      // console.log(JSON.stringify(siteData, null, 4))
+
+      return { message: `Successfully updated ${key}.` }
+
+    } catch (error:any) { 
+
+      return { error: error.toString() }
+
+    }
 
   });
 

@@ -20,6 +20,8 @@ export default async function SiteSettingsAppearance({
     },
   });
 
+  const design = (data?.siteData as any)?.design || {};
+
   return (
     <div className="flex flex-col space-y-6">
       <Form
@@ -30,7 +32,7 @@ export default async function SiteSettingsAppearance({
         inputAttrs={{
           name: "primary_color",
           type: "color",
-          defaultValue: "#ff00ff",
+          defaultValue: design["primary_color"] || "#ED6A5A",
         }}
         handleSubmit={updateSiteAppearance}
       />
@@ -42,7 +44,7 @@ export default async function SiteSettingsAppearance({
         inputAttrs={{
           name: "secondary_color",
           type: "color",
-          defaultValue: "#ff00ff",
+          defaultValue: design["secondary_color"] || "#9BC1BC",
         }}
         handleSubmit={updateSiteAppearance}
       />
@@ -54,7 +56,7 @@ export default async function SiteSettingsAppearance({
         inputAttrs={{
           name: "white_color",
           type: "color",
-          defaultValue: "#ff00ff",
+          defaultValue: design["white_color"] || "#F4F1BB",
         }}
         handleSubmit={updateSiteAppearance}
       />
@@ -66,7 +68,7 @@ export default async function SiteSettingsAppearance({
         inputAttrs={{
           name: "black_color",
           type: "color",
-          defaultValue: "#ff00ff",
+          defaultValue: design["black_color"] || "#5D576B",
         }}
         handleSubmit={updateSiteAppearance}
       />
