@@ -30,8 +30,6 @@ export default async function InvoicesBillingPage({
     customer: site.stripeId,
   });
 
-  console.log(invoices);
-
   return (
     <>
       {invoices.data.length > 0 ? (

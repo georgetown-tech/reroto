@@ -6,6 +6,8 @@ import AnalyticsMockup from "@/components/analytics";
 import { Card, ProgressCircle } from "@tremor/react";
 import BillingOverviewClientPage from "@/components/pages/billing-overview";
 
+const stripe = require("stripe")(process.env.STRIPE_KEY);
+
 export default async function BillingOverviewPage({
   params,
 }: {
@@ -38,12 +40,17 @@ export default async function BillingOverviewPage({
     notFound();
   }
 
+  const invoices = await stripe.invoices.list({
+    customer: site.stripeId,
+  });
+
   return (
     <BillingOverviewClientPage
       articlesCount={articlesCount}
       userCount={usersCount}
       site={site}
       user={user}
+      invoices={invoices.data}
     />
   );
 }
