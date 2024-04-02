@@ -21,7 +21,15 @@ import LogoutButton from "../logout-button";
 import { MessagesSquare, MoreHorizontal, Pencil } from "lucide-react";
 import { User } from "@prisma/client";
 
-export default async function BigProfile({ user }: { user: User }) {
+export interface CardUserData {
+  displayName: string | null;
+  email: string | null;
+  image: string | null;
+  role: number | null;
+  id: string;
+}
+
+export default async function BigProfile({ user }: { user: CardUserData }) {
   return (
     <div className="flex w-full items-center justify-between gap-2 rounded-lg px-2 transition-all duration-150 ease-in-out hover:bg-stone-50 active:bg-stone-100 dark:text-white dark:hover:bg-stone-900 dark:active:bg-stone-950">
       <Link
