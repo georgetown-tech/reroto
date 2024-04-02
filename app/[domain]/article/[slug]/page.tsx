@@ -60,11 +60,9 @@ export default async function SitePostPage({
   ]);
 
   if (!post) {
-    console.log("POST");
     notFound();
   }
-  if (!site) {
-    console.log("SITE");
+  if (site == null) {
     notFound();
   }
 
@@ -81,18 +79,27 @@ export default async function SitePostPage({
       <Render
         // config={config}
         siteData={site}
-        data={JSON.parse(site.siteData?.toString() || "{}")["header"]}
+        data={
+          // @ts-ignore
+          site.siteData?.["header"] || {}
+        }
       />
       <Render
         siteData={site}
         article={post}
         // config={config}
-        data={JSON.parse(site.siteData?.toString() || "{}")["article_page"]}
+        data={
+          // @ts-ignore
+          site.siteData?.["article_page"] || {}
+        }
       />
       <Render
         siteData={site}
         // config={config}
-        data={JSON.parse(site.siteData?.toString() || "{}")["footer"]}
+        data={
+          // @ts-ignore
+          site.siteData?.["footer"] || {}
+        }
       />
       {/* <script>
         { JSON.stringify({
