@@ -22,6 +22,8 @@ export default function Rendered({
   article?: Post;
 }) {
   // check if 'data == {}'
+  if (data == undefined) return <></>
+  if (data == null) return <></>
   if (Object.keys(data).length === 0) return <></>;
 
   return (
