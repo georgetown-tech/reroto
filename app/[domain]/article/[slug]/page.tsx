@@ -76,31 +76,38 @@ export default async function SitePostPage({
         // @ts-ignore
         tb_domain={domain}
       />
-      <Render
-        // config={config}
-        siteData={site}
-        data={
-          // @ts-ignore
-          site.siteData?.["header"] || {}
-        }
-      />
-      <Render
-        siteData={site}
-        article={post}
-        // config={config}
-        data={
-          // @ts-ignore
-          site.siteData?.["article_page"] || {}
-        }
-      />
-      <Render
-        siteData={site}
-        // config={config}
-        data={
-          // @ts-ignore
-          site.siteData?.["footer"] || {}
-        }
-      />
+
+      <header>
+        <Render
+          // config={config}
+          siteData={site}
+          data={
+            // @ts-ignore
+            site.siteData?.["header"] || {}
+          }
+        />
+      </header>
+      <main className="h-screen">
+        <Render
+          siteData={site}
+          article={post}
+          // config={config}
+          data={
+            // @ts-ignore
+            site.siteData?.["article_page"] || {}
+          }
+        />
+      </main>
+      <footer>
+        <Render
+          siteData={site}
+          // config={config}
+          data={
+            // @ts-ignore
+            site.siteData?.["footer"] || {}
+          }
+        />
+      </footer>
       {/* <script>
         { JSON.stringify({
         "@context": "https://schema.org",
