@@ -28,7 +28,10 @@ export default async function SitePosts({
     <Editor
       siteData={data}
       page={params.id}
-      content={JSON.parse(data.siteData?.toString() || "{}")[params.id]}
+      content={
+        // @ts-ignore
+        data.siteData[params.id]
+      }
     />
     // </div>
   );

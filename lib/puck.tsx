@@ -98,9 +98,8 @@ export default function config(
                     article={i}
                     // config={config}
                     data={
-                      JSON.parse(siteData.siteData?.toString() || "{}")[
-                        "article"
-                      ]
+                      // @ts-ignore
+                      siteData?.siteData["article"]
                     }
                   />
                 </Link>
@@ -520,7 +519,8 @@ export default function config(
               siteData={siteData}
               // config={config}
               data={
-                JSON.parse(siteData.siteData?.toString() || "{}")["article"]
+                // @ts-ignore
+                siteData?.siteData["article"]
               }
             />
           );
