@@ -88,7 +88,9 @@ export default function config(
                 width={64}
                 height={64}
                 className="w-8"
-                src={author?.image}
+                src={
+                  author?.image || `https://avatar.vercel.sh/${author?.email}`
+                }
                 alt={author?.displayName || "Jane Doe"}
               />
             );
@@ -98,7 +100,9 @@ export default function config(
                 width={512}
                 height={512}
                 className="w-32"
-                src={author?.image}
+                src={
+                  author?.image || `https://avatar.vercel.sh/${author?.email}`
+                }
                 alt={author?.displayName || "Jane Doe"}
               />
             );
@@ -108,7 +112,7 @@ export default function config(
               width={1024}
               height={1024}
               className="w-64"
-              src={author?.image}
+              src={author?.image || `https://avatar.vercel.sh/${author?.email}`}
               alt={author?.displayName || "Jane Doe"}
             />
           );

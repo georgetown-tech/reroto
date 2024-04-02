@@ -2,7 +2,7 @@ import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus, Check, X } from "lucide-react";
-import BigProfile from "@/components/big-profile";
+import BigProfile from "@/components/cards/big-profile";
 import AddUserButton from "@/components/add-user-button";
 import AddUserModal from "@/components/modal/add-user";
 import {

@@ -2,7 +2,7 @@ import { validateRequest } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { Search, Plus } from "lucide-react";
-import BigProfile from "@/components/big-profile";
+import BigProfile from "@/components/cards/big-profile";
 import AddUserButton from "@/components/add-user-button";
 import AddUserModal from "@/components/modal/add-user";
 
@@ -88,7 +88,7 @@ export default async function TeamOverview({
           </div>
         </div>
       </div>
-      <div className="flex gap-2 p-2 flex-col">
+      <div className="flex flex-col gap-2 p-2">
         {users.map((i, n) => (
           <BigProfile key={n} user={i} />
         ))}
