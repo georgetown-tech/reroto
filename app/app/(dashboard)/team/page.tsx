@@ -5,7 +5,6 @@ import { Search, Plus } from "lucide-react";
 import BigProfile, { CardUserData } from "@/components/cards/big-profile";
 import AddUserButton from "@/components/add-user-button";
 import AddUserModal from "@/components/modal/add-user";
-import TeamOverviewClient from "@/components/pages/team-overview";
 
 export default async function TeamOverview({
   params,
