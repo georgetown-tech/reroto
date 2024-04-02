@@ -26,7 +26,7 @@ export default function Form({
   inputAttrs: {
     name: string;
     type: string;
-    defaultValue: string;
+    defaultValue: string | any;
     placeholder?: string;
     maxLength?: number;
     pattern?: string;
@@ -129,6 +129,51 @@ export default function Form({
             required
             className="m-0 block h-16 w-16 overflow-hidden rounded-xl border-transparent bg-transparent p-0"
           />
+        ) : inputAttrs.type === "address" ? (
+          <div className="flex w-full max-w-md flex-col gap-2">
+            <input
+              type="text"
+              name="line1"
+              defaultValue={inputAttrs.defaultValue.line1}
+              required
+              placeholder="Address Line 1"
+              className="w-full rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
+            />
+            <input
+              type="text"
+              name="line2"
+              defaultValue={inputAttrs.defaultValue.line2}
+              required
+              placeholder="Address Line 2"
+              className="w-full rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
+            />
+            <div className="flex w-full flex-row gap-2">
+              <input
+                type="text"
+                name="state"
+                defaultValue={inputAttrs.defaultValue.state}
+                required
+                placeholder="State"
+                className="w-full max-w-md rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
+              />
+              <input
+                type="text"
+                name="city"
+                defaultValue={inputAttrs.defaultValue.city}
+                required
+                placeholder="City"
+                className="w-full max-w-md rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
+              />
+              <input
+                type="text"
+                name="postal_code"
+                defaultValue={inputAttrs.defaultValue.postal_code}
+                required
+                placeholder="Postal Code"
+                className="w-full max-w-md rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
+              />
+            </div>
+          </div>
         ) : (
           <input
             {...inputAttrs}

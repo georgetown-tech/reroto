@@ -116,8 +116,6 @@ export default function BillingOverviewClientPage({
         if (line.amount < 0) Revenue -= line.amount / 100;
         else Costs += line.amount / 100;
       });
-
-      console.dir(element, { depth: null });
     });
 
     let Profit = Revenue - Costs;

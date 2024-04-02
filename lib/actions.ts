@@ -276,6 +276,29 @@ export const updateSiteAppearance = withSiteAuth(
 
   });
 
+export const updateSiteBilling = withSiteAuth(
+  async (formData: FormData, site: Site, key: string) => {
+
+    try {
+
+      const value = formData.get(key) as string;
+      const response = await stripe.customers.update(
+        site.stripeId,
+        {
+          [key]: value
+        }
+      );
+
+      return { message: `Successfully updated ${key}.` }
+
+    } catch (error) {
+
+      return { error: "Error updating billing information." }
+
+    }
+
+  });
+
 // TODO: Add back site auth
 export const updateSite = withSiteAuth(
   async (formData: FormData, site: Site, key: string) => {
