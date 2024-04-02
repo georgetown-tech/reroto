@@ -243,6 +243,18 @@ export const createSite = async (formData: FormData):Promise<Site | Error> => {
   }
 };
 
+export const updateSiteAppearance = withSiteAuth(
+  async (formData: FormData, site: Site, key: string) => {
+    const value = formData.get(key) as string;
+
+    // const siteData = JSON.parse((site.siteData || {}).toString());
+
+    // console.log(JSON.stringify(siteData, null, 4))
+
+    return { error: "This is a fake error." }
+
+  });
+
 // TODO: Add back site auth
 export const updateSite = withSiteAuth(
   async (formData: FormData, site: Site, key: string) => {

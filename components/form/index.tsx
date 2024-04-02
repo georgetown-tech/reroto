@@ -123,6 +123,12 @@ export default function Form({
             required
             className="w-full max-w-xl rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
           />
+        ) : inputAttrs.type === "color" ? (
+          <input
+            {...inputAttrs}
+            required
+            className="m-0 block h-16 w-16 overflow-hidden rounded-xl border-transparent bg-transparent p-0"
+          />
         ) : (
           <input
             {...inputAttrs}

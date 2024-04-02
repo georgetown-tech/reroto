@@ -72,23 +72,18 @@ export const saveGrape = async (_: FormData) => {
         }
     });
 
-    let data = JSON.parse(siteData?.siteData?.toString() || "{}") || {}
+    let data:any = siteData?.siteData || {}
 
-    console.log(data)
-
-    if (data == null) data = {}
+    if (typeof data != "object") return;
 
     data[_.get("page")?.toString() || ""] = JSON.parse(_.get("components")?.toString() || "");
-
-    console.log("AFTER")
-    console.log(data)
 
     await prisma.site.update({
         where: {
             id: siteId
         },
         data: {
-          siteData: JSON.stringify(data)
+          siteData: data
         }
     });
 

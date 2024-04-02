@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import Form from "@/components/form";
-import { updateSite } from "@/lib/actions";
+import { updateSiteAppearance } from "@/lib/actions";
 import { validateRequest } from "@/lib/auth";
 import { notFound, redirect } from "next/navigation";
 
@@ -24,53 +24,52 @@ export default async function SiteSettingsAppearance({
     <div className="flex flex-col space-y-6">
       <Form
         siteId={user.siteId}
-        title="Thumbnail image"
-        description="The thumbnail image for your site. Accepted formats: .png, .jpg, .jpeg"
-        helpText="Max file size 50MB. Recommended size 1200x630."
+        title="Primary Brand Color"
+        description="The primary color for your brand. Typically the color used in your full-color logo."
+        helpText="Open your logo in another tab and use the eyedropper tool to select a color."
         inputAttrs={{
-          name: "image",
-          type: "file",
-          defaultValue: data?.image!,
+          name: "primary_color",
+          type: "color",
+          defaultValue: "#ff00ff",
         }}
-        handleSubmit={updateSite}
+        handleSubmit={updateSiteAppearance}
       />
       <Form
         siteId={user.siteId}
-        title="Logo"
-        description="The logo for your site. Accepted formats: .png, .jpg, .jpeg"
-        helpText="Max file size 50MB. Recommended size 400x400."
+        title="Secondary Brand Color"
+        description="The secondary color for your brand. Typically the color used in your alternate-color logo."
+        helpText="Open your logo in another tab and use the eyedropper tool to select a color."
         inputAttrs={{
-          name: "logo",
-          type: "file",
-          defaultValue: data?.logo!,
+          name: "secondary_color",
+          type: "color",
+          defaultValue: "#ff00ff",
         }}
-        handleSubmit={updateSite}
+        handleSubmit={updateSiteAppearance}
       />
-      {/* <Form
+      <Form
         siteId={user.siteId}
-        title="Font"
-        description="The font for the heading text your site."
-        helpText="Please select a font."
+        title="Brand White Color"
+        description="The white color for your brand. Typically the color used in your light logo."
+        helpText="Open your logo in another tab and use the eyedropper tool to select a color."
         inputAttrs={{
-          name: "font",
-          type: "select",
-          defaultValue: data?.font!,
+          name: "white_color",
+          type: "color",
+          defaultValue: "#ff00ff",
         }}
-        handleSubmit={updateSite}
-      /> */}
-      {/* <Form
-        title="404 Page Message"
-        description="Message to be displayed on the 404 page."
-        helpText="Please use 240 characters maximum."
+        handleSubmit={updateSiteAppearance}
+      />
+      <Form
+        siteId={user.siteId}
+        title="Brand Black Color"
+        description="The black color for your brand. Typically the color used in your dark logo."
+        helpText="Open your logo in another tab and use the eyedropper tool to select a color."
         inputAttrs={{
-          name: "message404",
-          type: "text",
-          defaultValue: data?.message404!,
-          placeholder: "Blimey! You've found a page that doesn't exist.",
-          maxLength: 240,
+          name: "black_color",
+          type: "color",
+          defaultValue: "#ff00ff",
         }}
-        handleSubmit={updateSite}
-      /> */}
+        handleSubmit={updateSiteAppearance}
+      />
     </div>
   );
 }

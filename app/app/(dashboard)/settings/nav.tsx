@@ -20,6 +20,11 @@ export default function SiteSettingsNav() {
       segment: "domains",
     },
     {
+      name: "Assets",
+      href: `/settings/assets`,
+      segment: "assets",
+    },
+    {
       name: "Appearance",
       href: `/settings/appearance`,
       segment: "appearance",
