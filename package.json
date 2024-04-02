@@ -53,6 +53,7 @@
     "react-hook-form": "^7.50.0",
     "react-textarea-autosize": "^8.5.3",
     "react-tweet": "^3.1.1",
+    "rss": "^1.2.2",
     "sonner": "^1.2.0",
     "stripe": "^14.22.0",
     "swr": "^2.2.4",
