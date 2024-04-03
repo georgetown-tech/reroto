@@ -90,7 +90,7 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
                 <ReadingDrawing />
                 <h1 className="mb-2 font-cal text-4xl">No Posts Found</h1>
                 <p className="text-lg text-stone-500">
-                  We couldn&apos;t find any posts. Create one to get started.
+                  This Teammate Hasn&apos;t Written Any Articles.
                 </p>
               </div>
             )}
