@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useParams, useRouter } from "next/navigation";
 import LoadingDots from "@/components/icons/loading-dots";
 import va from "@vercel/analytics";
+import { Plus } from "lucide-react";
 
 export default function CreatePostButton({ id }: { id: any }) {
   const router = useRouter();
@@ -23,14 +24,21 @@ export default function CreatePostButton({ id }: { id: any }) {
         })
       }
       className={cn(
-        "flex h-8 w-36 items-center justify-center space-x-2 rounded-lg border text-sm transition-all focus:outline-none sm:h-9",
+        "flex h-8 w-40 items-center justify-center space-x-2 rounded-lg border text-sm transition-all focus:outline-none sm:h-9",
         isPending
-          ? "cursor-not-allowed border-stone-200 bg-stone-100 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
-          : "border border-black bg-black text-white hover:bg-white hover:text-black active:bg-stone-100 dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
+          ? "cursor-not-allowed border-primary-200 bg-primary-100 text-primary-400 dark:border-primary-700 dark:bg-primary-800 dark:text-primary-300"
+          : "border border-primary bg-primary text-white hover:bg-white hover:text-primary active:bg-primary-100 dark:border-primary-700 dark:hover:border-primary-200 dark:hover:bg-primary dark:hover:text-white dark:active:bg-primary-800",
       )}
       disabled={isPending}
     >
-      {isPending ? <LoadingDots color="#808080" /> : <p>Create New Post</p>}
+      {isPending ? (
+        <LoadingDots color="#808080" />
+      ) : (
+        <p className="block flex flex-row items-center justify-center gap-1 whitespace-nowrap">
+          <Plus size={18} />
+          Create New Post
+        </p>
+      )}
     </button>
   );
 }
