@@ -152,7 +152,7 @@ export default async function SitePosts({
         </div>
         <CreatePostButton id={user.siteId} />
       </div>
-      <main className="h-auto p-4 pt-20">
+      <main className="h-auto p-4 pt-4">
         <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card>
             <Title>Teammates</Title>
@@ -212,7 +212,7 @@ export default async function SitePosts({
           </Card>
         </div>
         {/* <div className="mb-4 h-96 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600"></div> */}
-        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
           <Card>
             <Title>Visitors</Title>
             <AreaChart
