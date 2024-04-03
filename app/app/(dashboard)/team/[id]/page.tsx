@@ -6,6 +6,7 @@ import BigProfile from "@/components/cards/big-profile";
 import Image from "next/image";
 import PostCard from "@/components/cards/post-card";
 import TabView from "@/components/tab-view";
+import ReadingDrawing from "@/components/drawings/reading";
 
 export default async function TeamPage({ params }: { params: { id: string } }) {
   const { user: _user } = await validateRequest();
@@ -73,14 +74,28 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
         tabLabels={["About", "Articles", "Statistics"]}
         tabContents={[
           <div key="0">{user.description ?? ""}</div>,
-          <div
-            key="1"
-            className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4"
-          >
-            {articles.map((i, n) => (
-              <PostCard subdomain={site.subdomain || ""} key={n} data={i} />
-            ))}
+          <div key="1" className="w-full">
+            {articles.length > 0 ? (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                {articles.map((post) => (
+                  <PostCard
+                    key={post.id}
+                    data={post}
+                    subdomain={site.subdomain || ""}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center space-x-4">
+                <ReadingDrawing />
+                <h1 className="mb-2 font-cal text-4xl">No Posts Found</h1>
+                <p className="text-lg text-stone-500">
+                  We couldn&apos;t find any posts. Create one to get started.
+                </p>
+              </div>
+            )}
           </div>,
+          <></>,
         ]}
       />
     </>
