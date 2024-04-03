@@ -24,12 +24,12 @@ export default async function BillingOverviewPage({
         id: user.siteId,
       },
     }),
-    await prisma.post.count({
+    prisma.post.count({
       where: {
         siteId: user.siteId,
       },
     }),
-    await prisma.user.count({
+    prisma.user.count({
       where: {
         siteId: user.siteId,
       },
