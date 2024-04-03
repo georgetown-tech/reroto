@@ -30,6 +30,7 @@ export default function Form({
     placeholder?: string;
     maxLength?: number;
     pattern?: string;
+    options: Record<string, string>;
   };
   handleSubmit: any;
   siteId: string;
@@ -173,6 +174,21 @@ export default function Form({
                 className="w-full max-w-md rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
               />
             </div>
+          </div>
+        ) : inputAttrs.type === "plan" ? (
+          <div className="flex w-full max-w-md flex-col gap-2">
+            <select
+              {...inputAttrs}
+              required
+              placeholder="Address Line 1"
+              className="w-full rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
+            >
+              {Object.keys(inputAttrs.options).map((i) => (
+                <option key={i} value={inputAttrs.options[i]}>
+                  {i}
+                </option>
+              ))}
+            </select>
           </div>
         ) : (
           <input

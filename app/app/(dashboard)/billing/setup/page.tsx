@@ -5,7 +5,9 @@ import AnalyticsMockup from "@/components/analytics";
 import { Card } from "@/components/ui/card";
 import { Tracker, type Color } from "@tremor/react";
 import Form from "@/components/form";
-import { updateSiteBilling } from "@/lib/actions";
+import { updateSite, updateSiteBilling } from "@/lib/actions";
+import { plans } from "@/lib/sales";
+import { Plan } from "@prisma/client";
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
@@ -33,6 +35,25 @@ export default async function SettingsBillingPage({
 
   return (
     <div className="flex flex-col space-y-6">
+      <Form
+        siteId={user.siteId}
+        title="Current Plan"
+        description="The plan that you are paying for."
+        helpText="If you wish to downgrade, you must delete overage assets."
+        inputAttrs={{
+          options: {
+            None: Plan.none,
+            "High School": Plan.highschool,
+            College: Plan.college,
+            Professional: Plan.professional,
+            Enterprise: Plan.enterprise,
+          },
+          name: "plan",
+          type: "plan",
+          defaultValue: site.plan,
+        }}
+        handleSubmit={updateSite}
+      />
       <Form
         siteId={user.siteId}
         title="Billing Email"
