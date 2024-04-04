@@ -158,7 +158,7 @@ export default async function SitePosts({
             <Title>Teammates</Title>
             <Metric>{users.length}</Metric>
             <List>
-              {users.slice(0, 10).map((item) => (
+              {users.slice(0, 5).map((item) => (
                 <ListItem key={item.id}>
                   <Link
                     className="truncate hover:underline"
@@ -191,7 +191,7 @@ export default async function SitePosts({
                     className="truncate hover:underline"
                     href={`/posts/${item.id}`}
                   >
-                    {item.title}
+                    {item.title || "Untitled Article"}
                   </Link>
                   <span>
                     {item.createdAt.getMonth()}/{item.createdAt.getDate()}
