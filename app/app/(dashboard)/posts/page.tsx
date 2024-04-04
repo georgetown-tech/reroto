@@ -27,27 +27,31 @@ export default async function SitePosts({
   const posts = await prisma.post.findMany({
     where: {
       siteId: user.siteId,
-      OR: [
-        {
-          title: {
-            contains: searchParams.q || "",
-            mode: "insensitive",
-          },
-        },
-        {
-          description: {
-            contains: searchParams.q || "",
-            mode: "insensitive",
-          },
-        },
-      ],
+      OR:
+        searchParams.q == undefined
+          ? [
+              {
+                siteId: user.siteId
+              },
+            ]
+          : [
+              {
+                title: {
+                  contains: searchParams.q || "",
+                  mode: "insensitive",
+                },
+              },
+              {
+                description: {
+                  contains: searchParams.q || "",
+                  mode: "insensitive",
+                },
+              },
+            ],
       // ...(siteId ? { siteId } : {}),
     },
     orderBy: {
       updatedAt: "desc",
-    },
-    include: {
-      site: false,
     },
   });
 
