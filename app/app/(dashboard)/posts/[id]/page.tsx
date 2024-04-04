@@ -21,7 +21,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
       },
     },
   });
-  if (!data || data.userId !== user.id) {
+  if (!data) {
     notFound();
   }
 
