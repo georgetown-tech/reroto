@@ -8,8 +8,7 @@ export default async function ReadingDrawing({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1024 768"
       version="1.1"
-      width={400}
-      height={400}
+      className={className}
     >
       <g stroke="none" stroke-width="1" fill="#fff0" fill-rule="evenodd">
         <g transform="translate(-35.000000, -89.000000)">

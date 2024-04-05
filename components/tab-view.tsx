@@ -11,9 +11,11 @@ import { ReactElement, useState } from "react";
 export default function TabView({
   tabLabels,
   tabContents,
+  align = "left"
 }: {
   tabLabels: Array<string | ReactElement>;
   tabContents: Array<ReactElement>;
+  align?: "left" | "center" | "right";
 }) {
   const [index, setIndex] = useState(0);
 
@@ -42,7 +44,7 @@ export default function TabView({
 
         <div className="hidden sm:block">
           <div className="border-b border-gray-200">
-            <nav className="-mb-px flex gap-6" aria-label="Tabs">
+            <nav className={`-mb-px flex gap-6 ${align == "left" ? "justify-start" : align == "right" ? "justify-end" : "justify-center"}`} aria-label="Tabs">
               {tabLabels.map((i, n) => (
                 <button
                   key={n}

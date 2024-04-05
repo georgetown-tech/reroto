@@ -10,6 +10,48 @@
 - 5 - Writer
 - 6 - Part-Time Writer
 
+## Features
+
+- Writing
+  - Simplified Writing Experience
+    - ReRoto simplifies content creation with an intuitive editor for easy writing and publishing. Collaborative editing allows editors to work together on the same article with version Control to track changes. To manage the collaboration, our content calendar enables visually scheduling articles.
+  - Built-in Collaboration
+    - Collaboration lies at the core of ReRoto's design, fostering teamwork and creativity among writers, editors, and content creators. Our platform offers real-time collaboration tools, enabling team members to work together regardless of their physical location. From brainstorming sessions to final edits, ReRoto provides a seamless environment for teams to collaborate efficiently. With shared workspaces, comments, and notifications, communication flows effortlessly, ensuring that every voice is heard throughout the content creation process.
+  - Automatic Desk Edit
+    - This intelligent tool automatically scans content for grammatical errors, spelling mistakes, and stylistic inconsistencies. Automatic Desk Edit ensures that every piece of content meets the highest standards of clarity and professionalism, while matching editorial style, empowering writers to focus on their creative ideas while leaving the finer details to our advanced editing technology.
+  - AI Autocomplete
+    - Unlock the power of AI with ReRoto's Autocomplete feature, designed to enhance productivity and streamline the writing process. As writers type, our AI engine suggests relevant phrases, sentences, and even entire paragraphs based on context and previous writing patterns. This intelligent autocomplete function not only saves time but also inspires creativity, providing writers with new ideas and perspectives. Whether you're crafting a blog post, article, or marketing copy, ReRoto's AI Autocomplete helps you write with confidence and efficiency, ensuring that your content resonates with your audience.
+  - Unsplash Image Placement
+    - Elevate your content with stunning visuals using ReRoto's seamless integration with Unsplash for image placement. With access to a vast library of high-quality images, writers can effortlessly enhance their articles, blogs, and social media posts. Whether you're looking for striking landscapes, captivating portraits, or vibrant illustrations, Unsplash has you covered. ReRoto's intuitive interface allows for easy image selection, resizing, and placement within your content. With just a few clicks, writers can transform their text into visually engaging pieces that captivate audiences and bring their ideas to life.
+- Design
+  - Procedural Layouts
+  - Custom Page Editor
+  - Print Typesetting
+  - Newsletter Designer
+- Analytics
+  - Analytics and Insights
+  - Real-time Viewership
+  - Email Tracking
+  - Member Interests
+- Finances
+  - Overview
+  - Automated Billing
+  - Advertisements
+  - Subscriptions
+  - Donations
+- Team Management
+  - Quick Invite
+  - Roles
+  - Planning
+  - Member Pages
+  - Chats
+- Tools
+  - Interview Transcriber
+  - Media Library
+  - Print on Demand
+  - Email Newsletters
+  - Transfer In and Out
+
 ## Todo
 
 - [ ] Overview
