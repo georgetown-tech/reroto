@@ -96,8 +96,6 @@ export default async function SitePosts({
     };
   });
 
-  console.log(weeks);
-
   var groupBy = function (xs: Array<any>, key: string) {
     return xs.reduce(function (rv, x) {
       (rv[x[key]] = rv[x[key]] || []).push(x);
@@ -110,12 +108,12 @@ export default async function SitePosts({
 
   // console.log(articles);
 
-  const _topics = groupBy(articles, "published");
-  let topics = [];
-
   for (let i in _roles) {
     roles.push({ name: i, count: _roles[i].length });
   }
+
+  const _topics = groupBy(articles, "published");
+  let topics = [];
 
   for (let i in _topics) {
     topics.push({
