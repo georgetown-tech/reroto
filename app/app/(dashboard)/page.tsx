@@ -119,7 +119,7 @@ export default async function SitePosts({
 
   for (let i in _topics) {
     topics.push({
-      name: i ? "Published" : "In-Progress",
+      name: i == "true" ? "Published" : "In-Progress",
       count: _topics[i].length,
     });
   }
@@ -153,7 +153,7 @@ export default async function SitePosts({
         <CreatePostButton id={user.siteId} />
       </div>
       <main className="h-auto p-4 pt-4">
-        <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           <Card>
             <Title>Teammates</Title>
             <Metric>{users.length}</Metric>
@@ -217,9 +217,9 @@ export default async function SitePosts({
             <Title>Visitors</Title>
             <AreaChart
               className="mt-4 h-72"
-              data={kpiData.data}
+              data={kpiData.data.map((i: any) => ({ Visits: i.visits }))}
               index="date"
-              categories={["visits"]}
+              categories={["Visits"]}
               colors={["indigo"]}
               // valueFormatter={(number: number) =>
               //   Intl.NumberFormat("us").format(number).toString()
